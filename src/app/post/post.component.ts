@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
   styles: [`
     h2 {
       color: black;
-      margin: 100px 30px;
+      margin: 140px 30px;
       padding: 20px;
       border: 2px dotted black;
     }`],
