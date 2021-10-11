@@ -6,24 +6,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./mua.component.scss'],
 })
 export class MuaComponent {
-
-  inputValue = '';
-
-  constructor() {
+  title = '';
+  backgroundToggle = false;
+  styleNg = {width: '100px', height: '100px', background: '#444'};
+  onToggleStyle() {
+    this.styleNg.background = this.backgroundToggle ? '#444' : '#ff3';
+    return this.backgroundToggle = !this.backgroundToggle;
   }
-
-  onInput(event: KeyboardEvent | Event) {
-    this.inputValue = (event.target as HTMLInputElement).value;
-  }
-
-  onBlur(str: string) {
-    this.inputValue = str;
-  }
-
-  onClick() {
-    this.inputValue = '';
-    console.log('Пожилая кнопка кликис');
-    (document.getElementById('text') as HTMLInputElement).value = '';
-  }
-
 }
