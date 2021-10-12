@@ -1,9 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Post} from '../mua.component';
 
 @Component({
   selector: 'mua-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
+
+  @Input() myPost!: Post;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
 }

@@ -1,13 +1,15 @@
-<h1>My Angular application</h1>
+<div class="container">
+  <h1>My Angular application</h1>
 
-<input type="text" [(ngModel)]="title">
+  <mua-post-form
+    (onAddPost)="updateFormPosts($event)"
+  ></mua-post-form>
 
-<p>{{title}}</p>
+  <hr/>
 
-<button (click)="onToggleStyle()">Toggle</button>
+  <mua-post
+    *ngFor="let post of posts"
+    [myPost]="post"
+  ></mua-post>
 
-<div [ngStyle]="{width: '200px',height: '200px', margin: '2rem 0',border: '2px solid black', background: backgroundToggle ? 'red' : 'pink'}"></div>
-
-<div [ngStyle]="styleNg">square</div>
-
-<mua-post></mua-post>
+</div>
