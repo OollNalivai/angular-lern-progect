@@ -8,12 +8,13 @@ import {Post} from '../mua.component';
 })
 export class PostFormComponent implements OnInit {
 
-  @Output() onAddPost: EventEmitter<Post> = new EventEmitter<Post>();
+  @Output() oonAddPost: EventEmitter<Post> = new EventEmitter<Post>();
 
   @ViewChild('inputTitle') inputRef!: ElementRef;
 
   title = '';
   text = '';
+  id = 0;
 
   constructor() {
   }
@@ -26,8 +27,9 @@ export class PostFormComponent implements OnInit {
       const post: Post = {
         title: this.title,
         text: this.text,
+        id: this.id
       };
-      this.onAddPost.emit(post);
+      this.oonAddPost.emit(post);
       this.text = this.title = '';
     }
   }
