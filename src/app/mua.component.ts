@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 export interface Post {
   title: string;
   text: string;
-  id?: number;
+  id: number;
 }
 
 @Component({
@@ -27,14 +27,16 @@ export class MuaComponent implements OnInit {
       this.posts[0] = {
         title: 'focused',
         text: 'work highly focused on providing the best developer',
-        id: 30
+        id: 25,
       };
     }, 5000);
   }
 
   updateFormPosts(post: Post) {
-    this.posts.unshift(post);
-    console.log(post);
+    this.posts = [
+      {id: 0, ...post},
+      ...this.posts.map(p => ({...p, id: p.id + 1})),
+    ];
   }
 
   removePost(id: number) {
