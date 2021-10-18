@@ -9,14 +9,12 @@ h6 {
 
 .blue,
 .green {
-  padding: 30px;
-  font-size: 40px;
-  background-color: blue;
-  color: brown;
+  padding: 5px;
+  border: 10px solid white;
+  font-size: 25px;
 }
-.blue {
-  background-color: blue;
-}
-.green {
-  background-color: green;
+
+.wrap {
+  border: 1px dashed #ccc;
+  padding: 1rem;
 }

@@ -1,26 +1,27 @@
 <div class="container">
   <h1>My Angular application</h1>
 
-  <h2>PIZZA</h2>
+  <p class="green" [muaStyle] = "'green'" [dStyles]="{border: '10px ridge rgba(170, 50, 220, .6)', fontWeight: 'bold'}">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, in!
+  </p>
 
-  <mua-post-form
-    (oonAddPost)="updateFormPosts($event)"
-  ></mua-post-form>
+  <p class="green" [muaStyle] = "'green'" [dStyles]="{border: '10px dotted pink', fontWeight: 'bold'}">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, in!
+  </p>
 
-  <hr/>
+  <button class="btn" (click)="isViseble = !isViseble">toggle</button>
+  <div *ngIf="isViseble" class="wrap">
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>
 
-  <mua-post
-    *ngFor="let post of posts"
-    [myPost]="post"
-    (oonRemove)="removePost($event)"
-  >
-    <div #info>
-      <small *ngIf="post.text.length < 10; else longer">Text small</small>
-      <ng-template #longer>
-        <small>Text longer</small>
-      </ng-template>
+  <ng-template [ngIf]="isViseble" >
+    <div class="wrap">
+      <p>Lorem ipsum dolor sit amet.</p>
     </div>
+  </ng-template>
 
-  </mua-post>
+  <div *muaIfnote="isViseble" class="wrap">
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>
 
 </div>
