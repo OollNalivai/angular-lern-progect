@@ -1,20 +1,18 @@
 <div class="container">
   <h1>My Angular Pipes</h1>
 
-  <p class="blue">
-    Pipe number: {{ e | number: '2.1-3' }};
-    {{ e | number: '7.1-6' }};
-    {{ e | number: '2.0-0' }}
-  </p>
-  <p class="blue">
-    Pipe string: {{ str | uppercase }}; {{ str | titlecase | slice: 0:-6 }}
-  </p>
-  <p class="blue">
-    Pipe Date: {{ date | date: 'yyyy'}}
-  </p>
-  <p class="blue">
-    Pipe other: {{ float | currency }}; {{ float | percent:'3.0-1' }}
-  </p>
-  <pre> {{ obj | json }} </pre>
+  <input type="text" [(ngModel)]="search">
+
+  <button class="btn" (click)="searchFild = 'title'">filter title</button>
+  <button class="btn" (click)="searchFild = 'text'">filter text</button>
+
+  <hr>
+
+  <button class="btn" (click)="addPost()">Add Post</button>
+
+  <div class="card" *ngFor="let post of posts | filter:search:searchFild">
+    <h2>{{post.title}}</h2>
+    <p>{{post.text}}</p>
+  </div>
 
 </div>
