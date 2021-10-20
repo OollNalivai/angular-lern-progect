@@ -1,13 +1,5 @@
 import {Component} from '@angular/core';
-
-interface IObjectKeys {
-  [key: string]: string;
-}
-
-export interface IPost extends IObjectKeys {
-  title: string;
-  text: string;
-}
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'mua-root',
@@ -16,21 +8,16 @@ export interface IPost extends IObjectKeys {
 })
 export class MuaComponent {
 
-  search = '';
-  searchFild = 'title';
+  p: Promise<string> = new Promise<string>(resolve => {
+    setTimeout(() => {
+      resolve('Promise Resolved');
+    }, 4000);
+  });
 
-  posts: IPost[] = [
-    {title: '111111', text: 'lorem1d0 ddsdas da sdas ds adasd'},
-    {title: '222222', text: 'lorem1d0 222222 da sdas ds adasd'},
-    {title: '333333', text: '333333 ddsdas da sdas ds adasd'},
-    {title: '444444', text: 'lorem1d0 ddsdas da 444444 ds adasd'},
-  ];
-
-  addPost() {
-    this.posts.unshift({
-      title: 'Angular 8',
-      text: 'Позвони и мы подбросим'
-    });
-  }
+  date: Observable<Date> = new Observable(obj => {
+    setInterval(() => {
+      obj.next(new Date());
+    }, 1000);
+  });
 
 }
