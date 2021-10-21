@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'mua-root',
@@ -8,16 +8,15 @@ import {Observable} from 'rxjs';
 })
 export class MuaComponent {
 
-  p: Promise<string> = new Promise<string>(resolve => {
-    setTimeout(() => {
-      resolve('Promise Resolved');
-    }, 4000);
+  myPromise = new Promise((resolve, reject) => {
+    try {
+      console.log('Выполнение асинхронной операции');
+      getSomeWork();
+      resolve('Hello world!');
+    } catch (err) {
+      reject(`Произошла ошибка: ${err.message}`);
+    }
+  }).catch(error => {
+    console.log(error);
   });
-
-  date: Observable<Date> = new Observable(obj => {
-    setInterval(() => {
-      obj.next(new Date());
-    }, 1000);
-  });
-
 }
