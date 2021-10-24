@@ -1,0 +1,13 @@
+<div class="card">
+  <h2>Mua counter component: {{muaCounterService.counter}}</h2>
+
+  <button class="btn" (click)="muaCounterService.decrease()">-</button>
+  <button class="btn" (click)="muaCounterService.increase()">+</button>
+</div>
+
+<div class="card">
+  <h2>Local counter: {{localCounterService.counter}}</h2>
+
+  <button class="btn" (click)="localCounterService.decrease()">-</button>
+  <button class="btn" (click)="localCounterService.increase()">+</button>
+</div>
