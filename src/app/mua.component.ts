@@ -1,8 +1,5 @@
 import {Component} from '@angular/core';
-import {interval, Subscription} from 'rxjs';
-import {map, filter, switchMap} from 'rxjs/operators';
-
-// import {} from 'rxjs/operators';
+import {Subscription, Subject} from 'rxjs';
 
 @Component({
   selector: 'mua-root',
@@ -13,22 +10,21 @@ export class MuaComponent {
 
   sub: Subscription;
 
-  constructor() {
+  stream$: Subject<number> = new Subject<number>();
+  counter = 0;
 
-    const intervalStream$ = interval(2000);
-    this.sub = intervalStream$
-      .pipe(
-        filter(value => value % 3 === 0 ),
-        map((value) => `Mapped value ${value}`),
-        switchMap(() => interval(1000))
-      )
-      .subscribe(value => {
-      console.log(value);
+  constructor() {
+    this.sub = this.stream$.subscribe(value => {
+      console.log('subscribe ', value);
     });
   }
 
   stop() {
     this.sub.unsubscribe();
+  }
+
+  next() {
+    this.stream$.next(++this.counter);
   }
 
 }
