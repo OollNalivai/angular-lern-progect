@@ -1,23 +1,16 @@
 <div class="container">
 
-  <h1>Angular Services</h1>
+  <h1>Angular Services {{counterService.counter}}</h1>
 
-  <div class="card">
-    <h2>Mua counter: {{muaCounterService.counter}}</h2>
-
-    <button class="btn" (click)="muaCounterService.decrease()">-</button>
-    <button class="btn" (click)="muaCounterService.increase()">+</button>
-  </div>
-
-  <div class="card">
-    <h2>Local counter: {{localCounterService.counter}}</h2>
-
-    <button class="btn" (click)="localCounterService.decrease()">-</button>
-    <button class="btn" (click)="localCounterService.increase()">+</button>
-  </div>
+  <ol>
+    <li>{{logTypeService.logType(a)}}</li>
+    <li>{{logTypeService.logType(b)}}</li>
+    <li>{{logTypeService.logType(c)}}</li>
+    <li>{{logTypeService.logType(d)}}</li>
+  </ol>
 
   <hr>
 
-  <mua-counter></mua-counter>
+  <button class="btn" (click)="counterService.increment()">++</button>
 
 </div>

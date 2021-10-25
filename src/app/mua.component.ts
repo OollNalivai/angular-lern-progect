@@ -1,18 +1,25 @@
 import {Component} from '@angular/core';
-import {MuaCounterService} from './services/mua-counter.service';
-import {LocalCounterService} from './services/local-counter.service';
+import {LogTypeService} from './services/log-type.service';
+import {CounterService} from './services/counter.service';
 
 @Component({
   selector: 'mua-root',
   templateUrl: './mua.component.html',
   styleUrls: ['./mua.component.scss'],
-  providers: [LocalCounterService]
+  providers: [CounterService]
 })
 export class MuaComponent {
 
-  constructor(
-    public muaCounterService: MuaCounterService,
-    public localCounterService: LocalCounterService
-  ) {}
+  a = 45;
+  b = {
+    k: 23,
+    kl: '321',
+  };
+  c = true;
+  d: number[] = [3, 3, 5, 1, 5, 74];
+
+  constructor(public logTypeService: LogTypeService,
+              public  counterService: CounterService) {
+  }
 
 }
