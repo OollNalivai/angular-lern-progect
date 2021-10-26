@@ -1,25 +1,26 @@
 import {Component} from '@angular/core';
-import {LogTypeService} from './services/log-type.service';
-import {CounterService} from './services/counter.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'mua-root',
   templateUrl: './mua.component.html',
   styleUrls: ['./mua.component.scss'],
-  providers: [CounterService]
 })
 export class MuaComponent {
 
-  a = 45;
-  b = {
-    k: 23,
-    kl: '321',
-  };
-  c = true;
-  d: number[] = [3, 3, 5, 1, 5, 74];
+  form: FormGroup = new FormGroup({
+    email: new FormControl('',
+      [Validators.email, Validators.required]),
+    password: new FormControl('',
+      [Validators.minLength(6), Validators.required]),
+  });
 
-  constructor(public logTypeService: LogTypeService,
-              public  counterService: CounterService) {
+  submit(): void {
+    if (this.form.valid) {
+      console.log(this.form);
+      const formValues = {...this.form.value};
+      console.log('Form Data: ', formValues);
+    }
   }
-
 }
+
