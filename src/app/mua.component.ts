@@ -8,6 +8,16 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class MuaComponent implements OnInit {
   form!: FormGroup;
+  // formControls = {
+  //   a: this.form.get('email')?.invalid && this.form.get('email')?.touched,
+  //   email: this.form.get('email'),
+  //   password: this.form.get('password'),
+  //   address: {
+  //     country: this.form.get('address.country'),
+  //     city: this.form.get('address.city'),
+  //   },
+  // };
+
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -18,6 +28,11 @@ export class MuaComponent implements OnInit {
         [Validators.required,
           Validators.minLength(6),
           Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])/g)]),
+      address: new FormGroup({
+        country: new FormControl('by'),
+        city: new FormControl('Усть-Пистинск',
+          Validators.required),
+      }),
     });
   }
 
