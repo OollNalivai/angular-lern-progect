@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -6,21 +6,25 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './mua.component.html',
   styleUrls: ['./mua.component.scss'],
 })
-export class MuaComponent {
+export class MuaComponent implements OnInit {
+  form!: FormGroup;
 
-  form: FormGroup = new FormGroup({
-    email: new FormControl('',
-      [Validators.email, Validators.required]),
-    password: new FormControl('',
-      [Validators.minLength(6), Validators.required]),
-  });
+  ngOnInit() {
+    this.form = new FormGroup({
+      email: new FormControl('',
+        [Validators.email,
+          Validators.required]),
+      password: new FormControl(null,
+        [Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])/g)]),
+    });
+  }
 
-  submit(): void {
-    if (this.form.valid) {
-      console.log(this.form);
-      const formValues = {...this.form.value};
-      console.log('Form Data: ', formValues);
-    }
+  submit() {
+    console.log(this.form);
+    const formValues = {...this.form.value};
+    console.log('Form Value: ', formValues);
   }
 }
 
