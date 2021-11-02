@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="form">
   <form class="card" [formGroup]="form" (ngSubmit)="submit()">
     <h1>Angular Forms</h1>
 
@@ -6,9 +6,9 @@
       <label>Email</label>
       <input type="text" placeholder="Email" formControlName="email">
       <div class="validation"
-        *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-        <small *ngIf="form.get('email')?.errors.required">Значение Email не может быть пустым</small>
-        <small *ngIf="form.get('email')?.errors.email">Введите корректный Email</small>
+        *ngIf="emailCtrl?.invalid && emailCtrl?.touched">
+        <small *ngIf="emailCtrl?.errors.required">Значение Email не может быть пустым</small>
+        <small *ngIf="emailCtrl?.errors.email">Введите корректный Email</small>
       </div>
     </div>
 
@@ -16,14 +16,14 @@
       <label>Пароль</label>
       <input type="password" placeholder="Пароль" formControlName="password">
       <div
-        *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+        *ngIf="passwordCtrl.invalid && passwordCtrl?.touched"
         class="validation">
-        <small *ngIf="form.get('password')?.errors.required">Пароль не может быть пустым</small>
-        <small *ngIf="form.get('password')?.errors.minlength">
-          Минимальная длинна пароля {{form.get('password')?.errors.minlength.requiredLength}} символов,
-          сейчас длинна {{form.get('password')?.errors.minlength.actualLength}}.
+        <small *ngIf="passwordCtrl?.errors.required">Пароль не может быть пустым</small>
+        <small *ngIf="passwordCtrl?.errors.minlength">
+          Минимальная длинна пароля {{passwordCtrl?.errors.minlength.requiredLength}} символов,
+          сейчас длинна {{passwordCtrl?.errors.minlength.actualLength}}.
         </small>
-        <small *ngIf="form.get('password')?.errors.pattern">
+        <small *ngIf="passwordCtrl?.errors.pattern">
           Пароль должен содержать хотя бы одну заглавную и одну прописную латинские буквы
         </small>
 
@@ -46,23 +46,26 @@
       <div class="form-control">
         <input type="text" formControlName="city" placeholder="Город">
         <div
-          *ngIf="form.get('address.city')?.invalid && form.get('address.city')?.touched"
+          *ngIf="cityCtrl?.invalid && cityCtrl?.touched"
           class="validation">
-          <small *ngIf="form.get('address.city')?.errors.required">
+          <small *ngIf="cityCtrl?.errors.required">
             Укажите город в котором вы проживаете
           </small>
         </div>
       </div>
 
-      <button class="btn" type="button">Выбрать столицу</button>
+      <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
     </div>
 
-    <div class="card">
+    <div class="card" formGroupName="skills">
       <h2>Ваши навыки</h2>
-      <button class="btn" type="button">Добавить умение</button>
-      <div class="form-control">
-        <label></label>
-        <input type="text">
+      <button class="btn" type="button" (click)="addSkill()">Добавить умение</button>
+      <div
+        class="form-control"
+        *ngFor="let control of skillsCtrl.controls; let idx = index"
+      >
+        <label>Уменяние {{idx + 1}}</label>
+        <input type="text" [formControlName]="idx" formControlName="skills">
       </div>
     </div>
 

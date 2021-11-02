@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+
+interface IMap<T = any> {
+  [key: string]: T;
+}
 
 @Component({
   selector: 'mua-root',
@@ -8,18 +12,28 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class MuaComponent implements OnInit {
   form!: FormGroup;
-  // formControls = {
-  //   a: this.form.get('email')?.invalid && this.form.get('email')?.touched,
-  //   email: this.form.get('email'),
-  //   password: this.form.get('password'),
-  //   address: {
-  //     country: this.form.get('address.country'),
-  //     city: this.form.get('address.city'),
-  //   },
-  // };
 
+  get emailCtrl(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+
+  get passwordCtrl(): FormControl {
+    return this.form.get('password') as FormControl;
+  }
+
+  get cityCtrl(): FormControl {
+    return this.form.get('address.city') as FormControl;
+  }
+
+  get skillsCtrl(): FormArray {
+    return this.form.get('skills') as FormArray;
+  }
 
   ngOnInit() {
+    this._initForm();
+  }
+
+  private _initForm(): void {
     this.form = new FormGroup({
       email: new FormControl('',
         [Validators.email,
@@ -33,6 +47,7 @@ export class MuaComponent implements OnInit {
         city: new FormControl('Усть-Пистинск',
           Validators.required),
       }),
+      skills: new FormArray([]),
     });
   }
 
@@ -40,6 +55,22 @@ export class MuaComponent implements OnInit {
     console.log(this.form);
     const formValues = {...this.form.value};
     console.log('Form Value: ', formValues);
+  }
+
+  setCapital() {
+    const cityMap: IMap<string> = {
+      ru: 'Москва',
+      ua: 'Киев',
+      by: 'Минск',
+    };
+    const city = cityMap[this.form.get('address.country')?.value];
+
+    this.form.patchValue({address: {city}});
+  }
+
+  addSkill() {
+    const control = new FormControl('', Validators.required);
+    (this.form.get('skills') as FormArray).push(control);
   }
 }
 
