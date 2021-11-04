@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 interface IMap<T = any> {
   [key: string]: T;
@@ -12,6 +12,9 @@ interface IMap<T = any> {
 })
 export class MuaComponent implements OnInit {
   form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+  }
 
   get emailCtrl(): FormControl {
     return this.form.get('email') as FormControl;
@@ -34,20 +37,23 @@ export class MuaComponent implements OnInit {
   }
 
   private _initForm(): void {
-    this.form = new FormGroup({
-      email: new FormControl('',
+    this.form = this.fb.group({
+      email: this.fb.control('hui@zalupa',
         [Validators.email,
           Validators.required]),
-      password: new FormControl(null,
+      password: this.fb.control('asdasdasdA',
         [Validators.required,
           Validators.minLength(6),
           Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])/g)]),
-      address: new FormGroup({
-        country: new FormControl('by'),
-        city: new FormControl('Усть-Пистинск',
+      address: this.fb.group({
+        country: this.fb.control('by'),
+        city: this.fb.control('Усть-Пистинск',
           Validators.required),
       }),
-      skills: new FormArray([]),
+      skills: this.fb.array(['asd', 'das']),
+      // skills: new FormGroup({
+      //   skillsArr: new FormArray([])
+      // })
     });
   }
 
@@ -70,7 +76,7 @@ export class MuaComponent implements OnInit {
 
   addSkill() {
     const control = new FormControl('', Validators.required);
-    (this.form.get('skills') as FormArray).push(control);
+    this.skillsCtrl.push(control);
   }
 }
 
