@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MuaValidators} from './mua.validators';
 
 interface IMap<T = any> {
   [key: string]: T;
@@ -40,8 +41,9 @@ export class MuaComponent implements OnInit {
     this.form = this.fb.group({
       email: this.fb.control('hui@zalupa',
         [Validators.email,
-          Validators.required]),
-      password: this.fb.control('asdasdasdA',
+          Validators.required,
+          MuaValidators.restrictedEmails]),
+      password: this.fb.control('asdasdA',
         [Validators.required,
           Validators.minLength(6),
           Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])/g)]),

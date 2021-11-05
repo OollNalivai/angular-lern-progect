@@ -9,6 +9,7 @@
         *ngIf="emailCtrl?.invalid && emailCtrl?.touched">
         <small *ngIf="emailCtrl?.errors.required">Значение Email не может быть пустым</small>
         <small *ngIf="emailCtrl?.errors.email">Введите корректный Email</small>
+        <small *ngIf="emailCtrl?.errors.restrictedEmail">Введен запрещеный церковью емейл {{emailCtrl.value}}</small>
       </div>
     </div>
 
