@@ -6,6 +6,10 @@ interface IMap<T = any> {
   [key: string]: T;
 }
 
+export interface IMapB {
+  [key: string]: boolean;
+}
+
 @Component({
   selector: 'mua-root',
   templateUrl: './mua.component.html',
@@ -42,7 +46,8 @@ export class MuaComponent implements OnInit {
       email: this.fb.control('hui@zalupa',
         [Validators.email,
           Validators.required,
-          MuaValidators.restrictedEmails]),
+          MuaValidators.restrictedEmails],
+        [MuaValidators.uniqEmail]),
       password: this.fb.control('asdasdA',
         [Validators.required,
           Validators.minLength(6),
@@ -53,9 +58,6 @@ export class MuaComponent implements OnInit {
           Validators.required),
       }),
       skills: this.fb.array(['asd', 'das']),
-      // skills: new FormGroup({
-      //   skillsArr: new FormArray([])
-      // })
     });
   }
 
@@ -63,6 +65,7 @@ export class MuaComponent implements OnInit {
     console.log(this.form);
     const formValues = {...this.form.value};
     console.log('Form Value: ', formValues);
+    this.form.reset();
   }
 
   setCapital() {

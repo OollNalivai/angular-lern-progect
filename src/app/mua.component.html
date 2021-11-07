@@ -9,7 +9,8 @@
         *ngIf="emailCtrl?.invalid && emailCtrl?.touched">
         <small *ngIf="emailCtrl?.errors.required">Значение Email не может быть пустым</small>
         <small *ngIf="emailCtrl?.errors.email">Введите корректный Email</small>
-        <small *ngIf="emailCtrl?.errors.restrictedEmail">Введен запрещеный церковью емейл {{emailCtrl.value}}</small>
+        <small *ngIf="emailCtrl?.errors.restrictedEmail">Введен запрещеный церковью емейл {{emailCtrl?.value}}</small>
+        <small *ngIf="emailCtrl?.errors.uniqEmail">Введеный емейл {{emailCtrl?.value}} уже занят</small>
       </div>
     </div>
 
@@ -27,7 +28,6 @@
         <small *ngIf="passwordCtrl?.errors.pattern">
           Пароль должен содержать хотя бы одну заглавную и одну прописную латинские буквы
         </small>
-
       </div>
     </div>
 
@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+    <button class="btn" type="submit" [disabled]="form.invalid || form.pending">Отправить</button>
 
   </form>
 </div>
