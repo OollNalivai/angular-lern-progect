@@ -15,6 +15,7 @@ export interface IMapB {
   templateUrl: './mua.component.html',
   styleUrls: ['./mua.component.scss'],
 })
+
 export class MuaComponent implements OnInit {
   form!: FormGroup;
 
@@ -31,6 +32,10 @@ export class MuaComponent implements OnInit {
 
   get cityCtrl(): FormControl {
     return this.form.get('address.city') as FormControl;
+  }
+
+  get countryCtrl(): FormControl {
+    return this.form.get('address.country') as FormControl;
   }
 
   get skillsCtrl(): FormArray {
@@ -74,7 +79,7 @@ export class MuaComponent implements OnInit {
       ua: 'Киев',
       by: 'Минск',
     };
-    const city = cityMap[this.form.get('address.country')?.value];
+    const city = cityMap[this.countryCtrl.value];
 
     this.form.patchValue({address: {city}});
   }

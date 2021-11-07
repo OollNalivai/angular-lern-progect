@@ -19,7 +19,7 @@ export class MuaValidators {
         } else {
           resolve(null);
         }
-      }, 1999);
+      }, 1499);
     });
   }
 }
