@@ -2,18 +2,17 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {MuaComponent} from './mua.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SwitchComponent } from './switch/switch.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    MuaComponent,
-    SwitchComponent,
+    MuaComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [MuaComponent]

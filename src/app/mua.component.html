@@ -1,17 +1,23 @@
 <div class="container">
+  <h1>Angular HttpClient</h1>
 
-  <h1>Angular NgModels</h1>
-
-  <mua-switch
-    [(ngModel)]="muaState"
-    (ngModelChange)="handleChange()"
-  ></mua-switch>
+  <div class="card">
+    <div class="form-control">
+      <input type="text" placeholder="Название" [(ngModel)]="todoTitle">
+    </div>
+    <button class="btn" (click)="addTodo()">Добавить</button>
+    <button class="btn">Загрузить</button>
+  </div>
 
   <hr>
 
-  <p>muaState: {{muaState}}</p>
-
+  <div class="card" *ngFor="let todo of todos">
+    <p>
+      <span [class.completed]="todo.completed">{{ todo.title | titlecase }}</span>
+      <span>
+        <button class="btn btn-danger">Удалить</button>
+        <button class="btn" [disabled]="todo.completed">Завершить</button>
+      </span>
+    </p>
+  </div>
 </div>
-
-
-
