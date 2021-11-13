@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {delay} from 'rxjs/operators';
 import {Todo, TodosService} from './todos.service';
 
 @Component({
@@ -51,6 +50,15 @@ export class MuaComponent implements OnInit {
       .subscribe(() => {
         this.todos = this.todos.filter(t => t.id !== id);
       });
+  }
+
+  completeTodo(id: number) {
+    this.todosService.completeTodo(id).subscribe(todo => {
+      const todoEl = this.todos.find(t => t.id === todo.id);
+      if (todoEl !== undefined) {
+        todoEl.completed = true;
+      }
+    });
   }
 }
 
