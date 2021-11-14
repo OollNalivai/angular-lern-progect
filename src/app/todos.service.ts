@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError, delay, tap} from 'rxjs/operators';
+import {catchError, delay, map, tap} from 'rxjs/operators';
 
 export interface Todo {
   completed: boolean;
@@ -26,7 +26,7 @@ export class TodosService {
     });
   }
 
-  fetchTodos(): Observable<Todo[]> {
+  fetchTodos(): Observable<Todo[] | null> {
     const limitValue = 5;
     let params = new HttpParams();
 
@@ -35,9 +35,13 @@ export class TodosService {
 
     return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos', {
       params,
-      observe: 'body'
+      observe: 'response'
     })
-      .pipe(delay(500),
+      .pipe(
+        map(response => {
+          return response.body;
+        }),
+        delay(500),
         catchError(error => {
           console.log('Error: ', error.message);
 
@@ -61,12 +65,10 @@ export class TodosService {
     );
   }
 
-  completeTodo(id: number): Observable<any> {
+  completeTodo(id: number): Observable<Todo> {
 
     return this.http.put<Todo>(`https://jsonplaceholder.typicode.com/todos/${id}`, {
       completed: true,
-    }, {
-      responseType: 'text'
     });
 
   }
