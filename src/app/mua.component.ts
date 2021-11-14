@@ -29,11 +29,12 @@ export class MuaComponent implements OnInit {
     this.todosService.addTodo({
       title: this.todoTitle,
       completed: false,
-    }).subscribe(todo => {
-      console.log('todo: ', todo);
-      this.todos.push(todo);
-      this.todoTitle = '';
-    });
+    })
+      .subscribe(todo => {
+        console.log('todo: ', todo);
+        this.todos.push(todo);
+        this.todoTitle = '';
+      });
   }
 
   fetchTodos() {
@@ -58,6 +59,7 @@ export class MuaComponent implements OnInit {
   completeTodo(id: number) {
     this.todosService.completeTodo(id).subscribe(todo => {
       const todoEl = this.todos.find(t => t.id === todo.id);
+
       if (todoEl !== undefined) {
         todoEl.completed = true;
       }
