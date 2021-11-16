@@ -21,7 +21,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [MuaComponent]
 })
 export class MuaModule {
