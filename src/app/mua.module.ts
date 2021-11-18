@@ -8,6 +8,7 @@ import {AboutExtraComponent} from './about-extra/about-extra.component';
 import {HomeComponent} from './home/home.component';
 import {PostComponent} from './post/post.component';
 import {PostsComponent} from './posts/posts.component';
+import {MuaRoutingModule} from './mua-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {PostsComponent} from './posts/posts.component';
   imports: [
     BrowserModule,
     FormsModule,
+    MuaRoutingModule
   ],
   providers: [],
   bootstrap: [MuaComponent]
