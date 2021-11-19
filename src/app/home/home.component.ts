@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'mua-home',
@@ -7,4 +8,10 @@ import {Component} from '@angular/core';
 })
 export class HomeComponent {
 
+  constructor(private router: Router) {
+  }
+
+  goToPostPages() {
+    this.router.navigate(['/posts']).then(r => this.router);
+  }
 }
