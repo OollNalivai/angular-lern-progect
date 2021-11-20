@@ -10,7 +10,7 @@
 <ul>
   <li class="card" *ngFor="let post of postsService.posts">
     <h4>
-      <a href="#">
+      <a [routerLink]="['/posts', post.id]">
         <strong>(ID {{post.id}})</strong>
         {{post.title}}
       </a>
