@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  LoadPost() {
+  loadPost() {
     this.router.navigate(['/posts', 44]);
   }
 }
