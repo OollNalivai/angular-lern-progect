@@ -20,7 +20,6 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       this.showIds = !!params?.showIds;
-      // console.log(this.showIds);
     });
     this.route.fragment.subscribe((fragment) => {
       console.log(fragment);
