@@ -5,6 +5,7 @@ import {AboutComponent} from './about/about.component';
 import {HomeComponent} from './home/home.component';
 import {PostComponent} from './post/post.component';
 import {AboutExtraComponent} from './about-extra/about-extra.component';
+import {ErrorPageComponent} from './error-page/error-page.component';
 
 // http://localhost:4200/ => home
 // http://localhost:4200/about => about
@@ -17,7 +18,9 @@ const routes: Routes = [
       {path: 'extra', component: AboutExtraComponent}
     ] },
   {path: 'posts', component: PostsComponent },
-  {path: 'posts/:id', component: PostComponent}
+  {path: 'posts/:id', component: PostComponent},
+  {path: 'error', component: ErrorPageComponent},
+  {path: '**', redirectTo: '/error'}
 ];
 
 @NgModule({
