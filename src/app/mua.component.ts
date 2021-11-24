@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {AuthService} from './auth.service';
 
 @Component({
   selector: 'mua-root',
@@ -7,5 +8,6 @@ import {Component} from '@angular/core';
 })
 
 export class MuaComponent {
+  constructor(public auth: AuthService) {}
 }
 
