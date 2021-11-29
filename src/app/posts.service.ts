@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {UndefinableType} from './global';
 
 export interface Post {
   title: string;
@@ -15,7 +16,7 @@ export class PostsService {
     {title: 'Post 4', text: 'Sample text for post 4', id: 44},
   ];
 
-  getById(id: number) {
+  getById(id: number): UndefinableType<Post> {
     return this.posts.find(p => p.id === id);
   }
 }
