@@ -5,6 +5,7 @@ import {HomePageComponent} from './home-page/home-page.component';
 @NgModule({
   imports: [RouterModule.forRoot([
     {path: '', component: HomePageComponent, pathMatch: 'full'},
+    {path: 'about', loadChildren: './about-page/about-page.module#AboutPageModule'}
   ])],
   exports: [RouterModule],
 })

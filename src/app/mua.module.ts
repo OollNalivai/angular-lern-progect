@@ -5,8 +5,6 @@ import {FormsModule} from '@angular/forms';
 import {HomePageComponent} from './home-page/home-page.component';
 import {MuaRoutingModule} from './mua-routing.module';
 import {SharedModule} from './shared/shared.module';
-import {AboutPageModule} from './about-page/about-page.module';
-
 
 @NgModule({
   declarations: [
@@ -18,7 +16,6 @@ import {AboutPageModule} from './about-page/about-page.module';
     FormsModule,
     MuaRoutingModule,
     SharedModule,
-    AboutPageModule
   ],
   providers: [
   ],
