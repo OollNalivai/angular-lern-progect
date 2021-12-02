@@ -14,5 +14,6 @@ import {ColorDirective} from './color.directive';
     ColorDirective,
   ],
 })
+
 export class SharedModule {
 }

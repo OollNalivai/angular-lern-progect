@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+
 import {AboutPageComponent} from './about-page.component';
 import {AboutExtraPageComponent} from './about-extra-page/about-extra-page.component';
 import {SharedModule} from '../shared/shared.module';
-import {RouterModule} from '@angular/router';
 
 
 @NgModule({
@@ -28,5 +29,6 @@ import {RouterModule} from '@angular/router';
     AboutExtraPageComponent,
   ],
 })
+
 export class AboutPageModule {
 }
