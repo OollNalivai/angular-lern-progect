@@ -1,28 +1,21 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
 
 import {MuaComponent} from './mua.component';
-import {HomePageComponent} from './home-page/home-page.component';
-import {MuaRoutingModule} from './mua-routing.module';
-import {SharedModule} from './shared/shared.module';
-
+import {FormsModule} from '@angular/forms';
+import {ModalComponent} from './modal/modal.component';
 
 @NgModule({
   declarations: [
     MuaComponent,
-    HomePageComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    MuaRoutingModule,
-    SharedModule,
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [MuaComponent],
 })
-
 export class MuaModule {
 }
