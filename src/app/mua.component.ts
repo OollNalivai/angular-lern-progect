@@ -7,6 +7,11 @@ import {Component} from '@angular/core';
 })
 
 export class MuaComponent {
-  modal = false;
+
+  constructor() {
+  }
+
+  showModal() {
+  }
 }
 
