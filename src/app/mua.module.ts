@@ -17,7 +17,7 @@ import {RefDirective} from './ref.directive';
     FormsModule,
   ],
   providers: [],
-  entryComponents: [],
+  entryComponents: [ModalComponent],
   bootstrap: [MuaComponent],
 })
 export class MuaModule {
