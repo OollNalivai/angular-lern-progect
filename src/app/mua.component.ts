@@ -18,7 +18,9 @@ export class MuaComponent {
     private title: Title,
     private meta: Meta
   ) {
-    this.title.setTitle(`Mua oh shit i'm sorry`);
+    this.title.setTitle(`Oh shit i'm sorry`);
+    const t = title.getTitle();
+    console.log(t);
     this.meta.addTags([
       {name: 'keywords', content: 'angular, react'},
       {name: 'description', content: 'this is Mua component'}
