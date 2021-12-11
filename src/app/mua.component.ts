@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {state, style, transition, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'mua-root',
@@ -14,7 +14,8 @@ import {state, style, transition, trigger} from '@angular/animations';
         background: 'red',
         transform: 'scale(1.5)'
       })),
-      // transition()
+      transition('start => end', animate(400)),
+      transition('end => start', animate('800ms ease-in-out')),
     ])
   ]
 })
