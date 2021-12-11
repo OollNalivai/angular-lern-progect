@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'mua-root',
@@ -33,16 +33,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       // void => *
       transition(':enter', [
         style({opacity: 0}),
-        animate('800ms ease-out')
+        animate('800ms ease-out'),
       ]),
       // * => void
       transition(':leave', [
         style({opacity: 1}),
-        animate(850, style({
-          opacity: 0,
-          transform: 'scale(1.4)'
-        }))
-      ])
+        group([
+          animate(850, style({
+            opacity: 0,
+            transform: 'scale(1.4)',
+          })),
+          animate(460, style({
+            color: '#000',
+            fontSize: '28px'
+          }))
+        ])
+      ]),
     ]),
   ],
 })
