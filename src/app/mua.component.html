@@ -4,6 +4,7 @@
   <div>
     <button class="btn" (click)="boxStart()">Start</button>
     <button class="btn" (click)="boxEnd()">End</button>
+    <button class="btn" (click)="boxState = 'special'">Set Special State</button>
   </div>
 
   <div class="wrap">
@@ -11,7 +12,7 @@
       class="box"
       [@boxTrig]="boxState"
     >
-      {{boxState}}
+      <h4>{{boxState | uppercase}}</h4>
     </div>
   </div>
 </div>
