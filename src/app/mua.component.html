@@ -5,11 +5,13 @@
     <button class="btn" (click)="boxStart()">Start</button>
     <button class="btn" (click)="boxEnd()">End</button>
     <button class="btn" (click)="boxState = 'special'">Set Special State</button>
+    <button class="btn" (click)="visible = !visible">Invisibility</button>
   </div>
 
   <div class="wrap">
     <div
       class="box"
+      *ngIf="visible"
       [@boxTrig]="boxState"
     >
       <h4>{{boxState | uppercase}}</h4>

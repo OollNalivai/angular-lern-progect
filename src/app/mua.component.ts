@@ -12,7 +12,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       })),
       state('end', style({
         background: 'red',
-        transform: 'scale(1.5)',
+        transform: 'scale(1.2)',
       })),
       state('special', style({
         background: 'black',
@@ -30,12 +30,26 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         ),
         animate(750),
       ]),
+      // void => *
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('800ms ease-out')
+      ]),
+      // * => void
+      transition(':leave', [
+        style({opacity: 1}),
+        animate(850, style({
+          opacity: 0,
+          transform: 'scale(1.4)'
+        }))
+      ])
     ]),
   ],
 })
 
 export class MuaComponent {
   boxState = 'start';
+  visible = true;
 
   boxStart() {
     this.boxState = this.boxState === 'end' ? 'start' : 'end';
