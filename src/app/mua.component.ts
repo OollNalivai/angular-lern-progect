@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {state, style, trigger} from '@angular/animations';
+import {state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'mua-root',
@@ -11,9 +11,10 @@ import {state, style, trigger} from '@angular/animations';
         background: 'blue'
       })),
       state('end', style({
-        background: 'blue',
-        transform: 'scale{1.5}'
-      }))
+        background: 'red',
+        transform: 'scale(1.5)'
+      })),
+      // transition()
     ])
   ]
 })
@@ -21,6 +22,13 @@ import {state, style, trigger} from '@angular/animations';
 export class MuaComponent {
   boxState = 'start';
 
+  boxStart() {
+    this.boxState = this.boxState === 'end' ? 'start' : 'end';
+  }
+
+  boxEnd() {
+    this.boxState = this.boxState === 'start' ? 'end' : 'start';
+  }
 }
 
 

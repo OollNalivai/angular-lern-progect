@@ -1,12 +1,17 @@
-<h1>Angular Animation</h1>
+<div>
+  <h1>Angular Animation</h1>
 
-<div class="wrap">
-  <div
-    class="box"
-    [@boxTrig] = "boxState"
-  >
-    111
+  <div>
+    <button class="btn" (click)="boxStart()">Start</button>
+    <button class="btn" (click)="boxEnd()">End</button>
+  </div>
+
+  <div class="wrap">
+    <div
+      class="box"
+      [@boxTrig]="boxState"
+    >
+      111
+    </div>
   </div>
 </div>
-
-

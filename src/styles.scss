@@ -15,9 +15,13 @@ body {
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 a {
