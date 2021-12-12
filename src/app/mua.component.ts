@@ -75,6 +75,14 @@ export class MuaComponent {
   boxEnd() {
     this.boxState = this.boxState === 'start' ? 'end' : 'start';
   }
+
+  animationStart(event: any) {
+    console.log('animationStart', event);
+  }
+
+  animationDone(event: any) {
+    console.log('animationDone', event);
+  }
 }
 
 
