@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {animate, group, query, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, keyframes, query, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'mua-root',
@@ -8,14 +8,14 @@ import {animate, group, query, state, style, transition, trigger} from '@angular
   animations: [
     trigger('boxTrig', [
       state('start', style({
-        background: 'blue',
+        backgroundColor: 'blue',
       })),
       state('end', style({
-        background: 'red',
+        backgroundColor: 'red',
         transform: 'scale(1.2)',
       })),
       state('special', style({
-        background: 'black',
+        backgroundColor: 'black',
         transform: 'scale(0.8)',
         borderRadius: '50%',
       })),
@@ -31,7 +31,7 @@ import {animate, group, query, state, style, transition, trigger} from '@angular
           style({background: 'green'}),
           animate('0.5s',
             style({
-              background: 'pink',
+              backgroundColor: 'pink',
             }),
           ),
           animate(950),
@@ -39,8 +39,12 @@ import {animate, group, query, state, style, transition, trigger} from '@angular
       ]),
       // void => *
       transition(':enter', [
-        style({opacity: 0}),
-        animate('800ms ease-out'),
+        animate('4s', keyframes([
+          style({backgroundColor: 'red', offset: 0}),
+          style({backgroundColor: 'orange', offset: 0.2}),
+          style({backgroundColor: 'black', offset: 0.3}),
+          style({backgroundColor: 'blue', offset: 1})
+        ]))
       ]),
       // * => void
       transition(':leave', [
