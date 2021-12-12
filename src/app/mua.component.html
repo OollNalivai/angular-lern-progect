@@ -9,6 +9,7 @@
   </div>
 
   <div class="wrap">
+
     <div
       class="box"
       *ngIf="visible"
@@ -17,6 +18,9 @@
       (@boxTrig.done)="animationDone($event)"
     >
       <h4>{{boxState | uppercase}}</h4>
+
     </div>
+
   </div>
+
 </div>
