@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {animate, group, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, query, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'mua-root',
@@ -16,19 +16,26 @@ import {animate, group, state, style, transition, trigger} from '@angular/animat
       })),
       state('special', style({
         background: 'black',
-        transform: 'scale(0.4)',
+        transform: 'scale(0.8)',
         borderRadius: '50%',
       })),
       transition('start => end', animate(400)),
       transition('end => start', animate('800ms ease-in-out')),
       transition('special <=> *', [
-        style({background: 'green'}),
-        animate('0.5s',
-          style({
-            background: 'pink',
-          }),
-        ),
-        animate(750),
+        group([
+          query('h4', animate(1500,
+            style({
+              fontSize: '2.5rem',
+              color: 'red',
+            }))),
+          style({background: 'green'}),
+          animate('0.5s',
+            style({
+              background: 'pink',
+            }),
+          ),
+          animate(950),
+        ]),
       ]),
       // void => *
       transition(':enter', [
@@ -45,9 +52,9 @@ import {animate, group, state, style, transition, trigger} from '@angular/animat
           })),
           animate(460, style({
             color: '#000',
-            fontSize: '28px'
-          }))
-        ])
+            fontSize: '28px',
+          })),
+        ]),
       ]),
     ]),
   ],
