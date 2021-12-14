@@ -4,7 +4,6 @@
   <div>
     <button class="btn" (click)="boxStart()">Start</button>
     <button class="btn" (click)="boxEnd()">End</button>
-    <button class="btn" (click)="boxState = 'special'">Set Special State</button>
     <button class="btn" (click)="visible = !visible">Invisibility</button>
   </div>
 
@@ -13,11 +12,9 @@
     <div
       class="box"
       *ngIf="visible"
-      [@boxTrig]="boxState"
-      (@boxTrig.start)="animationStart($event)"
-      (@boxTrig.done)="animationDone($event)"
-    >
-      <h4>{{boxState | uppercase}}</h4>
+      [@myAnimationTrigger]="myStatusExp">
+
+      <h4>{{myStatusExp | uppercase}}</h4>
 
     </div>
 
