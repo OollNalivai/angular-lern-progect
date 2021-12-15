@@ -1,20 +1,18 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {MuaComponent} from './mua.component';
-import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MuaRoutingModule } from './mua-routing.module';
+import { AppComponent } from './mua.component';
 
 @NgModule({
   declarations: [
-    MuaComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule
+    MuaRoutingModule
   ],
-  bootstrap: [MuaComponent],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class MuaModule {
-}
+export class MuaModule { }

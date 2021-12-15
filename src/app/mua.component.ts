@@ -1,26 +1,10 @@
-import {Component} from '@angular/core';
-import {boxAnimation} from './mua.animation';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'mua-root',
   templateUrl: './mua.component.html',
-  styleUrls: ['./mua.component.scss'],
-  animations: [boxAnimation],
+  styleUrls: ['./mua.component.scss']
 })
-
-export class MuaComponent {
-  myStatusExp = 'start';
-  log = '';
-  visible = true;
-
-  boxStart() {
-    this.myStatusExp = this.myStatusExp === 'end' ? 'start' : 'end';
-  }
-
-  boxEnd() {
-    this.myStatusExp = this.myStatusExp === 'start' ? 'end' : 'start';
-  }
+export class AppComponent {
+  title = 'angular-blog';
 }
-
-
-
