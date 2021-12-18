@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './mua.component.html',
   styleUrls: ['./mua.component.scss']
 })
-export class AppComponent {
+export class MuaComponent {
 }
