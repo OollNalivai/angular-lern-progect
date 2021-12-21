@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layout.component';
 import {LoginPageComponent} from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { CreatePageComponent } from './create-page/create-page.component';
-import { EditPageComponent } from './edit-page/edit-page.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
+import {CreatePageComponent} from './create-page/create-page.component';
+import {EditPageComponent} from './edit-page/edit-page.component';
+import {AuthServices} from './shared/services/auth.services';
 
 const routes: Routes = [
   {
@@ -15,7 +17,7 @@ const routes: Routes = [
       {path: 'login', component: LoginPageComponent},
       {path: 'dashboard', component: DashboardPageComponent},
       {path: 'create', component: CreatePageComponent},
-      {path: 'post/:id/edit', component: EditPageComponent}
+      {path: 'post/:id/edit', component: EditPageComponent},
     ],
   },
 ];
@@ -35,6 +37,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule, AdminLayoutComponent],
+  providers: [AuthServices],
 })
 
 export class AdminModule {
