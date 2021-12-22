@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IUser} from '../../shared/interfaces';
+import {Router} from '@angular/router';
+import {AuthServices} from '../shared/services/auth.services';
+import {DashboardPageComponent} from '../dashboard-page/dashboard-page.component';
 
 @Component({
   selector: 'mua-login-page',
@@ -11,7 +14,10 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup | undefined;
 
-  constructor() {
+  constructor(
+    private auth: AuthServices,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -40,5 +46,9 @@ export class LoginPageComponent implements OnInit {
 
     console.log(user);
 
+    this.auth.login(user).subscribe(() => {
+      this.form?.reset();
+      this.router.navigate(['/admin', 'dashboard']);
+    });
   }
 }

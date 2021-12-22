@@ -9,6 +9,7 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
 import {CreatePageComponent} from './create-page/create-page.component';
 import {EditPageComponent} from './edit-page/edit-page.component';
 import {AuthServices} from './shared/services/auth.services';
+import {SharedModule} from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
+    SharedModule,
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule, AdminLayoutComponent],
   providers: [AuthServices],
