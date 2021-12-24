@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IUser} from '../../shared/interfaces';
 import {Router} from '@angular/router';
 import {AuthServices} from '../shared/services/auth.services';
-import {DashboardPageComponent} from '../dashboard-page/dashboard-page.component';
 
 @Component({
   selector: 'mua-login-page',
