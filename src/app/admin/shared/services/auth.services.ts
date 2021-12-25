@@ -17,6 +17,7 @@ export class AuthServices {
   }
 
   login(user: IUser): Observable<any> {
+    user.returnSecureToken = true;
     return this.http
       .post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
