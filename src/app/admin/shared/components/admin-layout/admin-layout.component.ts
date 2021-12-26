@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginPageComponent} from '../../../login-page/login-page.component';
+import {AuthServices} from '../../services/auth.services';
 
 @Component({
   selector: 'mua-admin-layout',
@@ -9,13 +9,17 @@ import {LoginPageComponent} from '../../../login-page/login-page.component';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private auth: AuthServices
+  ) { }
 
   ngOnInit(): void {
   }
 
   logout($event: Event) {
     event?.preventDefault();
+    this.auth.logout();
     this.router.navigate(['/admin', 'login']).then(r => r);
   }
 }
