@@ -15,6 +15,7 @@ export class AdminLayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(+new Date());
   }
 
   logout($event: Event) {

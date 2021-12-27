@@ -14,7 +14,7 @@ export class AuthServices {
   }
 
   get token(): string | null {
-    const expData = new Date(localStorage.getItem('fb-token-exp'));
+    const expData = new Date(localStorage.getItem('fb-token-exp') as string);
     if (new Date() > expData) {
       this.logout();
       return null;
@@ -27,7 +27,7 @@ export class AuthServices {
     return this.http
       .post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
-        tap(this.setToken),
+        tap(this.setToken) as any,
       );
 
   }
@@ -40,7 +40,7 @@ export class AuthServices {
     return !!this.token;
   }
 
-  private setToken(response: FbAuthResponse | any | null): void {
+  private setToken(response: FbAuthResponse | null): void {
     if (response) {
       console.log(response);
       const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
