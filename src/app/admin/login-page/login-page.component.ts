@@ -3,12 +3,14 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IUser} from '../../shared/interfaces';
 import {Router} from '@angular/router';
 import {AuthServices} from '../shared/services/auth.services';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'mua-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
+
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup | undefined;
@@ -20,12 +22,20 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
+
+  get authErrors(): Observable<string> {
+    return this.auth.error$;
+  }
+
   ngOnInit(): void {
+
     this.form = new FormGroup({
+
       email: new FormControl(null, [
         Validators.required,
         Validators.email,
       ]),
+
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(6),
@@ -34,7 +44,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit() {
+
     console.log(this.form);
+
     if (this.form?.invalid) {
       return;
     }
@@ -49,8 +61,11 @@ export class LoginPageComponent implements OnInit {
     console.log(user);
 
     this.auth.login(user).subscribe(() => {
+
       this.form?.reset();
       this.router.navigate(['/admin', 'dashboard']);
+      this.submitted = false;
+    }, () => {
       this.submitted = false;
     });
   }
