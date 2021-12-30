@@ -10,6 +10,7 @@ import {CreatePageComponent} from './create-page/create-page.component';
 import {EditPageComponent} from './edit-page/edit-page.component';
 import {AuthServices} from './shared/services/auth.services';
 import {SharedModule} from '../shared/shared.module';
+import {AuthGuard} from './shared/services/auth.guard';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule, AdminLayoutComponent],
-  providers: [AuthServices],
+  providers: [AuthServices, AuthGuard],
 })
 
 export class AdminModule {
