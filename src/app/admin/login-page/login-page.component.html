@@ -5,6 +5,9 @@
   <div class="alert alert-danger" *ngIf="authErrors | async as error">
     {{ error }}
   </div>
+  <div class="alert alert-info" *ngIf="massage">
+    {{ massage }}
+  </div>
 
   <div
     class="form-control"
