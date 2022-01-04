@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'mua-create-page',
   templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.scss']
+  styleUrls: ['./create-page.component.scss'],
 })
 export class CreatePageComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup | undefined;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      title: new FormControl(null, Validators.required),
+      text: new FormControl(null, Validators.required),
+      author: new FormControl(null, Validators.required)
+    });
   }
 
 }
