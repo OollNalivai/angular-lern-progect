@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <h1>Create new post</h1>
 
   <div
@@ -12,7 +12,7 @@
       *ngIf="form?.get('title').touched && form?.get('title').invalid"
     >
       <small *ngIf="form?.get('title').errors.required">
-        Enter the title
+        Enter the post title
       </small>
     </div>
   </div>
@@ -34,7 +34,7 @@
       *ngIf="form?.get('author').touched && form?.get('author').invalid"
     >
       <small *ngIf="form?.get('author').errors.required">
-        Enter the author
+        Enter the author of the post
       </small>
     </div>
   </div>
