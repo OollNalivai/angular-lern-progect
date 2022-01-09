@@ -59,7 +59,7 @@ export class AuthServices {
 
     return throwError(error);
   }
-
+  /* TODO: изменить тип */
   login(user: IUser): Observable<FbAuthResponse | null> {
     user.returnSecureToken = true;
 
