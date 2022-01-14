@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IPost} from '../../shared/interfaces';
+import { PostsService } from '../../shared/posts.service';
 
 @Component({
   selector: 'mua-create-page',
@@ -11,7 +12,7 @@ export class CreatePageComponent implements OnInit {
 
   form: FormGroup | undefined;
 
-  constructor() {
+  constructor(private postsService: PostsService) {
   }
 
   ngOnInit(): void {
@@ -35,6 +36,10 @@ export class CreatePageComponent implements OnInit {
       author: this.form?.value.author,
       date: new Date(),
     };
+
+    this.postsService.create(post).subscribe(() => {
+      this.form?.reset();
+    })
 
     console.log(post);
   }
