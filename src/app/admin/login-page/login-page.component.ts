@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IUser} from '../../shared/interfaces';
+import {User} from '../../shared/interfaces';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AuthServices} from '../shared/services/auth.services';
 import {Observable} from 'rxjs';
@@ -62,7 +62,7 @@ export class LoginPageComponent implements OnInit {
 
     this.submitted = true;
 
-    const user: IUser = {
+    const user: User = {
       email: this.form?.value.email,
       password: this.form?.value.password,
     };

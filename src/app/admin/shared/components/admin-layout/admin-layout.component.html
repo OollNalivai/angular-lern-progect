@@ -4,7 +4,7 @@
     <a routerLink="/">Angular Admin. Go to Home Page?</a>
   </h1>
 
-  <ul *ngIf="auth.isAuthenticated()">
+  <ul *ngIf="auth.isAuth">
 
     <li routerLinkActive="active">
       <a [routerLink]="['/admin', 'dashboard']">Dashboard page</a>

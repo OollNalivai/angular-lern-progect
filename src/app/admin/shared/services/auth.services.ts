@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 
-import {FbAuthResponse, IUser} from '../../../shared/interfaces';
+import {FbAuthResponse, User} from '../../../shared/interfaces';
 import {environment} from '../../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 
@@ -25,6 +25,10 @@ export class AuthServices {
     }
 
     return localStorage.getItem('fb-token');
+  }
+
+  get isAuth(): boolean {
+    return !!this.token;
   }
 
   private static setToken(response: FbAuthResponse | null): void {
@@ -59,8 +63,8 @@ export class AuthServices {
 
     return throwError(error);
   }
-  /* TODO: изменить тип */
-  login(user: IUser): Observable<FbAuthResponse | null> {
+
+  login(user: User): Observable<FbAuthResponse | null> {
     user.returnSecureToken = true;
 
     return this.http
@@ -73,10 +77,5 @@ export class AuthServices {
 
   logout() {
     AuthServices.setToken(null);
-  }
-
-  isAuthenticated(): boolean {
-
-    return !!this.token;
   }
 }

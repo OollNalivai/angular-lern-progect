@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IPost} from '../../shared/interfaces';
+import {Post} from '../../shared/interfaces';
 import { PostsService } from '../../shared/posts.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    const post: IPost = {
+    const post: Post = {
       title: this.form?.value.title,
       text: this.form?.value.text,
       author: this.form?.value.author,

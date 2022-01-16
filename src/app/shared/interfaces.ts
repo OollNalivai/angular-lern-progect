@@ -1,4 +1,4 @@
-export interface IUser {
+export interface User {
   email: string;
   password: string;
   returnSecureToken?: boolean;
@@ -9,7 +9,7 @@ export interface FbAuthResponse {
   expiresIn: string;
 }
 
-export interface IPost {
+export interface Post {
   id?: string;
   title: string;
   text: string;
