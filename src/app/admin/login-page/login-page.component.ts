@@ -35,6 +35,8 @@ export class LoginPageComponent implements OnInit {
 
       if (params.loginAgain) {
         this.massage = 'Please, log in';
+      } else if (params['authFailed']) {
+        this.massage = 'Session has expired. Log in again.'
       }
     });
 
