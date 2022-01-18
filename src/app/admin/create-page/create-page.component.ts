@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Post} from '../../shared/interfaces';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Post } from '../../shared/interfaces';
 import { PostsService } from '../../shared/posts.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class CreatePageComponent implements OnInit {
 
     this.postsService.create(post).subscribe(() => {
       this.form?.reset();
-    })
+    });
 
     console.log(post);
   }

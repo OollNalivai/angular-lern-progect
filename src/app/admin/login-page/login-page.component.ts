@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../shared/interfaces';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {AuthServices} from '../shared/services/auth.services';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../shared/interfaces';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthServices } from '../shared/services/auth.services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'mua-login-page',
@@ -33,10 +33,11 @@ export class LoginPageComponent implements OnInit {
 
     this.route.queryParams.subscribe((params: Params) => {
 
-      if (params.loginAgain) {
+      if (params['loginAgain']) {
         this.massage = 'Please, log in';
-      } else if (params['authFailed']) {
-        this.massage = 'Session has expired. Log in again.'
+      }
+      if (params['authFailed']) {
+        this.massage = 'Session has expired. Log in again.';
       }
     });
 
