@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Provider } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { MuaRoutingModule } from './mua-routing.module';
 import { MuaComponent } from './mua.component';
