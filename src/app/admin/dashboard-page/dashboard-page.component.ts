@@ -18,18 +18,22 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
               private auth: AuthServices) { }
 
   ngOnInit(): void {
-    this.postsService.getAll.subscribe(posts => {
+    this.pSub = this.postsService.getAll.subscribe(posts => {
       this.posts = posts;
     })
+  }
+
+  remove(id: string) {
+
+  }
+
+  test() {
+    console.log(this.auth.token);
   }
 
   ngOnDestroy() {
     if(this.pSub) {
       this.pSub.unsubscribe();
     }
-  }
-
-  test() {
-    console.log(this.auth.token);
   }
 }

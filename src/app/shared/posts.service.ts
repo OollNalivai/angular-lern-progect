@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Post, FbCreateResponse } from './interfaces';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import objectContaining = jasmine.objectContaining;
+// import objectContaining = jasmine.objectContaining;
 
 @Injectable({providedIn: 'root'})
 
