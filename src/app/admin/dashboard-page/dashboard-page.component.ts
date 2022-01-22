@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {AuthServices} from '../shared/services/auth.services';
+import { AuthServices } from '../shared/services/auth.services';
 import { PostsService } from '../../shared/posts.service';
 import { Post } from '../../shared/interfaces';
 import { Subscription } from 'rxjs';
@@ -13,14 +13,16 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   posts: Post[] | undefined = [];
   pSub: Subscription | undefined;
+  searchStr = '';
 
   constructor(private postsService: PostsService,
-              private auth: AuthServices) { }
+              private auth: AuthServices) {
+  }
 
   ngOnInit(): void {
     this.pSub = this.postsService.getAll.subscribe(posts => {
       this.posts = posts;
-    })
+    });
   }
 
   remove(id: string) {
@@ -32,7 +34,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.pSub) {
+    if (this.pSub) {
       this.pSub.unsubscribe();
     }
   }

@@ -24,8 +24,6 @@ export class CreatePageComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form);
-
     if (this.form?.invalid) {
       return;
     }
