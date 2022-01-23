@@ -12,7 +12,7 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
-  get getAll(): Observable<Post[]> {
+  get allPosts(): Observable<Post[]> {
     return this.http.get(`${environment.fbDbUrl}/posts.json`)
       .pipe(map((response: {[key: string]: any}) => {
         return Object
@@ -34,5 +34,9 @@ export class PostsService {
           date: new Date(post.date)
         };
       }));
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
   }
 }
