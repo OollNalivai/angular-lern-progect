@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PostsService } from '../../shared/posts.service';
 
 @Component({
   selector: 'mua-edit-page',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private postsService: PostsService
+  ) {}
 
   ngOnInit(): void {
+    // this.route.params.subscribe((params: Params) => {
+    //
+    // })
   }
 
 }
