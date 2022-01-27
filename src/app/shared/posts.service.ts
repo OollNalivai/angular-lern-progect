@@ -25,6 +25,16 @@ export class PostsService {
       }));
   }
 
+  getById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`)
+      .pipe(map((post: Post) => {
+        return {
+          ...post, id,
+          date: new Date(post.date)
+        };
+      }));
+  }
+
   create(post: Post): Observable<Post> {
     return this.http.post<FbCreateResponse>(`${environment.fbDbUrl}/posts.json`, post)
       .pipe(map((response: FbCreateResponse) => {

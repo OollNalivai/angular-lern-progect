@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostsService } from '../../shared/posts.service';
+import { switchMap } from 'rxjs';
+import { Post } from '../../shared/interfaces';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'mua-edit-page',
@@ -9,15 +12,25 @@ import { PostsService } from '../../shared/posts.service';
 })
 export class EditPageComponent implements OnInit {
 
+  form: FormGroup | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {
-    // this.route.params.subscribe((params: Params) => {
-    //
-    // })
+  ngOnInit() {
+    this.route.params
+      .pipe(switchMap((params) => {
+          return this.postsService.getById(params['id']);
+        })
+      ).subscribe((post: Post) => {
+        this.form = new FormGroup({
+          title: new FormControl(post.title, Validators.required),
+          text: new FormControl(post.text,Validators.required)
+        })
+    })
   }
 
 }
