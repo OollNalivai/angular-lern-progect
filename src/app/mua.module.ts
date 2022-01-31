@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import enLocaleData from '@angular/common/locales/en';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MuaRoutingModule } from './mua-routing.module';
@@ -10,6 +12,8 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
+
+registerLocaleData(enLocaleData, 'en')
 
 @NgModule({
   declarations: [

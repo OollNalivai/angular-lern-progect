@@ -26,7 +26,7 @@
       <td>{{ idx + 1 }}</td>
       <td>{{ post.author }}</td>
       <td>{{ post.title }}</td>
-      <td>{{ post.date | date: 'medium' }}</td>
+      <td>{{ post.date | date: 'medium':'string | undefined':'en' }}</td>
       <td>
 
         <a class="btn btn-link open"
