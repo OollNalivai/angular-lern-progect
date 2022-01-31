@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpHandler, HttpRequest, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { AuthServices } from '../admin/shared/services/auth.services';
+import { AuthService } from '../admin/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-    private auth: AuthServices,
+    private auth: AuthService,
     private router: Router
   ) {
   }

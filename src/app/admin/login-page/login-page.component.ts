@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../shared/interfaces';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AuthServices } from '../shared/services/auth.services';
+import { AuthService } from '../shared/services/auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit {
   massage: string | undefined;
 
   constructor(
-    private auth: AuthServices,
+    private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
   ) {

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthServices } from '../shared/services/auth.services';
+import { AuthService } from '../shared/services/auth.service';
 import { PostsService } from '../../shared/posts.service';
 import { Post } from '../../shared/interfaces';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   searchStr = '';
 
   constructor(private postsService: PostsService,
-              private auth: AuthServices) {
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {

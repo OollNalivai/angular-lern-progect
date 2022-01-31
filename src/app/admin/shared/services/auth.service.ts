@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 
-export class AuthServices {
+export class AuthService {
 
   error$: Subject<string> = new Subject<string>();
 
@@ -70,12 +70,12 @@ export class AuthServices {
     return this.http
       .post<FbAuthResponse | null>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
-        tap(AuthServices.setToken),
+        tap(AuthService.setToken),
         catchError(this.handleError.bind(this)),
       );
   }
 
   logout() {
-    AuthServices.setToken(null);
+    AuthService.setToken(null);
   }
 }
