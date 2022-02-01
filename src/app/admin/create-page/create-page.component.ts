@@ -11,7 +11,7 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class CreatePageComponent implements OnInit {
 
-  form: FormGroup | undefined;
+  public form: FormGroup | undefined;
 
   constructor(
     private postsService: PostsService,
@@ -41,7 +41,7 @@ export class CreatePageComponent implements OnInit {
 
     this.postsService.create(post).subscribe(() => {
       this.form?.reset();
-      this.alertService.success('Post was created')
+      this.alertService.alertMessage('success','Post was created')
     });
 
     console.log(post);

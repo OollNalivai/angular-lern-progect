@@ -5,6 +5,8 @@ import { Post, FbCreateResponse } from './interfaces';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
+type updateType = Pick<Post, "id" | "text" | "title">
+
 @Injectable({providedIn: 'root'})
 
 export class PostsService {
@@ -50,8 +52,8 @@ export class PostsService {
     return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
   }
 
-  update(post: Pick<Post, "id" | "text" | "title">): Observable<Pick<Post, "id" | "text" | "title">> {
-    return this.http.patch<Pick<Post, "id" | "text" | "title">>
+  update(post: updateType): Observable<updateType> {
+    return this.http.patch<updateType>
     (`${environment.fbDbUrl}/posts/${post.id}.json`, post)
   }
 }

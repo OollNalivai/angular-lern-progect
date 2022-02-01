@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
-import { Subscription, timeout } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mua-alert',
@@ -13,7 +13,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   public text: string | undefined;
   public type = 'success';
-  _subscriptions$: Subscription = new Subscription();
+  private _subscriptions$: Subscription = new Subscription();
 
   constructor(private alertService: AlertService) {
   }

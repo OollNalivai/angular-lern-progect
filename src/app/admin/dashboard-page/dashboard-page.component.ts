@@ -12,9 +12,9 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  _subscriptions$: Subscription = new Subscription();
-  posts: Post[] | undefined = [];
-  searchStr = '';
+  public posts: Post[] | undefined = [];
+  public searchStr = '';
+  private _subscriptions$: Subscription = new Subscription();
 
   constructor(private postsService: PostsService,
               private auth: AuthService,
@@ -31,7 +31,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   remove(id: string) {
     this._subscriptions$.add(this.postsService.remove(id).subscribe(() => {
       this.posts = this.posts?.filter(post => post.id !== id);
-      this.alertService.warning('Post was deleted');
+      this.alertService.alertMessage('warning','Post was deleted');
     }));
   }
 

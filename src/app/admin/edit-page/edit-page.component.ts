@@ -13,10 +13,10 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class EditPageComponent implements OnInit, OnDestroy {
 
-  _subscriptions$: Subscription = new Subscription();
-  form: FormGroup | undefined;
-  post: Post | undefined;
-  submitted = false;
+  public form: FormGroup | undefined;
+  public submitted = false;
+  private _subscriptions$: Subscription = new Subscription();
+  private post: Post | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,7 +57,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
 
         .subscribe(() => {
           this.submitted = false;
-          this.alertService.success('Post was updated');
+          this.alertService.alertMessage('success','Post was updated');
         })
     );
 
