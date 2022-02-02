@@ -56,9 +56,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit() {
-
-    console.log(this.form);
-
     if (this.form?.invalid) {
       return;
     }
@@ -70,12 +67,10 @@ export class LoginPageComponent implements OnInit {
       password: this.form?.value.password,
     };
 
-    console.log(user);
-
     this.auth.login(user).subscribe(() => {
 
         this.form?.reset();
-        this.router.navigate(['/admin', 'dashboard']);
+        this.router.navigate(['/admin', 'dashboard']).then(r => r);
         this.submitted = false;
       },
       () => {

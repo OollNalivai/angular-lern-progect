@@ -12,7 +12,7 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  public posts: Post[] | undefined = [];
+  public posts: Post[] = [];
   public searchStr = '';
   private _subscriptions$: Subscription = new Subscription();
 
@@ -33,10 +33,6 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       this.posts = this.posts?.filter(post => post.id !== id);
       this.alertService.alertMessage('warning','Post was deleted');
     }));
-  }
-
-  test() {
-    console.log(this.auth.token);
   }
 
   ngOnDestroy(): void {

@@ -43,8 +43,6 @@ export class CreatePageComponent implements OnInit {
       this.form?.reset();
       this.alertService.alertMessage('success','Post was created')
     });
-
-    console.log(post);
   }
 
 }

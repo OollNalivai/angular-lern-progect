@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
         queryParams: {
           loginAgain: true,
         },
-      });
+      }).then(r => r);
     }
 
     return false;
