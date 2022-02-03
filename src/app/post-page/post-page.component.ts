@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../shared/posts.service';
 import { Observable, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

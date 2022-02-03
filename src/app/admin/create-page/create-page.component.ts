@@ -9,6 +9,7 @@ import { AlertService } from '../shared/services/alert.service';
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.scss'],
 })
+
 export class CreatePageComponent implements OnInit {
 
   public form: FormGroup | undefined;
