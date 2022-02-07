@@ -1,0 +1,36 @@
+.header {
+  margin: 0 auto;
+  max-width: 1180px;
+
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+}
+
+.header-navigation {
+
+  &__list {
+    max-width: 780px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 0.5rem auto;
+  }
+
+  &__item {
+    margin-left: 1rem;
+
+    &:last-child {
+      background-color: var(--light-color);
+    }
+  }
+
+  &__link {
+    padding: .15rem .3rem;
+    font-size: 1.5rem;
+  }
+
+}
