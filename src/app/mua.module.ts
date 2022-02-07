@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { SliderComponent } from './slider/slider.component';
 
 registerLocaleData(enLocaleData, 'en')
 
@@ -25,7 +26,8 @@ registerLocaleData(enLocaleData, 'en')
     PostPageComponent,
     PostComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
