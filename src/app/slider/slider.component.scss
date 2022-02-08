@@ -1,0 +1,42 @@
+.slider {
+
+  margin: 100px auto;
+  max-width: 1180px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &__container {
+    margin: 0 auto;
+    max-width: 860px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__item {
+    margin: 10px 30px;
+    padding: 20px;
+
+    background-color: var(--danger-color);
+  }
+
+  &__button {
+    margin: 10px 20px;
+    padding: 10px;
+  }
+}
+

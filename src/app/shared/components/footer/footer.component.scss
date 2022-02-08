@@ -1,0 +1,17 @@
+.footer {
+  height: 15vh;
+  background-color: var(--dark-color);
+}
+
+.footer-container {
+  margin: 0 auto;
+  padding: 15px;
+  max-width: 780px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+
