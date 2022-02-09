@@ -1,13 +1,12 @@
-<nav class="navbar main">
-  <h1>Angular Blog</h1>
-  <a [routerLink]="['/admin']">Go to Admin layout</a>
-</nav>
+<div class="layout-container">
 
-<div class="container">
-  <router-outlet></router-outlet>
+  <nav class="navbar main">
+    <h1>Angular Blog</h1>
+    <a [routerLink]="['/admin']">Go to Admin layout</a>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>
-
-<mua-slider id="slider"></mua-slider>
-
-<mua-footer></mua-footer>
-
