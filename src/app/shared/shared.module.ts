@@ -6,12 +6,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
     RouterModule,
     HttpClientModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    CommonModule
   ],
   exports: [
     HttpClientModule,

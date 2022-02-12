@@ -4,15 +4,18 @@
 
   <div class="slider__container">
 
-    <button class="slider__button"><<<<<</button>
+    <button class="slider__button left" (click)="clickLeft()"><<<<<</button>
 
     <ul class="slider__list">
-      <li class="slider__item">1111111</li>
-      <li class="slider__item">2222222</li>
-      <li class="slider__item">3333333</li>
+
+      <li class="slider__item"
+          *ngFor="let el of array | slice: start: end">
+        {{ el }}
+      </li>
+
     </ul>
 
-    <button class="slider__button">>>>>></button>
+    <button class="slider__button right" (click)="clickRight()">>>>>></button>
 
   </div>
 
