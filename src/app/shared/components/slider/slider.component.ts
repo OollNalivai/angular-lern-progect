@@ -20,14 +20,11 @@ export class SliderComponent implements OnInit {
   }
 
   clickLeft() {
-
+    this.array.slice(this.start--, this.end--);
   }
 
   clickRight() {
-    if (this.end === this.array.length) {
-    }
-
-    this.array.slice(this.start++, this.end++)
+    this.array.slice(this.start++, this.end++);
     console.log(this.sliderItem)
   }
 }

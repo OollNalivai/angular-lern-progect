@@ -4,7 +4,21 @@
 
   <div class="slider__container">
 
-    <button class="slider__button left" (click)="clickLeft()"><<<<<</button>
+
+    <button class="slider__button left" disabled="disabled"
+            *ngIf="start === 0; else elseLeftBtn"
+    >
+      <<<<<
+    </button>
+
+    <ng-template #elseLeftBtn>
+
+      <button class="slider__button"
+              (click)="clickLeft()">
+        <<<<<
+      </button>
+
+    </ng-template>
 
     <ul class="slider__list">
 
@@ -15,7 +29,15 @@
 
     </ul>
 
-    <button class="slider__button right" (click)="clickRight()">>>>>></button>
+    <button class="slider__button right"
+            (click)="clickRight()" *ngIf="end !== array.length; else elseRightBtn">
+
+      >>>>>
+    </button>
+
+    <ng-template #elseRightBtn>
+      <button class="slider__button" disabled="disabled">>>>>></button>
+    </ng-template>
 
   </div>
 
