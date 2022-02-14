@@ -30,6 +30,7 @@
   &__item {
     margin: 10px 30px;
     padding: 20px;
+    box-sizing: border-box;
 
     background-color: var(--danger-color);
   }

@@ -20,14 +20,37 @@
 
     </ng-template>
 
-    <ul class="slider__list">
+    <ul class="slider__list" *ngIf="posts$ | async as posts; else loading">
 
       <li class="slider__item"
-          *ngFor="let el of array | slice: start: end">
-        {{ el }}
+          *ngFor="let post of posts | slice: start: end">
+        <!--        {{ el }}-->
+        <div>
+          <h2>{{ post?.title }}</h2>
+
+          <small>{{ post?.date | date: 'dd.MM.yyyy' }}</small>
+        </div>
+
+        <div>
+          <small>{{ post?.author }}</small>
+        </div>
+
+
+        <button
+          [routerLink]="['/post', post?.id]"
+          class="btn btn-dark"
+        >Open
+        </button>
+
       </li>
 
     </ul>
+
+    <ng-template #loading>
+      <li>
+        <p class="text-center">Loading posts...</p>
+      </li>
+    </ng-template>
 
     <button class="slider__button right"
             (click)="clickRight()" *ngIf="end !== array.length; else elseRightBtn">
