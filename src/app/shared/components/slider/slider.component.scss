@@ -1,11 +1,10 @@
 .slider {
-
-  margin: 50px auto;
-  max-width: 1180px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  margin: 50px auto;
+  max-width: 1180px;
 
   &__title {
     text-align: center;
@@ -13,12 +12,12 @@
   }
 
   &__container {
-    margin: 0 auto;
-    max-width: 860px;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    margin: 0 auto;
+    max-width: 860px;
   }
 
   &__list {
@@ -28,11 +27,37 @@
   }
 
   &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 25%;
+    height: 300px;
     margin: 10px 30px;
-    padding: 20px;
+    padding: 5px;
+
     box-sizing: border-box;
 
     background-color: var(--danger-color);
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.3rem 0.5rem;
+    box-sizing: border-box;
+  }
+
+  &__subtitle,
+  &__text {
+    width: 90%;
+    padding: 0.5rem 0;
+  }
+
+  &__list-button {
+    margin-right: 0;
+    align-self: stretch;
   }
 
   &__button {

@@ -6,7 +6,7 @@
 
 
     <button class="slider__button left" disabled="disabled"
-            *ngIf="start === 0; else elseLeftBtn"
+            *ngIf="sliceStart === 0; else elseLeftBtn"
     >
       <<<<<
     </button>
@@ -23,24 +23,26 @@
     <ul class="slider__list" *ngIf="posts$ | async as posts; else loading">
 
       <li class="slider__item"
-          *ngFor="let post of posts | slice: start: end">
-        <!--        {{ el }}-->
-        <div>
-          <h2>{{ post?.title }}</h2>
+          *ngFor="let post of posts | slice: sliceStart: sliceEnd">
 
-          <small>{{ post?.date | date: 'dd.MM.yyyy' }}</small>
+        <div class="slider__wrapper">
+          <h3 class="slider__subtitle">{{ post?.title }}</h3>
+
+          <small class="slider__text">{{ post?.date | date: 'dd.MM.yyyy' }}</small>
+
+          <small class="slider__text">{{ post?.author | slice : 0 : 14 }}...</small>
         </div>
 
-        <div>
-          <small>{{ post?.author }}</small>
+        <div class="slider__wrapper">
+
+          <button
+            [routerLink]="['/post', post?.id]"
+            class="slider__list-button btn btn-dark"
+          >Open
+          </button>
+
         </div>
 
-
-        <button
-          [routerLink]="['/post', post?.id]"
-          class="btn btn-dark"
-        >Open
-        </button>
 
       </li>
 
@@ -53,7 +55,7 @@
     </ng-template>
 
     <button class="slider__button right"
-            (click)="clickRight()" *ngIf="end !== array.length; else elseRightBtn">
+            (click)="clickRight()" *ngIf="sliceEnd !== postsArr.length; else elseRightBtn">
 
       >>>>>
     </button>
