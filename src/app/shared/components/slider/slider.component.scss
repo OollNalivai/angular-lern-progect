@@ -83,10 +83,12 @@
   }
 
   .left {
+    left: 10px;
     transform: rotate(45deg);
   }
 
   .right {
+    right: 10px;
     transform: rotate(225deg);
   }
 }
