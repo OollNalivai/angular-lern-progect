@@ -12,11 +12,7 @@ export class SliderComponent implements OnInit {
 
   sliceStart: number = 0;
   sliceEnd: number = 3;
-  sliderItem = document.getElementsByClassName('slider__item');
-  btnLeft = document.getElementsByClassName('left');
-  btnRight = document.getElementsByClassName('right');
   postsArr: Post[] = [];
-
   public posts$: Observable<Post[]> | undefined;
 
   constructor(
