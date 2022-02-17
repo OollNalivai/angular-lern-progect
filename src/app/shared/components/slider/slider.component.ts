@@ -1,6 +1,6 @@
-import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { Post } from '../../interfaces';
-import { delay, Observable, skipWhile } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostsService } from '../../posts.service';
 
 @Component({
@@ -8,14 +8,14 @@ import { PostsService } from '../../posts.service';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnInit, AfterContentChecked {
+export class SliderComponent implements OnInit {
 
   sliceStart: number = 0;
   sliceEnd: number = 3;
   sliderItem = document.getElementsByClassName('slider__item');
   btnLeft = document.getElementsByClassName('left');
   btnRight = document.getElementsByClassName('right');
-  postsArr: any[] = [];
+  postsArr: Post[] = [];
 
   public posts$: Observable<Post[]> | undefined;
 
@@ -26,16 +26,10 @@ export class SliderComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
     this.posts$ = this.postsService.allPosts;
     this.postsService.allPosts
-      .pipe(skipWhile((posts: Post[]) => !posts.length))
       .subscribe(posts => {
-        console.log(posts, 'posts');
         this.postsArr = [...posts];
-    })
-    console.log(this.postsArr, 'this.posts');
-  }
-
-  ngAfterContentChecked(): void {
-    console.log(this.postsArr, 'this.posts');
+        console.log(posts, 'posts');
+      })
   }
 
   clickLeft() {
