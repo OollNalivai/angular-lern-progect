@@ -4,6 +4,7 @@ import { QuillModule } from 'ngx-quill';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,12 +18,14 @@ import { CommonModule } from '@angular/common';
   ],
   exports: [
     HttpClientModule,
-    QuillModule
+    QuillModule,
+    PaginatorComponent,
   ],
   declarations: [
     FooterComponent,
     HeaderComponent,
     SliderComponent,
+    PaginatorComponent,
     MainLayoutComponent,
   ]
 })
