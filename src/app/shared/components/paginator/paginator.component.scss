@@ -1,10 +1,43 @@
 .tools-paginator {
   width: 180px;
-  height: 60px;
 
   margin: 20px auto;
+  padding: 5px;
   border: 1px solid red;
 
   background-color: white;
+  text-align: center;
+
+  &__info {
+    font-size: 14px;
+    color: var(--gray-color)
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__item > a {
+    padding: 4px 3px 2px;
+    margin: 0 2px 0;
+
+    border-bottom: 2px solid var(--primary-color);
+    font-size: 18px;
+  }
+
+  &__item > a:hover {
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--dark-color);
+    opacity: 0.75;
+  }
+
+  &__item > a:active {
+    opacity: 1;
+  }
+
+}
+
+p {
   text-align: center;
 }

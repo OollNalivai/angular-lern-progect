@@ -1,8 +1,16 @@
+<p>{{arr | slice: sliceStart : sliceEnd}}</p>
+
 <div class="tools-paginator">
-  <span class="tools-paginator__info">Показано 25-30 из 38</span>
+  <span class="tools-paginator__info">
+    Showing posts from {{sliceStart + 1}} to {{sliceEnd}} of {{arr.length}}
+  </span>
   <ul class="tools-paginator__list">
-    <li class="tools-paginator__item">
-      <a href="">1, 2, 3, ... , 8</a>
+    <li class="tools-paginator__item"
+        *ngFor="let page of allPageLength">
+      <a class="tools-paginator__button" *ngIf="page !== allPageLength.length; else lastEl">{{page}},</a>
+      <ng-template #lastEl>
+        <a class="tools-paginator__button">{{page}}</a>
+      </ng-template>
     </li>
   </ul>
 </div>
