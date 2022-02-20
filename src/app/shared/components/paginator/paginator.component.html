@@ -3,7 +3,8 @@
 <div class="tools-paginator">
 
   <span class="tools-paginator__info">
-    Showing posts from {{sliceStart + 1}} to {{sliceEnd}} of {{arr.length}}
+    Showing posts from {{sliceStart + 1}}
+    to {{sliceEnd <= arr.length ? sliceEnd : arr.length}} of {{arr.length}}
   </span>
 
   <ul class="tools-paginator__list">

@@ -7,14 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginatorComponent implements OnInit{
 
-
-  arr = [1,33,3,4,5,6,6,7,7,3,3,2,2,34,4,2,1,2,3,5,34,5,65,7,56,8,6,8,8,9,5,4,3,2,1];
+  arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,2,3,5,34,5,65,7,56,8,6,8,8,9,5,4,3,2,1,3,4];
+  numberOfPostsShown: number = 7;
+  sliceStart: number = 0;
+  sliceEnd: number = 7;
   arrPageNumbers: number[] = [];
-  totalPage: number = Math.ceil(this.arr.length/5);
   currentPage: number | undefined;
-  sliceStart: number = 30;
-  sliceEnd: number = 35;
-
+  totalPage: number = Math.ceil(this.arr.length/this.numberOfPostsShown);
   currentEl:  Element | null = document.querySelector('.tools-paginator__button');
 
   ngOnInit(): void {
@@ -28,8 +27,8 @@ export class PaginatorComponent implements OnInit{
   clickPage($event: any): void {
     this.currentPage = $event.target.innerHTML.replace(/[^0-9]/g,"");
     // this.currentEl?.classList.add('active');
-    this.sliceStart = this.currentPage! * 5 -5;
-    this.sliceEnd = this.currentPage! * 5;
+    this.sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
+    this.sliceEnd = this.currentPage! * this.numberOfPostsShown;
 
     console.log(this.currentPage);
   }
