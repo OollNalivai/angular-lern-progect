@@ -1,16 +1,29 @@
 <p>{{arr | slice: sliceStart : sliceEnd}}</p>
 
 <div class="tools-paginator">
+
   <span class="tools-paginator__info">
     Showing posts from {{sliceStart + 1}} to {{sliceEnd}} of {{arr.length}}
   </span>
+
   <ul class="tools-paginator__list">
+
     <li class="tools-paginator__item"
-        *ngFor="let page of allPageLength">
-      <a class="tools-paginator__button" *ngIf="page !== allPageLength.length; else lastEl">{{page}},</a>
+        *ngFor="let page of arrPageNumbers">
+
+      <a class="tools-paginator__button"
+         *ngIf="page !== arrPageNumbers.length; else lastEl"
+         (click)="clickPage($event)">{{page}},
+      </a>
+
       <ng-template #lastEl>
-        <a class="tools-paginator__button">{{page}}</a>
+        <a class="tools-paginator__button"
+           (click)="clickPage($event)">{{page}}
+        </a>
       </ng-template>
+
     </li>
+
   </ul>
+
 </div>
