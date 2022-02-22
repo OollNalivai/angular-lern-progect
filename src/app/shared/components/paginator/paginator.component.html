@@ -27,4 +27,18 @@
 
   </ul>
 
+  <ul class="tools-paginator__list">
+
+    <li class="tools-paginator__item"
+        *ngFor="let page of arrPageNumbersDots">
+
+      <a class="tools-paginator__button"
+         *ngIf="page !== arrPageNumbersDots.length"
+         (click)="clickPage($event)">{{page}},
+      </a>
+
+    </li>
+
+  </ul>
+
 </div>
