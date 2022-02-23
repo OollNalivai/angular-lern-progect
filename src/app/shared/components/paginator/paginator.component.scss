@@ -1,5 +1,5 @@
 .tools-paginator {
-  width: 180px;
+  width:200px;
 
   margin: 20px auto;
   padding: 5px;
@@ -40,6 +40,12 @@
   &__item > a:active {
     border: 2px solid var(--dark-color);
     opacity: 1;
+  }
+
+  .active-btn {
+    border: 2px solid var(--dark-color);
+
+    background-color: var(--light-color);
   }
 
 }
