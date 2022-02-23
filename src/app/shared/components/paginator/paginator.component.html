@@ -7,19 +7,19 @@
     to {{sliceEnd <= arr.length ? sliceEnd : arr.length}} of {{arr.length}}
   </span>
 
-  <ul class="tools-paginator__list">
+  <ul class="tools-paginator__list" (click)="clickPage($event)">
 
     <li class="tools-paginator__item"
         *ngFor="let page of arrPageNumbers">
 
       <a class="tools-paginator__button"
          *ngIf="page !== arrPageNumbers[0]; else firstEl"
-         (click)="clickPage($event)">{{page}}
+         >{{page}}
       </a>
 
       <ng-template #firstEl>
         <a class="tools-paginator__button active-btn"
-           (click)="clickPage($event)">{{page}}
+           >{{page}}
         </a>
       </ng-template>
 
