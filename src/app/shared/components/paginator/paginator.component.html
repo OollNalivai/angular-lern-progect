@@ -13,14 +13,12 @@
         *ngFor="let page of arrPageNumbers">
 
       <a class="tools-paginator__button"
-         *ngIf="page !== arrPageNumbers[0]; else firstEl"
-         >{{page}}
+         *ngIf="page !== arrPageNumbers[0]; else firstEl">
+        {{page}}
       </a>
 
       <ng-template #firstEl>
-        <a class="tools-paginator__button active-btn"
-           >{{page}}
-        </a>
+        <a class="tools-paginator__button active-btn">{{page}}</a>
       </ng-template>
 
     </li>
@@ -34,7 +32,8 @@
 
       <a class="tools-paginator__button"
          *ngIf="page !== arrPageNumbersDots.length"
-         (click)="clickPage($event)">{{page}}
+         (click)="clickPage($event)">
+        {{page}}
       </a>
 
     </li>

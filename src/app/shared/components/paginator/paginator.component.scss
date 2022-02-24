@@ -1,5 +1,5 @@
 .tools-paginator {
-  width:200px;
+  width:320px;
 
   margin: 20px auto;
   padding: 5px;
@@ -18,12 +18,15 @@
     flex-direction: row;
     justify-content: center;
 
-    padding: 1rem;
+    margin: 1rem;
+  }
+
+  &__item {
+    margin: 0 2px 0;
   }
 
   &__item > a {
     padding: 4px 3px 2px;
-    margin: 0 2px 0;
 
     border: 2px solid transparent;
     border-bottom: 2px solid var(--primary-color);
