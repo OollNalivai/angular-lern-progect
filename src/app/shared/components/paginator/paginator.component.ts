@@ -27,7 +27,7 @@ export class PaginatorComponent implements OnInit {
       this.arrPageNumbers.push(i);
     }
 
-    this.dotsClickLogic()
+    this.dotsClickLogic();
   }
 
   clickPage(evt: MouseEvent): void {
@@ -52,17 +52,31 @@ export class PaginatorComponent implements OnInit {
     this.sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
     this.sliceEnd = this.currentPage! * this.numberOfPostsShown;
 
-    this.dotsClickLogic()
+    this.dotsClickLogic();
   }
 
   dotsClickLogic() {
+
     if (this.totalPage > 7) {
+      let arrWorkspace = this.arrPageNumbers.slice(4, 8);
+
       this.arrPageNumbersDots = this.arrPageNumbers.slice(0, 1);
-      this.arrPageNumbersDots.push(this.dots, this.arrPageNumbers.slice(3, 6));
-      this.arrPageNumbersDots.push(this.dots, this.arrPageNumbers[this.arrPageNumbers.length - 1]);
-    } else {
 
+      arrWorkspace.forEach((value, key) => {
+        if (key === 0) {
+          this.arrPageNumbersDots.push(this.dots);
+          this.arrPageNumbersDots.push(value);
+        }
+        if (key === arrWorkspace.length - 1) {
+          this.arrPageNumbersDots.push(value);
+          this.arrPageNumbersDots.push(this.dots);
+        }
+        if (key !== 0 && key !== arrWorkspace.length - 1)
+          this.arrPageNumbersDots.push(value);
+      });
+
+      this.arrPageNumbersDots.push(this.arrPageNumbers[this.arrPageNumbers.length - 1]);
     }
-  }
 
+  }
 }
