@@ -31,7 +31,6 @@
         *ngFor="let page of this.getArrayWithDots()">
 
       <a class="tools-paginator__button"
-         *ngIf="page !== this.getArrayWithDots().length"
          (click)="clickPage($event)">
         {{page}}
       </a>

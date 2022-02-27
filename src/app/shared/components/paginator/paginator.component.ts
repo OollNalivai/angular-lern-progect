@@ -13,12 +13,12 @@ export class PaginatorComponent implements OnInit {
     2, 3, 5, 34, 5, 65, 78, 6, 8, 8, 1, 4, 2, 13, 14, 15, 16, 17,
     2, 3, 5, 34, 5, 65, 7];
 
-  numberOfPostsShown = 6;
-  sliceStart = 0;
-  sliceEnd = 6;
-  arrPageNumbers: number[] = [];
-  currentPage: number | undefined = 1;
-  totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown);
+  numberOfPostsShown = 3; // выводимое количество постов
+  sliceStart = 0; // начало отображаемого диапазона страниц
+  sliceEnd = 3; // конец отображаемого диапазона страниц
+  arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
+  currentPage: number | undefined = 1; // текущая выбранная страница
+  totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
 
   ngOnInit(): void {
     for (let i = 1; i <= this.totalPage; i++) {
@@ -55,35 +55,41 @@ export class PaginatorComponent implements OnInit {
 
   getArrayWithDots(): (number | string)[] {
     const dotsText = '...';
-    let arrPageNumbersDots: (number | string)[] = [];
     const paginatorPageCount = 7;
-    // console.log(this.currentPage);
+    let start = 0;
+    let end = 6;
+    let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(start, end);
+    let firstEl: number[] = this.arrPageNumbers.slice(0, 1);
+    let lastEl: number[] = this.arrPageNumbers.slice(-1);
+    // let arrWorkspace = this.arrPageNumbers.slice(start, end);
 
     if (this.totalPage <= paginatorPageCount) { // если страниц меньше 7
       return arrPageNumbersDots;
     }
 
     if (this.totalPage > paginatorPageCount) {
-      let arrWorkspace = this.arrPageNumbers.slice(4, 8);
 
-      arrPageNumbersDots = this.arrPageNumbers.slice(0, 1);
+      if (this.currentPage! <= 5) {
+        arrPageNumbersDots.push(dotsText);
+      }
+      if (this.currentPage! > this.arrPageNumbers.length - end + 1) {
+        arrPageNumbersDots = this.arrPageNumbers.slice(-end)
+        arrPageNumbersDots.unshift(dotsText);
+      }
 
-      arrWorkspace.forEach((value, key) => {
-        if (key === 0) {
-          arrPageNumbersDots.push(dotsText);
-          arrPageNumbersDots.push(value);
-        }
-        if (key === arrWorkspace.length - 1) {
-          arrPageNumbersDots.push(value);
-          arrPageNumbersDots.push(dotsText);
-        }
-        if (key !== 0 && key !== arrWorkspace.length - 1)
-          arrPageNumbersDots.push(value);
-      });
+      if (this.currentPage! > 5 && this.currentPage! <= this.arrPageNumbers.length - end + 1) {
+        arrPageNumbersDots = firstEl;
+        arrPageNumbersDots.push(dotsText);
 
-      arrPageNumbersDots.push(this.arrPageNumbers[this.arrPageNumbers.length - 1]);
+        this.arrPageNumbers.slice(this.currentPage! - 2, this.currentPage! + 1 ).forEach(value => {
+          arrPageNumbersDots.push(value);
+        })
+
+        arrPageNumbersDots.push(dotsText);
+        arrPageNumbersDots.push(lastEl[0]);
+      }
+
     }
-
 
     return arrPageNumbersDots;
   }
