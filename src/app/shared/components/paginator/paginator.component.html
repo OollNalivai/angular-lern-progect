@@ -28,10 +28,10 @@
   <ul class="tools-paginator__list">
 
     <li class="tools-paginator__item"
-        *ngFor="let page of arrPageNumbersDots">
+        *ngFor="let page of this.getArrayWithDots()">
 
       <a class="tools-paginator__button"
-         *ngIf="page !== arrPageNumbersDots.length"
+         *ngIf="page !== this.getArrayWithDots().length"
          (click)="clickPage($event)">
         {{page}}
       </a>

@@ -17,8 +17,6 @@ export class PaginatorComponent implements OnInit {
   sliceStart = 0;
   sliceEnd = 6;
   arrPageNumbers: number[] = [];
-  arrPageNumbersDots: any[] = [];
-  dots = '...';
   currentPage: number | undefined = 1;
   totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown);
 
@@ -27,56 +25,66 @@ export class PaginatorComponent implements OnInit {
       this.arrPageNumbers.push(i);
     }
 
-    this.dotsClickLogic();
+    this.getArrayWithDots();
   }
 
   clickPage(evt: MouseEvent): void {
     const activeClass = 'active-btn';
     const target = evt.target as HTMLElement;
 
-    if (target) {
-      this.currentPage = +target.innerText;
-    }
-
     if (target.tagName === 'A') {
-      const currentPage = +target.outerText;
+      // const currentPage = +target.outerText;
+      this.currentPage = +target.outerText;
       const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
 
       allPages.forEach((el: Element, index: number) => {
-        currentPage === index + 1
+        this.currentPage === index + 1
           ? el.classList.add(activeClass)
           : el.classList.remove(activeClass);
       });
     }
 
-    this.sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
-    this.sliceEnd = this.currentPage! * this.numberOfPostsShown;
-
-    this.dotsClickLogic();
+    this.updateShowingPosts();
+    this.getArrayWithDots();
   }
 
-  dotsClickLogic() {
+  updateShowingPosts(): void {
+    this.sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
+    this.sliceEnd = this.currentPage! * this.numberOfPostsShown;
+  }
 
-    if (this.totalPage > 7) {
+  getArrayWithDots(): (number | string)[] {
+    const dotsText = '...';
+    let arrPageNumbersDots: (number | string)[] = [];
+    const paginatorPageCount = 7;
+    // console.log(this.currentPage);
+
+    if (this.totalPage <= paginatorPageCount) { // если страниц меньше 7
+      return arrPageNumbersDots;
+    }
+
+    if (this.totalPage > paginatorPageCount) {
       let arrWorkspace = this.arrPageNumbers.slice(4, 8);
 
-      this.arrPageNumbersDots = this.arrPageNumbers.slice(0, 1);
+      arrPageNumbersDots = this.arrPageNumbers.slice(0, 1);
 
       arrWorkspace.forEach((value, key) => {
         if (key === 0) {
-          this.arrPageNumbersDots.push(this.dots);
-          this.arrPageNumbersDots.push(value);
+          arrPageNumbersDots.push(dotsText);
+          arrPageNumbersDots.push(value);
         }
         if (key === arrWorkspace.length - 1) {
-          this.arrPageNumbersDots.push(value);
-          this.arrPageNumbersDots.push(this.dots);
+          arrPageNumbersDots.push(value);
+          arrPageNumbersDots.push(dotsText);
         }
         if (key !== 0 && key !== arrWorkspace.length - 1)
-          this.arrPageNumbersDots.push(value);
+          arrPageNumbersDots.push(value);
       });
 
-      this.arrPageNumbersDots.push(this.arrPageNumbers[this.arrPageNumbers.length - 1]);
+      arrPageNumbersDots.push(this.arrPageNumbers[this.arrPageNumbers.length - 1]);
     }
 
+
+    return arrPageNumbersDots;
   }
 }
