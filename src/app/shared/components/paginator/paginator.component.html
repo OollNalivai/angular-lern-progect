@@ -31,9 +31,15 @@
         *ngFor="let page of this.getArrayWithDots()">
 
       <a class="tools-paginator__button"
-         (click)="clickPage($event)">
+         (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
         {{page}}
       </a>
+
+      <ng-template #dotsBlock>
+        <a class="tools-paginator__button" style="pointer-events: none;">
+          {{page}}
+        </a>
+      </ng-template>
 
     </li>
 
