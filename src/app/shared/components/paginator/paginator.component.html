@@ -10,16 +10,12 @@
   <ul class="tools-paginator__list" (click)="clickPage($event)">
 
     <li class="tools-paginator__item"
-        *ngFor="let page of arrPageNumbers">
+        *ngFor="let page of arrPageNumbers; let index = index">
 
       <a class="tools-paginator__button"
-         *ngIf="page !== arrPageNumbers[0]; else firstEl">
+         [ngClass]="{'active-btn': index === 0}">
         {{page}}
       </a>
-
-      <ng-template #firstEl>
-        <a class="tools-paginator__button active-btn">{{page}}</a>
-      </ng-template>
 
     </li>
 
@@ -28,9 +24,10 @@
   <ul class="tools-paginator__list">
 
     <li class="tools-paginator__item"
-        *ngFor="let page of this.getArrayWithDots()">
+        *ngFor="let page of this.getArrayWithDots(); let first = first">
 
       <a class="tools-paginator__button"
+         [ngClass]="{'active-btn': first}"
          (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
         {{page}}
       </a>
