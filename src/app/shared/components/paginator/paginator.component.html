@@ -7,21 +7,28 @@
     to {{sliceEnd <= arr.length ? sliceEnd : arr.length}} of {{arr.length}}
   </span>
 
-  <ul class="tools-paginator__list" (click)="clickPage($event)">
+<!--  <ul class="tools-paginator__list" (click)="clickPage($event)">-->
 
-    <li class="tools-paginator__item"
-        *ngFor="let page of arrPageNumbers; let index = index">
+<!--    <li class="tools-paginator__item"-->
+<!--        *ngFor="let page of arrPageNumbers; let index = index">-->
 
-      <a class="tools-paginator__button"
-         [ngClass]="{'active-btn': index === 0}">
-        {{page}}
-      </a>
+<!--      <a class="tools-paginator__button"-->
+<!--         [ngClass]="{'active-btn': index === 0}">-->
+<!--        {{page}}-->
+<!--      </a>-->
 
-    </li>
+<!--    </li>-->
 
-  </ul>
+<!--  </ul>-->
 
   <ul class="tools-paginator__list">
+
+    <button class="paginator__button"
+            (click)="clickLeft()">
+      <div class="btn-paginator left">
+        <<<
+      </div>
+    </button>
 
     <li class="tools-paginator__item"
         *ngFor="let page of this.getArrayWithDots(); let first = first">
@@ -39,6 +46,13 @@
       </ng-template>
 
     </li>
+
+    <button class="paginator__button"
+            (click)="clickRight()">
+      <div class="btn-paginator right">
+        >>>
+      </div>
+    </button>
 
   </ul>
 

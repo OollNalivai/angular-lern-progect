@@ -26,17 +26,15 @@ export class PaginatorComponent implements OnInit {
       this.arrPageNumbers.push(i);
     }
 
-    this.getArrayWithDots();
-
   }
 
   clickPage(evt: MouseEvent): void {
     const activeClass = 'active-btn';
     const target = evt.target as HTMLElement;
-
+    console.log(target);
     if (target.tagName === 'A') {
-      // const currentPage = +target.outerText;
       this.currentPage = +target.outerText;
+
       const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
 
       allPages.forEach((el: Element, index: number) => {
@@ -63,7 +61,6 @@ export class PaginatorComponent implements OnInit {
     let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(start, end);
     let firstEl: number[] = this.arrPageNumbers.slice(0, 1);
     let [lastEl]: number[] = this.arrPageNumbers.slice(-1);
-    console.log(lastEl);
     if (this.totalPage <= paginatorPageCount) { // если страниц меньше 7
       return arrPageNumbersDots;
     }
@@ -93,5 +90,13 @@ export class PaginatorComponent implements OnInit {
     }
 
     return arrPageNumbersDots;
+  }
+
+  clickLeft() {
+
+  }
+
+  clickRight() {
+
   }
 }
