@@ -37,8 +37,8 @@ export class PaginatorComponent implements OnInit {
 
       const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
 
-      allPages.forEach((el: Element, index: number) => {
-        this.currentPage === index + 1
+      allPages.forEach((el: Element) => {
+        this.currentPage === +el.innerHTML
           ? el.classList.add(activeClass)
           : el.classList.remove(activeClass);
       });
