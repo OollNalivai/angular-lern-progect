@@ -1,25 +1,13 @@
-<p>{{arr | slice: sliceStart : sliceEnd}}</p>
+
+<p>{{arr | slice: updateShowingPosts().sliceStart : updateShowingPosts().sliceEnd}}</p>
 
 <div class="tools-paginator">
 
   <span class="tools-paginator__info">
-    Showing posts from {{sliceStart + 1}}
-    to {{sliceEnd <= arr.length ? sliceEnd : arr.length}} of {{arr.length}}
+    Showing posts from {{updateShowingPosts().sliceStart + 1}} to
+    {{updateShowingPosts().sliceEnd <= arr.length ? updateShowingPosts().sliceEnd : arr.length}}
+    of {{arr.length}}
   </span>
-
-<!--  <ul class="tools-paginator__list" (click)="clickPage($event)">-->
-
-<!--    <li class="tools-paginator__item"-->
-<!--        *ngFor="let page of arrPageNumbers; let index = index">-->
-
-<!--      <a class="tools-paginator__button"-->
-<!--         [ngClass]="{'active-btn': index === 0}">-->
-<!--        {{page}}-->
-<!--      </a>-->
-
-<!--    </li>-->
-
-<!--  </ul>-->
 
   <ul class="tools-paginator__list">
 

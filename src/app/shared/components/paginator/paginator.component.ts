@@ -14,9 +14,7 @@ export class PaginatorComponent implements OnInit {
     46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
     57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
 
-  numberOfPostsShown = 3; // выводимое количество постов
-  sliceStart = 0; // начало отображаемого диапазона страниц
-  sliceEnd = 3; // конец отображаемого диапазона страниц
+  numberOfPostsShown: number = 9; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
   totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
@@ -25,7 +23,6 @@ export class PaginatorComponent implements OnInit {
     for (let i = 1; i <= this.totalPage; i++) {
       this.arrPageNumbers.push(i);
     }
-
   }
 
   clickPage(evt: MouseEvent): void {
@@ -48,20 +45,24 @@ export class PaginatorComponent implements OnInit {
     this.getArrayWithDots();
   }
 
-  updateShowingPosts(): void {
-    this.sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
-    this.sliceEnd = this.currentPage! * this.numberOfPostsShown;
+  updateShowingPosts() {
+    let sliceStart = 0; // начало отображаемого диапазона страниц
+    let sliceEnd = 9; // конец отображаемого диапазона страниц
+    sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
+    sliceEnd = this.currentPage! * this.numberOfPostsShown;
+    return {
+      'sliceStart': sliceStart,
+      'sliceEnd': sliceEnd
+    }
   }
 
   getArrayWithDots(): (number | string)[] {
     const dotsText = '...';
-    const paginatorPageCount = 7;
-    let start = 0;
-    let end = 6;
-    let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(start, end);
-    let firstEl: number[] = this.arrPageNumbers.slice(0, 1);
-    let [lastEl]: number[] = this.arrPageNumbers.slice(-1);
-    if (this.totalPage <= paginatorPageCount) { // если страниц меньше 7
+    const paginatorPageCount = 7; // постоянное колличество показываемых страниц
+    const end = 6;
+    let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(0, end);
+
+    if (this.totalPage <= paginatorPageCount) {
       return arrPageNumbersDots;
     }
 
@@ -76,6 +77,8 @@ export class PaginatorComponent implements OnInit {
       }
 
       if (this.currentPage! > 5 && this.currentPage! <= this.arrPageNumbers.length - end + 1) {
+        const firstEl: number[] = this.arrPageNumbers.slice(0, 1);
+        const [lastEl]: number[] = this.arrPageNumbers.slice(-1);
 
         arrPageNumbersDots = firstEl;
         arrPageNumbersDots.push(dotsText);
@@ -93,10 +96,14 @@ export class PaginatorComponent implements OnInit {
   }
 
   clickLeft() {
-
+    if (this.currentPage! > 1) {
+      console.log('sosi left')
+    }
   }
 
   clickRight() {
-
+    if (this.currentPage! < this.arrPageNumbers.length) {
+      console.log('sosi right')
+    }
   }
 }
