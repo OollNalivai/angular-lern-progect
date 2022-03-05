@@ -19,10 +19,9 @@
     </button>
 
     <li class="tools-paginator__item"
-        *ngFor="let page of this.getArrayWithDots(); let first = first">
+        *ngFor="let page of this.getArrayWithDots()">
 
       <a class="tools-paginator__button"
-         [ngClass]="{'active-btn': first}"
          (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
         {{page}}
       </a>

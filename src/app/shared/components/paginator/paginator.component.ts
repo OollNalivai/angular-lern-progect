@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'mua-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, AfterViewInit {
 
   arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
     13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
@@ -25,10 +25,17 @@ export class PaginatorComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    Array.from(document.getElementsByClassName('tools-paginator__button'))
+      .forEach((el: Element) => {
+        if (+el.innerHTML === 1) {
+          el.classList.add('active-btn');
+        }
+      });
+  }
+
   clickPage(evt: MouseEvent): void {
-    const activeClass = 'active-btn';
     const target = evt.target as HTMLElement;
-    console.log(target);
     if (target.tagName === 'A') {
       this.currentPage = +target.outerText;
 
@@ -36,8 +43,8 @@ export class PaginatorComponent implements OnInit {
 
       allPages.forEach((el: Element) => {
         this.currentPage === +el.innerHTML
-          ? el.classList.add(activeClass)
-          : el.classList.remove(activeClass);
+          ? el.classList.add('active-btn')
+          : el.classList.remove('active-btn');
       });
     }
 
@@ -53,7 +60,7 @@ export class PaginatorComponent implements OnInit {
     return {
       'sliceStart': sliceStart,
       'sliceEnd': sliceEnd
-    }
+    };
   }
 
   getArrayWithDots(): (number | string)[] {
@@ -72,7 +79,7 @@ export class PaginatorComponent implements OnInit {
         arrPageNumbersDots.push(dotsText);
       }
       if (this.currentPage! > this.arrPageNumbers.length - end + 1) {
-        arrPageNumbersDots = this.arrPageNumbers.slice(-end)
+        arrPageNumbersDots = this.arrPageNumbers.slice(-end);
         arrPageNumbersDots.unshift(dotsText);
       }
 
@@ -83,9 +90,9 @@ export class PaginatorComponent implements OnInit {
         arrPageNumbersDots = firstEl;
         arrPageNumbersDots.push(dotsText);
 
-        this.arrPageNumbers.slice(this.currentPage! - 2, this.currentPage! + 1 ).forEach(value => {
+        this.arrPageNumbers.slice(this.currentPage! - 2, this.currentPage! + 1).forEach(value => {
           arrPageNumbersDots.push(value);
-        })
+        });
 
         arrPageNumbersDots.push(dotsText, lastEl);
       }
@@ -97,13 +104,13 @@ export class PaginatorComponent implements OnInit {
 
   clickLeft() {
     if (this.currentPage! > 1) {
-      console.log('sosi left')
+      console.log('left');
     }
   }
 
   clickRight() {
     if (this.currentPage! < this.arrPageNumbers.length) {
-      console.log('sosi right')
+      console.log('right');
     }
   }
 }
