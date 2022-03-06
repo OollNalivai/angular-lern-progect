@@ -14,7 +14,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
     57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
 
-  numberOfPostsShown: number = 9; // выводимое количество постов
+  numberOfPostsShown: number = 6; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
   totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
@@ -34,18 +34,22 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
       });
   }
 
+  addingActiveClass() {
+    const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
+
+    allPages.forEach((el: Element) => {
+      this.currentPage === +el.innerHTML
+        ? el.classList.add('active-btn')
+        : el.classList.remove('active-btn');
+    });
+  }
+
   clickPage(evt: MouseEvent): void {
     const target = evt.target as HTMLElement;
+
     if (target.tagName === 'A') {
       this.currentPage = +target.outerText;
-
-      const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
-
-      allPages.forEach((el: Element) => {
-        this.currentPage === +el.innerHTML
-          ? el.classList.add('active-btn')
-          : el.classList.remove('active-btn');
-      });
+      this.addingActiveClass();
     }
 
     this.updateShowingPosts();
@@ -54,7 +58,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
   updateShowingPosts() {
     let sliceStart = 0; // начало отображаемого диапазона страниц
-    let sliceEnd = 9; // конец отображаемого диапазона страниц
+    let sliceEnd = 6; // конец отображаемого диапазона страниц
     sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
     sliceEnd = this.currentPage! * this.numberOfPostsShown;
     return {
@@ -96,7 +100,6 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
         arrPageNumbersDots.push(dotsText, lastEl);
       }
-
     }
 
     return arrPageNumbersDots;
@@ -104,13 +107,15 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
   clickLeft() {
     if (this.currentPage! > 1) {
-      console.log('left');
+      this.currentPage!--;
+      this.addingActiveClass();
     }
   }
 
   clickRight() {
     if (this.currentPage! < this.arrPageNumbers.length) {
-      console.log('right');
+      this.currentPage!++;
+      this.addingActiveClass();
     }
   }
 }
