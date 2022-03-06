@@ -1,5 +1,5 @@
 .tools-paginator {
-  width:320px;
+  width: 320px;
 
   margin: 20px auto;
   padding: 5px;
@@ -13,12 +13,20 @@
     color: var(--gray-color)
   }
 
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 1rem 0;
+  }
+
   &__list {
     display: flex;
     flex-direction: row;
     justify-content: center;
 
-    margin: 1rem;
+    margin: 0.2rem;
   }
 
   &__item {
@@ -52,6 +60,36 @@
     background-color: var(--light-color);
   }
 
+  &__button {
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .btn-paginator {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  .btn-paginator:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-left: 2px solid var(--dark-color);
+    border-bottom: 2px solid var(--dark-color);
+  }
+
+  .left {
+    left: 5px;
+    transform: rotate(45deg);
+  }
+
+  .right {
+    right: 5px;
+    transform: rotate(225deg);
+  }
 }
 
 p {

@@ -44,23 +44,11 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  clickPage(evt: MouseEvent): void {
-    const target = evt.target as HTMLElement;
-
-    if (target.tagName === 'A') {
-      this.currentPage = +target.outerText;
-      this.addingActiveClass();
-    }
-
-    this.updateShowingPosts();
-    this.getArrayWithDots();
-  }
-
   updateShowingPosts() {
     let sliceStart = 0; // начало отображаемого диапазона страниц
     let sliceEnd = 6; // конец отображаемого диапазона страниц
-    sliceStart = this.currentPage! * this.numberOfPostsShown - this.numberOfPostsShown;
     sliceEnd = this.currentPage! * this.numberOfPostsShown;
+    sliceStart = sliceEnd - this.numberOfPostsShown;
     return {
       'sliceStart': sliceStart,
       'sliceEnd': sliceEnd
@@ -69,19 +57,20 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
   getArrayWithDots(): (number | string)[] {
     const dotsText = '...';
-    const paginatorPageCount = 7; // постоянное колличество показываемых страниц
     const end = 6;
+    const paginatorPageCount = 6; // постоянное колличество показываемых страниц
     let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(0, end);
 
-    if (this.totalPage <= paginatorPageCount) {
+    if (this.totalPage <= paginatorPageCount) {  // когда страниц меньше показываемых страниц
       return arrPageNumbersDots;
     }
 
-    if (this.totalPage > paginatorPageCount) {
+    if (this.totalPage > paginatorPageCount) { // когда страниц больше показываемых страниц
 
       if (this.currentPage! <= 5) {
         arrPageNumbersDots.push(dotsText);
       }
+
       if (this.currentPage! > this.arrPageNumbers.length - end + 1) {
         arrPageNumbersDots = this.arrPageNumbers.slice(-end);
         arrPageNumbersDots.unshift(dotsText);
@@ -103,6 +92,18 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     }
 
     return arrPageNumbersDots;
+  }
+
+  clickPage(evt: MouseEvent): void {
+    const target = evt.target as HTMLElement;
+
+    if (target.tagName === 'A') {
+      this.currentPage = +target.outerText;
+      this.addingActiveClass();
+    }
+
+    this.updateShowingPosts();
+    this.getArrayWithDots();
   }
 
   clickLeft() {

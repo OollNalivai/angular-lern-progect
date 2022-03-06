@@ -1,4 +1,3 @@
-
 <p>{{arr | slice: updateShowingPosts().sliceStart : updateShowingPosts().sliceEnd}}</p>
 
 <div class="tools-paginator">
@@ -9,38 +8,56 @@
     of {{arr.length}}
   </span>
 
-  <ul class="tools-paginator__list">
 
-    <button class="paginator__button"
-            (click)="clickLeft()">
-      <div class="btn-paginator left">
-        <<<
-      </div>
+  <div class="tools-paginator__wrapper">
+    <button class="tools-paginator__button"
+            *ngIf="currentPage === 1; else elseLeftBtn"
+            disabled="disabled"
+    >
+      <div class="btn-paginator left"></div>
     </button>
 
-    <li class="tools-paginator__item"
-        *ngFor="let page of this.getArrayWithDots()">
+    <ng-template #elseLeftBtn>
 
-      <a class="tools-paginator__button"
-         (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
-        {{page}}
-      </a>
+      <button class="tools-paginator__button"
+              (click)="clickLeft()">
+        <div class="btn-paginator left"></div>
+      </button>
 
-      <ng-template #dotsBlock>
-        <a class="tools-paginator__button" style="pointer-events: none;">
+    </ng-template>
+
+    <ul class="tools-paginator__list">
+
+      <li class="tools-paginator__item"
+          *ngFor="let page of this.getArrayWithDots()">
+
+        <a class="tools-paginator__button"
+           (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
           {{page}}
         </a>
-      </ng-template>
 
-    </li>
+        <ng-template #dotsBlock>
+          <a class="tools-paginator__button" style="pointer-events: none;">
+            {{page}}
+          </a>
+        </ng-template>
 
-    <button class="paginator__button"
-            (click)="clickRight()">
-      <div class="btn-paginator right">
-        >>>
-      </div>
+      </li>
+
+    </ul>
+
+    <button class="tools-paginator__button"
+            (click)="clickRight()"
+            *ngIf="currentPage !== arrPageNumbers.length; else elseRightBtn">
+      <div class="btn-paginator right"></div>
     </button>
 
-  </ul>
+    <ng-template #elseRightBtn>
+      <button class="tools-paginator__button" disabled="disabled">
+        <div class="btn-paginator right"></div>
+      </button>
+    </ng-template>
+
+  </div>
 
 </div>
