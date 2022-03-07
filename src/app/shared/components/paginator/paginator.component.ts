@@ -1,4 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Post } from '../../interfaces';
+import { PostsService } from '../../posts.service';
 
 @Component({
   selector: 'mua-paginator',
@@ -14,15 +17,29 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
     57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
 
+  public posts$: Observable<Post[]> | undefined;
+  postsArr: Post[] = [];
+
   numberOfPostsShown: number = 4; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
   totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
 
+  constructor(
+    private postsService: PostsService
+  ) { }
+
   ngOnInit(): void {
     for (let i = 1; i <= this.totalPage; i++) {
       this.arrPageNumbers.push(i);
     }
+
+    this.posts$ = this.postsService.allPosts;
+    this.postsService.allPosts
+      .subscribe(posts => {
+        this.postsArr = [...posts];
+        console.log(this.postsArr, 'posts');
+      })
   }
 
   ngAfterViewInit() {

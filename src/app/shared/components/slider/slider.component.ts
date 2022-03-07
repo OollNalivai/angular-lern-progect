@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from '../../interfaces';
 import { Observable } from 'rxjs';
 import { PostsService } from '../../posts.service';
@@ -24,7 +24,7 @@ export class SliderComponent implements OnInit {
     this.postsService.allPosts
       .subscribe(posts => {
         this.postsArr = [...posts];
-        console.log(posts, 'posts');
+        // console.log(posts, 'posts');
       })
   }
 
