@@ -14,7 +14,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
     57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
 
-  numberOfPostsShown: number = 6; // выводимое количество постов
+  numberOfPostsShown: number = 4; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
   totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
@@ -58,7 +58,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   getArrayWithDots(): (number | string)[] {
     const dotsText = '...';
     const end = 6;
-    const paginatorPageCount = 6; // постоянное колличество показываемых страниц
+    const paginatorPageCount = 4; // постоянное колличество показываемых страниц
     let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(0, end);
 
     if (this.totalPage <= paginatorPageCount) {  // когда страниц меньше показываемых страниц
