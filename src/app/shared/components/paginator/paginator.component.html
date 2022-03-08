@@ -1,13 +1,13 @@
 <h3 style="text-align: center">
-  {{arr | slice: updateShowingPosts().sliceStart : updateShowingPosts().sliceEnd}}
+  {{posts | slice: updateShowingPosts().sliceStart : updateShowingPosts().sliceEnd}}
 </h3>
 
 <div class="tools-paginator">
 
   <span class="tools-paginator__info">
     Showing posts from {{updateShowingPosts().sliceStart + 1}} to
-    {{updateShowingPosts().sliceEnd <= arr.length ? updateShowingPosts().sliceEnd : arr.length}}
-    of {{arr.length}}
+    {{updateShowingPosts().sliceEnd <= posts.length ? updateShowingPosts().sliceEnd : posts.length}}
+    of {{posts.length}}
   </span>
 
 

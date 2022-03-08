@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
 import { Post } from '../../interfaces';
-import { PostsService } from '../../posts.service';
 
 @Component({
   selector: 'mua-paginator',
@@ -10,36 +8,22 @@ import { PostsService } from '../../posts.service';
 })
 export class PaginatorComponent implements OnInit, AfterViewInit {
 
-  arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-    13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-    24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-    35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45,
-    46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
-    57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
-
-  public posts$: Observable<Post[]> | undefined;
-  postsArr: Post[] = [];
+  @Input() posts!: Post[];
+  @Output() changePage!: () => void;
 
   numberOfPostsShown: number = 4; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
-  totalPage: number = Math.ceil(this.arr.length / this.numberOfPostsShown); // вычисление количества страниц
-
-  constructor(
-    private postsService: PostsService
-  ) { }
+  totalPage: number = 0; // вычисление количества страниц
 
   ngOnInit(): void {
+    this.totalPage = Math.ceil(this.posts.length / this.numberOfPostsShown);
+
+    console.log(this.totalPage, 'init');
+
     for (let i = 1; i <= this.totalPage; i++) {
       this.arrPageNumbers.push(i);
     }
-
-    this.posts$ = this.postsService.allPosts;
-    this.postsService.allPosts
-      .subscribe(posts => {
-        this.postsArr = [...posts];
-        console.log(this.postsArr, 'posts');
-      })
   }
 
   ngAfterViewInit() {
@@ -73,13 +57,15 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   }
 
   getArrayWithDots(): (number | string)[] {
+    console.log(this.totalPage, 'in fn');
     const dotsText = '...';
-    const end = 6;
-    const paginatorPageCount = 4; // постоянное колличество показываемых страниц
+    const end = 6; // количество страниц показываемое если страниц > 7 && <12
+    // end (пересчитывается в коде в зависимости от формата отображения, сама постоянная не меняется)
+    const paginatorPageCount = 7; // постоянное колличество показываемых страниц (не менять)
     let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(0, end);
 
     if (this.totalPage <= paginatorPageCount) {  // когда страниц меньше показываемых страниц
-      return arrPageNumbersDots;
+      return this.arrPageNumbers.slice(0, 7);
     }
 
     if (this.totalPage > paginatorPageCount) { // когда страниц больше показываемых страниц

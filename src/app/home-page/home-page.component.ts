@@ -20,4 +20,6 @@ export class HomePageComponent implements OnInit {
     this.posts$ = this.postsService.allPosts;
   }
 
+  // changePage(): void {}
+
 }

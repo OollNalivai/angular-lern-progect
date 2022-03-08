@@ -7,10 +7,12 @@
     [post]="post"
   ></mua-post>
 
+  <mua-paginator [posts]="posts"></mua-paginator>
+<!-- (changePage)="changePage()" -->
 </div>
 
 <ng-template #loading>
   <p class="text-center">Loading posts...</p>
 </ng-template>
 
-<mua-paginator></mua-paginator>
+
