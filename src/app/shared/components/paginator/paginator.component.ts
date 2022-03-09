@@ -45,7 +45,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateShowingPosts() {
+  get updateShowingPosts() {
     let sliceStart = 0; // начало отображаемого диапазона страниц
     let sliceEnd = 6; // конец отображаемого диапазона страниц
     sliceEnd = this.currentPage! * this.numberOfPostsShown;
@@ -56,7 +56,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     };
   }
 
-  getArrayWithDots(): (number | string)[] {
+  get getArrayWithDots(): (number | string)[] {
     console.log(this.totalPage, 'in fn');
     const dotsText = '...';
     const end = 6; // количество страниц показываемое если страниц > 7 && <12
@@ -70,23 +70,26 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
     if (this.totalPage > paginatorPageCount) { // когда страниц больше показываемых страниц
 
-      if (this.currentPage! <= 5) {
+      if (this.currentPage && this.currentPage <= 5) {
         arrPageNumbersDots.push(dotsText);
       }
 
-      if (this.currentPage! > this.arrPageNumbers.length - end + 1) {
+      if (this.currentPage && this.currentPage > this.arrPageNumbers.length - end + 1) {
         arrPageNumbersDots = this.arrPageNumbers.slice(-end);
         arrPageNumbersDots.unshift(dotsText);
       }
 
-      if (this.currentPage! > 5 && this.currentPage! <= this.arrPageNumbers.length - end + 1) {
+      if (
+        this.currentPage && this.currentPage > 5 &&
+        this.currentPage <= this.arrPageNumbers.length - end + 1
+      ) {
         const firstEl: number[] = this.arrPageNumbers.slice(0, 1);
         const [lastEl]: number[] = this.arrPageNumbers.slice(-1);
 
         arrPageNumbersDots = firstEl;
         arrPageNumbersDots.push(dotsText);
 
-        this.arrPageNumbers.slice(this.currentPage! - 2, this.currentPage! + 1).forEach(value => {
+        this.arrPageNumbers.slice(this.currentPage - 2, this.currentPage + 1).forEach(value => {
           arrPageNumbersDots.push(value);
         });
 
@@ -105,20 +108,20 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
       this.addingActiveClass();
     }
 
-    this.updateShowingPosts();
-    this.getArrayWithDots();
+    this.updateShowingPosts;
+    this.getArrayWithDots;
   }
 
   clickLeft() {
-    if (this.currentPage! > 1) {
-      this.currentPage!--;
+    if (this.currentPage && this.currentPage > 1) {
+      this.currentPage--;
       this.addingActiveClass();
     }
   }
 
   clickRight() {
-    if (this.currentPage! < this.arrPageNumbers.length) {
-      this.currentPage!++;
+    if (this.currentPage && this.currentPage < this.arrPageNumbers.length) {
+      this.currentPage++;
       this.addingActiveClass();
     }
   }

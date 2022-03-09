@@ -2,13 +2,14 @@
   *ngIf="posts$ | async as posts; else loading"
   class="posts">
 
+  <mua-paginator [posts]="posts"></mua-paginator>
+  <!-- (changePage)="changePage()" -->
+
   <mua-post
     *ngFor="let post of posts"
     [post]="post"
   ></mua-post>
 
-  <mua-paginator [posts]="posts"></mua-paginator>
-<!-- (changePage)="changePage()" -->
 </div>
 
 <ng-template #loading>

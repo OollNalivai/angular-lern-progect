@@ -1,12 +1,12 @@
 <h3 style="text-align: center">
-  {{posts | slice: updateShowingPosts().sliceStart : updateShowingPosts().sliceEnd}}
+  {{posts | slice: updateShowingPosts.sliceStart : updateShowingPosts.sliceEnd}}
 </h3>
 
 <div class="tools-paginator">
 
   <span class="tools-paginator__info">
-    Showing posts from {{updateShowingPosts().sliceStart + 1}} to
-    {{updateShowingPosts().sliceEnd <= posts.length ? updateShowingPosts().sliceEnd : posts.length}}
+    Showing posts from {{updateShowingPosts.sliceStart + 1}} to
+    {{updateShowingPosts.sliceEnd <= posts.length ? updateShowingPosts.sliceEnd : posts.length}}
     of {{posts.length}}
   </span>
 
@@ -31,7 +31,7 @@
     <ul class="tools-paginator__list">
 
       <li class="tools-paginator__item"
-          *ngFor="let page of this.getArrayWithDots()">
+          *ngFor="let page of this.getArrayWithDots">
 
         <a class="tools-paginator__button"
            (click)="clickPage($event)" *ngIf="page !== '...'; else dotsBlock">
