@@ -1,15 +1,19 @@
-import { AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
-import { Post } from '../../interfaces';
+import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Post, ShowingPosts } from '../../interfaces';
 
 @Component({
   selector: 'mua-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit, AfterViewInit {
+export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
 
   @Input() posts!: Post[];
-  @Output() changePage!: () => void;
+  // @Output() changePage!: () => void;
+  @Output() changePage = new EventEmitter<ShowingPosts>();
+  onChangePage(): void {
+    this.changePage.emit(this.updateShowingPosts);
+  }
 
   numberOfPostsShown: number = 4; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
@@ -18,8 +22,6 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.totalPage = Math.ceil(this.posts.length / this.numberOfPostsShown);
-
-    console.log(this.totalPage, 'init');
 
     for (let i = 1; i <= this.totalPage; i++) {
       this.arrPageNumbers.push(i);
@@ -33,6 +35,10 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
           el.classList.add('active-btn');
         }
       });
+  }
+
+  ngDoCheck(): void {
+    this.onChangePage();
   }
 
   addingActiveClass() {
@@ -57,7 +63,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   }
 
   get getArrayWithDots(): (number | string)[] {
-    console.log(this.totalPage, 'in fn');
+    // console.log(this.totalPage, 'in fn');
     const dotsText = '...';
     const end = 6; // количество страниц показываемое если страниц > 7 && <12
     // end (пересчитывается в коде в зависимости от формата отображения, сама постоянная не меняется)

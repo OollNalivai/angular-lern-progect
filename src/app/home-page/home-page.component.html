@@ -2,11 +2,10 @@
   *ngIf="posts$ | async as posts; else loading"
   class="posts">
 
-  <mua-paginator [posts]="posts"></mua-paginator>
-  <!-- (changePage)="changePage()" -->
+  <mua-paginator [posts]="posts" (changePage)="onChangePage($event)"></mua-paginator>
 
   <mua-post
-    *ngFor="let post of posts"
+    *ngFor="let post of posts.slice(sliceShowingPosts.sliceStart, sliceShowingPosts.sliceEnd)"
     [post]="post"
   ></mua-post>
 
