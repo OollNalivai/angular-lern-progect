@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
 import { Post, ShowingPosts } from '../../interfaces';
 
 @Component({
@@ -6,50 +6,16 @@ import { Post, ShowingPosts } from '../../interfaces';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
+
+export class PaginatorComponent implements OnInit, AfterViewInit {
 
   @Input() posts!: Post[];
-  // @Output() changePage!: () => void;
   @Output() changePage = new EventEmitter<ShowingPosts>();
-  onChangePage(): void {
-    this.changePage.emit(this.updateShowingPosts);
-  }
 
   numberOfPostsShown: number = 4; // выводимое количество постов
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
   totalPage: number = 0; // вычисление количества страниц
-
-  ngOnInit(): void {
-    this.totalPage = Math.ceil(this.posts.length / this.numberOfPostsShown);
-
-    for (let i = 1; i <= this.totalPage; i++) {
-      this.arrPageNumbers.push(i);
-    }
-  }
-
-  ngAfterViewInit() {
-    Array.from(document.getElementsByClassName('tools-paginator__button'))
-      .forEach((el: Element) => {
-        if (+el.innerHTML === 1) {
-          el.classList.add('active-btn');
-        }
-      });
-  }
-
-  ngDoCheck(): void {
-    this.onChangePage();
-  }
-
-  addingActiveClass() {
-    const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
-
-    allPages.forEach((el: Element) => {
-      this.currentPage === +el.innerHTML
-        ? el.classList.add('active-btn')
-        : el.classList.remove('active-btn');
-    });
-  }
 
   get updateShowingPosts() {
     let sliceStart = 0; // начало отображаемого диапазона страниц
@@ -106,6 +72,33 @@ export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
     return arrPageNumbersDots;
   }
 
+  ngOnInit(): void {
+    this.totalPage = Math.ceil(this.posts.length / this.numberOfPostsShown);
+
+    for (let i = 1; i <= this.totalPage; i++) {
+      this.arrPageNumbers.push(i);
+    }
+  }
+
+  ngAfterViewInit() {
+    Array.from(document.getElementsByClassName('tools-paginator__button'))
+      .forEach((el: Element) => {
+        if (+el.innerHTML === 1) {
+          el.classList.add('active-btn');
+        }
+      });
+  }
+
+  addingActiveClass() {
+    const allPages = Array.from(document.getElementsByClassName('tools-paginator__button'));
+
+    allPages.forEach((el: Element) => {
+      this.currentPage === +el.innerHTML
+        ? el.classList.add('active-btn')
+        : el.classList.remove('active-btn');
+    });
+  }
+
   clickPage(evt: MouseEvent): void {
     const target = evt.target as HTMLElement;
 
@@ -114,7 +107,7 @@ export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
       this.addingActiveClass();
     }
 
-    this.updateShowingPosts;
+    this.changePage.emit(this.updateShowingPosts);
     this.getArrayWithDots;
   }
 
@@ -122,6 +115,7 @@ export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
     if (this.currentPage && this.currentPage > 1) {
       this.currentPage--;
       this.addingActiveClass();
+      this.changePage.emit(this.updateShowingPosts);
     }
   }
 
@@ -129,6 +123,7 @@ export class PaginatorComponent implements OnInit, DoCheck, AfterViewInit {
     if (this.currentPage && this.currentPage < this.arrPageNumbers.length) {
       this.currentPage++;
       this.addingActiveClass();
+      this.changePage.emit(this.updateShowingPosts);
     }
   }
 }

@@ -1,4 +1,15 @@
-.posts {
+.posts-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
   max-width: 600px;
   margin: 0 auto;
+  &__list {
+    min-height: 610px;
+  }
 }
+
+
+
+

@@ -6,7 +6,7 @@ import { Post, ShowingPosts } from '../shared/interfaces';
 @Component({
   selector: 'mua-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
 
@@ -14,10 +14,10 @@ export class HomePageComponent implements OnInit {
   sliceShowingPosts: ShowingPosts = {
     'sliceStart': 0,
     'sliceEnd': 4
-  }
+  };
 
   constructor(
-    private postsService: PostsService
+    private postsService: PostsService,
   ) {
   }
 
@@ -25,16 +25,11 @@ export class HomePageComponent implements OnInit {
     this.posts$ = this.postsService.allPosts;
   }
 
-  onChangePage(showingPosts: ShowingPosts): ShowingPosts {
-    console.log('$event onChangePage: ', {
-      'start': showingPosts.sliceStart,
-      'end': showingPosts.sliceEnd
-    });
-    return this.sliceShowingPosts = {
+  onChangePage(showingPosts: ShowingPosts) {
+    this.sliceShowingPosts = {
       'sliceStart': showingPosts.sliceStart,
       'sliceEnd': showingPosts.sliceEnd
     };
-
   }
 
 }
