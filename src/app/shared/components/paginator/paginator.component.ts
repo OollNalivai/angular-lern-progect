@@ -12,16 +12,14 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   @Input() posts!: Post[];
   @Output() changePage = new EventEmitter<ShowingPosts>();
 
-  numberOfPostsShown: number = 4; // выводимое количество постов
+  private _numberOfPostsShown: number = 4; // выводимое количество постов
+  private _totalPage: number = 0; // вычисление количества страниц
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
-  totalPage: number = 0; // вычисление количества страниц
 
   get updateShowingPosts() {
-    let sliceStart = 0; // начало отображаемого диапазона страниц
-    let sliceEnd = 6; // конец отображаемого диапазона страниц
-    sliceEnd = this.currentPage! * this.numberOfPostsShown;
-    sliceStart = sliceEnd - this.numberOfPostsShown;
+    let sliceEnd = this.currentPage! * this._numberOfPostsShown || 6; // конец отображаемого диапазона страниц
+    let sliceStart = sliceEnd - this._numberOfPostsShown || 0; // начало отображаемого диапазона страниц
     return {
       'sliceStart': sliceStart,
       'sliceEnd': sliceEnd
@@ -29,26 +27,24 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   }
 
   get getArrayWithDots(): (number | string)[] {
-    // console.log(this.totalPage, 'in fn');
     const dotsText = '...';
     const end = 6; // количество страниц показываемое если страниц > 7 && <12
     // end (пересчитывается в коде в зависимости от формата отображения, сама постоянная не меняется)
     const paginatorPageCount = 7; // постоянное колличество показываемых страниц (не менять)
     let arrPageNumbersDots: (number | string)[] = this.arrPageNumbers.slice(0, end);
 
-    if (this.totalPage <= paginatorPageCount) {  // когда страниц меньше показываемых страниц
-      return this.arrPageNumbers.slice(0, 7);
+    if (this._totalPage <= paginatorPageCount) {  // когда страниц меньше показываемых страниц
+      arrPageNumbersDots = this.arrPageNumbers.slice(0, paginatorPageCount);
     }
 
-    if (this.totalPage > paginatorPageCount) { // когда страниц больше показываемых страниц
+    if (this._totalPage > paginatorPageCount) { // когда страниц больше показываемых страниц
 
       if (this.currentPage && this.currentPage <= 5) {
         arrPageNumbersDots.push(dotsText);
       }
 
       if (this.currentPage && this.currentPage > this.arrPageNumbers.length - end + 1) {
-        arrPageNumbersDots = this.arrPageNumbers.slice(-end);
-        arrPageNumbersDots.unshift(dotsText);
+        arrPageNumbersDots = [dotsText, ...this.arrPageNumbers.slice(-end)];
       }
 
       if (
@@ -58,14 +54,13 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
         const firstEl: number[] = this.arrPageNumbers.slice(0, 1);
         const [lastEl]: number[] = this.arrPageNumbers.slice(-1);
 
-        arrPageNumbersDots = firstEl;
-        arrPageNumbersDots.push(dotsText);
+        arrPageNumbersDots = [...firstEl, dotsText];
 
         this.arrPageNumbers.slice(this.currentPage - 2, this.currentPage + 1).forEach(value => {
           arrPageNumbersDots.push(value);
         });
 
-        arrPageNumbersDots.push(dotsText, lastEl);
+        arrPageNumbersDots = [...arrPageNumbersDots, dotsText, lastEl];
       }
     }
 
@@ -73,9 +68,9 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.totalPage = Math.ceil(this.posts.length / this.numberOfPostsShown);
+    this._totalPage = Math.ceil(this.posts.length / this._numberOfPostsShown);
 
-    for (let i = 1; i <= this.totalPage; i++) {
+    for (let i = 1; i <= this._totalPage; i++) {
       this.arrPageNumbers.push(i);
     }
   }

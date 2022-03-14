@@ -8,6 +8,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SlicePostsPipe } from './pipes/slice-posts.pipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
     SliderComponent,
     PaginatorComponent,
     MainLayoutComponent,
+    SlicePostsPipe,
   ]
 })
 

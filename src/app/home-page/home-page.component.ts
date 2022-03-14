@@ -8,6 +8,7 @@ import { Post, ShowingPosts } from '../shared/interfaces';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
+
 export class HomePageComponent implements OnInit {
 
   posts$: Observable<Post[]> | undefined;
@@ -17,12 +18,12 @@ export class HomePageComponent implements OnInit {
   };
 
   constructor(
-    private postsService: PostsService,
+    private _postsService: PostsService,
   ) {
   }
 
   ngOnInit(): void {
-    this.posts$ = this.postsService.allPosts;
+    this.posts$ = this._postsService.allPosts;
   }
 
   onChangePage(showingPosts: ShowingPosts) {
