@@ -1,22 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ShowingPosts } from '../interfaces';
+import { Post } from '../interfaces';
 
 @Pipe({
   name: 'slicePosts'
 })
 export class SlicePostsPipe implements PipeTransform {
 
-  sliceShowingPosts: ShowingPosts = {
-    'sliceStart': 0,
-    'sliceEnd': 4
-  };
+  private _newArrayPosts: Post[] = [];
 
-  transform(value: number, ...args: unknown[]): any {
-    this.sliceShowingPosts = {
-      'sliceStart': 0,
-      'sliceEnd': 4
-    };
-    return console.log(this.sliceShowingPosts);
+  transform(posts: Post[], sliceStart: number, sliceEnd: number): Post[] {
+
+    return this._newArrayPosts = posts.slice(sliceStart, sliceEnd);
   }
-
 }

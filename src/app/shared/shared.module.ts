@@ -17,11 +17,12 @@ import { SlicePostsPipe } from './pipes/slice-posts.pipe';
     QuillModule.forRoot(),
     CommonModule
   ],
-  exports: [
-    HttpClientModule,
-    QuillModule,
-    PaginatorComponent,
-  ],
+    exports: [
+        HttpClientModule,
+        QuillModule,
+        PaginatorComponent,
+        SlicePostsPipe,
+    ],
   declarations: [
     FooterComponent,
     HeaderComponent,
