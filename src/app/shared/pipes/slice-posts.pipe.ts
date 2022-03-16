@@ -7,9 +7,14 @@ import { Post } from '../interfaces';
 export class SlicePostsPipe implements PipeTransform {
 
   private _newArrayPosts: Post[] = [];
+  private _sliceStart: number = 0;
+  private _sliceEnd: number = 4;
+  private _numberOfPostsShown: number = 4;
 
-  transform(posts: Post[], sliceStart: number, sliceEnd: number): Post[] {
+  transform(posts: Post[], currentPage: number): Post[] {
+    this._sliceEnd = currentPage * this._numberOfPostsShown;
+    this._sliceStart = this._sliceEnd - this._numberOfPostsShown;
 
-    return this._newArrayPosts = posts.slice(sliceStart, sliceEnd);
+    return this._newArrayPosts = posts.slice(this._sliceStart, this._sliceEnd);
   }
 }

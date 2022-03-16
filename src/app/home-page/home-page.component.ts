@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../shared/posts.service';
 import { Observable } from 'rxjs';
-import { Post, ShowingPosts } from '../shared/interfaces';
+import { Post } from '../shared/interfaces';
 
 @Component({
   selector: 'mua-home-page',
@@ -12,10 +12,7 @@ import { Post, ShowingPosts } from '../shared/interfaces';
 export class HomePageComponent implements OnInit {
 
   posts$: Observable<Post[]> | undefined;
-  sliceShowingPosts: ShowingPosts = {
-    'sliceStart': 0,
-    'sliceEnd': 4
-  };
+  currentPage: number = 1;
 
   constructor(
     private _postsService: PostsService,
@@ -26,11 +23,8 @@ export class HomePageComponent implements OnInit {
     this.posts$ = this._postsService.allPosts;
   }
 
-  onChangePage(showingPosts: ShowingPosts) {
-    this.sliceShowingPosts = {
-      'sliceStart': showingPosts.sliceStart,
-      'sliceEnd': showingPosts.sliceEnd
-    };
+  onChangePage(current: number): number {
+    return this.currentPage = current;
   }
 
 }

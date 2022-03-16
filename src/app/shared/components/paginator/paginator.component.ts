@@ -10,7 +10,7 @@ import { Post, ShowingPosts } from '../../interfaces';
 export class PaginatorComponent implements OnInit, AfterViewInit {
 
   @Input() posts!: Post[];
-  @Output() changePage = new EventEmitter<ShowingPosts>();
+  @Output() changePage = new EventEmitter<number>();
 
   private _numberOfPostsShown: number = 4; // выводимое количество постов
   private _totalPage: number = 0; // вычисление количества страниц
@@ -18,8 +18,8 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
   currentPage: number | undefined = 1; // текущая выбранная страница
 
   get updateShowingPosts() {
-    let sliceEnd = this.currentPage! * this._numberOfPostsShown || 6; // конец отображаемого диапазона страниц
-    let sliceStart = sliceEnd - this._numberOfPostsShown || 0; // начало отображаемого диапазона страниц
+    let sliceEnd = this.currentPage! * this._numberOfPostsShown || 4; // конец отображаемого диапазона постов
+    let sliceStart = sliceEnd - this._numberOfPostsShown || 0; // начало отображаемого диапазона постов
     return {
       'sliceStart': sliceStart,
       'sliceEnd': sliceEnd
@@ -102,7 +102,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
       this.addingActiveClass();
     }
 
-    this.changePage.emit(this.updateShowingPosts);
+    this.changePage.emit(this.currentPage);
     this.getArrayWithDots;
   }
 
@@ -110,7 +110,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     if (this.currentPage && this.currentPage > 1) {
       this.currentPage--;
       this.addingActiveClass();
-      this.changePage.emit(this.updateShowingPosts);
+      this.changePage.emit(this.currentPage);
     }
   }
 
@@ -118,7 +118,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     if (this.currentPage && this.currentPage < this.arrPageNumbers.length) {
       this.currentPage++;
       this.addingActiveClass();
-      this.changePage.emit(this.updateShowingPosts);
+      this.changePage.emit(this.currentPage);
     }
   }
 }
