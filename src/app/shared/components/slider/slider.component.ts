@@ -13,7 +13,7 @@ export class SliderComponent implements OnInit {
   sliceStart: number = 0;
   sliceEnd: number = 3;
   postsArr: Post[] = [];
-  public posts$: Observable<Post[]> | undefined;
+  posts$: Observable<Post[]> | undefined;
 
   constructor(
     private postsService: PostsService
@@ -24,7 +24,6 @@ export class SliderComponent implements OnInit {
     this.postsService.allPosts
       .subscribe(posts => {
         this.postsArr = [...posts];
-        // console.log(posts, 'posts');
       })
   }
 

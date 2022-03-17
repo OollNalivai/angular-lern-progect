@@ -18,20 +18,20 @@ export class LoginPageComponent implements OnInit {
   massage: string | undefined;
 
   constructor(
-    private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
+    private _auth: AuthService,
+    private _router: Router,
+    private _route: ActivatedRoute,
   ) {
   }
 
 
   get authErrors(): Observable<string> {
-    return this.auth.error$;
+    return this._auth.error$;
   }
 
   ngOnInit(): void {
 
-    this.route.queryParams.subscribe((params: Params) => {
+    this._route.queryParams.subscribe((params: Params) => {
 
       if (params['loginAgain']) {
         this.massage = 'Please, log in';
@@ -67,10 +67,10 @@ export class LoginPageComponent implements OnInit {
       password: this.form?.value.password,
     };
 
-    this.auth.login(user).subscribe(() => {
+    this._auth.login(user).subscribe(() => {
 
         this.form?.reset();
-        this.router.navigate(['/admin', 'dashboard']).then(r => r);
+        this._router.navigate(['/admin', 'dashboard']).then(r => r);
         this.submitted = false;
       },
       () => {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
-import { Post, ShowingPosts } from '../../interfaces';
+import { Post } from '../../interfaces';
 
 @Component({
   selector: 'mua-paginator',

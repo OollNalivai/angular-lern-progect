@@ -16,24 +16,24 @@ export class EditPageComponent implements OnInit, OnDestroy {
   public form: FormGroup | undefined;
   public submitted = false;
   private _subscriptions$: Subscription = new Subscription();
-  private post: Post | undefined;
+  private _post: Post | undefined;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private postsService: PostsService,
-    private alertService: AlertService
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _postsService: PostsService,
+    private _alertService: AlertService
   ) {
   }
 
   ngOnInit() {
-    this.route.params.pipe(switchMap((params) => {
-        return this.postsService.getById(params['id']);
+    this._route.params.pipe(switchMap((params) => {
+        return this._postsService.getById(params['id']);
       })
     )
 
       .subscribe((post: Post) => {
-        this.post = post;
+        this._post = post;
         this.form = new FormGroup({
           title: new FormControl(post.title, Validators.required),
           text: new FormControl(post.text, Validators.required)
@@ -50,16 +50,16 @@ export class EditPageComponent implements OnInit, OnDestroy {
     this.submitted = true;
 
     this._subscriptions$.add(
-      this.postsService.update({
-        id: this.post?.id,
+      this._postsService.update({
+        id: this._post?.id,
         text: this.form?.value.text,
         title: this.form?.value.title,
       })
 
         .subscribe(() => {
           this.submitted = false;
-          this.alertService.alertMessage('success', 'Post was updated');
-          this.router.navigate(['/admin', 'dashboard']).then(r => r);
+          this._alertService.alertMessage('success', 'Post was updated');
+          this._router.navigate(['/admin', 'dashboard']).then(r => r);
         })
     );
   }

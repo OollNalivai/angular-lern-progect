@@ -15,8 +15,8 @@ export class CreatePageComponent implements OnInit {
   public form: FormGroup | undefined;
 
   constructor(
-    private postsService: PostsService,
-    private alertService: AlertService
+    private _postsService: PostsService,
+    private _alertService: AlertService
   ) {
   }
 
@@ -40,9 +40,9 @@ export class CreatePageComponent implements OnInit {
       date: new Date(),
     };
 
-    this.postsService.create(post).subscribe(() => {
+    this._postsService.create(post).subscribe(() => {
       this.form?.reset();
-      this.alertService.alertMessage('success','Post was created')
+      this._alertService.alertMessage('success','Post was created')
     });
   }
 

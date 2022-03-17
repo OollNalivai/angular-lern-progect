@@ -20,8 +20,3 @@ export interface Post {
 export interface FbCreateResponse {
   name: string;
 }
-
-export interface ShowingPosts {
-  sliceStart: number;
-  sliceEnd: number;
-}
