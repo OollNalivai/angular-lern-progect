@@ -13,6 +13,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
+import { SliceDashboardPipe } from '../shared/pipes/slice-dashboard.pipe';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     CreatePageComponent,
     EditPageComponent,
     SearchPipe,
-    AlertComponent
+    AlertComponent,
+    SliceDashboardPipe
   ],
   imports: [
     CommonModule,
