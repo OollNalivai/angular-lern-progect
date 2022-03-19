@@ -23,11 +23,11 @@
           *ngFor="let post of posts | slice: sliceStart: sliceEnd">
 
         <div class="slider__wrapper">
-          <h3 class="slider__subtitle">{{ post?.title }}</h3>
+          <h3 class="slider__subtitle">{{ post?.title | stringClipping: 12 }}</h3>
 
           <small class="slider__text">{{ post?.date | date: 'dd.MM.yyyy' }}</small>
 
-          <small class="slider__text">{{ post?.author | slice : 0 : 14 }}...</small>
+          <small class="slider__text">{{ post?.author | stringClipping: 14  }}</small>
         </div>
 
         <div class="slider__wrapper">

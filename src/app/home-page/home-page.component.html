@@ -4,7 +4,7 @@
 
   <div class="posts-wrapper__list">
     <mua-post
-      *ngFor="let post of posts | slicePosts:currentPage"
+      *ngFor="let post of posts | slicePosts: currentPage"
       [post]="post"
     ></mua-post>
   </div>

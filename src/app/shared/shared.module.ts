@@ -9,6 +9,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SlicePostsPipe } from './pipes/slice-posts.pipe';
+import { StringClippingPipe } from './pipes/string-clipping.pipe';
 
 @NgModule({
   imports: [
@@ -17,12 +18,13 @@ import { SlicePostsPipe } from './pipes/slice-posts.pipe';
     QuillModule.forRoot(),
     CommonModule
   ],
-    exports: [
-        HttpClientModule,
-        QuillModule,
-        PaginatorComponent,
-        SlicePostsPipe,
-    ],
+  exports: [
+    HttpClientModule,
+    QuillModule,
+    PaginatorComponent,
+    SlicePostsPipe,
+    StringClippingPipe
+  ],
   declarations: [
     FooterComponent,
     HeaderComponent,
@@ -30,6 +32,7 @@ import { SlicePostsPipe } from './pipes/slice-posts.pipe';
     PaginatorComponent,
     MainLayoutComponent,
     SlicePostsPipe,
+    StringClippingPipe,
   ]
 })
 
