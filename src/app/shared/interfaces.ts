@@ -15,6 +15,7 @@ export interface Post {
   text: string;
   author: string;
   date: Date;
+  rating?: number;
 }
 
 export interface FbCreateResponse {
