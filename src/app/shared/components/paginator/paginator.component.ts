@@ -14,6 +14,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
 
   private _numberOfPostsShown: number = 4; // выводимое количество постов
   private _totalPage: number = 0; // вычисление количества страниц
+
   arrPageNumbers: number[] = []; // массив номеров страниц 1, 2, 3, 4
   currentPage: number | undefined = 1; // текущая выбранная страница
 
