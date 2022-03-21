@@ -12,7 +12,7 @@ export class AuthService {
 
   error$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private _http: HttpClient) {
   }
 
   get token(): string | null {
@@ -44,8 +44,7 @@ export class AuthService {
     }
   }
 
-  private handleError(error: HttpErrorResponse) {
-
+  #handleError(error: HttpErrorResponse) {
     const {message} = error.error.error;
 
     switch (message) {
@@ -66,15 +65,13 @@ export class AuthService {
   login(user: User): Observable<FbAuthResponse | null> {
     user.returnSecureToken = true;
 
-    return this.http
+    return this._http
       .post<FbAuthResponse | null>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
         tap(AuthService.setToken),
-        catchError(this.handleError.bind(this)),
+        catchError(this.#handleError.bind(this)),
       );
   }
 
-  logout() {
-    AuthService.setToken(null);
-  }
+  logout = (): void => AuthService.setToken(null);
 }

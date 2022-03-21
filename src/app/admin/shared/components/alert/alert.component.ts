@@ -11,15 +11,15 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   @Input() delay = 5000;
 
-  public text: string | undefined;
-  public type = 'success';
-  private _subscriptions$: Subscription = new Subscription();
+  text: string | undefined;
+  type = 'success';
+  #subscriptions$: Subscription = new Subscription();
 
   constructor(private alertService: AlertService) {
   }
 
   ngOnInit(): void {
-    this._subscriptions$.add(
+    this.#subscriptions$.add(
       this.alertService.alert$.subscribe(alert => {
         this.text = alert.text;
         this.type = alert.type;
@@ -33,7 +33,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions$.unsubscribe();
+    this.#subscriptions$.unsubscribe();
   }
 
 }

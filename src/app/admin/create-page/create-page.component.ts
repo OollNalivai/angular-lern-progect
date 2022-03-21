@@ -12,7 +12,7 @@ import { AlertService } from '../shared/services/alert.service';
 
 export class CreatePageComponent implements OnInit {
 
-  public form: FormGroup | undefined;
+  form: FormGroup | undefined;
 
   constructor(
     private _postsService: PostsService,

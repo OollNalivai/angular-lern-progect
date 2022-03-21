@@ -3,10 +3,10 @@ import { Subject } from 'rxjs';
 import { Alert, AlertType } from '../models/alert-interface';
 
 @Injectable()
-export class AlertService {
-  public alert$ = new Subject<Alert>();
 
-  alertMessage(type: AlertType, text: string) {
-    this.alert$.next({type: type, text})
-  }
+export class AlertService {
+  alert$ = new Subject<Alert>();
+
+  alertMessage = (type: AlertType, text: string) =>
+    this.alert$.next({type: type, text});
 }

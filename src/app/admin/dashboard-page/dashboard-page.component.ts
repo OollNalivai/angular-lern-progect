@@ -12,8 +12,8 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  public posts: Post[] = [];
-  public searchStr = '';
+  posts: Post[] = [];
+  searchStr = '';
   private _subscriptions$: Subscription = new Subscription();
 
   constructor(private _postsService: PostsService,
@@ -28,7 +28,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }));
   }
 
-  remove(id: string) {
+  remove(id: string): void {
     this._subscriptions$.add(this._postsService.remove(id).subscribe(() => {
       this.posts = this.posts?.filter(post => post.id !== id);
       this._alertService.alertMessage('warning','Post was deleted');

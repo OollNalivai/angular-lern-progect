@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mua-main-layout',
@@ -7,11 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
-  constructor(private _router: Router) {
+
+  constructor (private _router: Router) {
   }
 
   get isHomePage(): boolean {
     return this._router.url === "/";
-
   }
 }

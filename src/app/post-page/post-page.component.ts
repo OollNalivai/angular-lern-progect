@@ -11,16 +11,16 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  public post$: Observable<Post> | undefined;
+  post$: Observable<Post> | undefined;
 
-  constructor(
-    private route: ActivatedRoute,
-    private postsService: PostsService
+  constructor (
+    private _route: ActivatedRoute,
+    private _postsService: PostsService
   ) { }
 
   ngOnInit(): void {
-    this.post$ = this.route.params.pipe(switchMap((params) => {
-        return this.postsService.getById(params['id']);
+    this.post$ = this._route.params.pipe(switchMap((params) => {
+        return this._postsService.getById(params['id']);
       })
     );
   }

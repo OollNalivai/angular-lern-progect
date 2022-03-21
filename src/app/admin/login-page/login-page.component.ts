@@ -24,7 +24,6 @@ export class LoginPageComponent implements OnInit {
   ) {
   }
 
-
   get authErrors(): Observable<string> {
     return this._auth.error$;
   }

@@ -13,8 +13,8 @@ import { AlertService } from '../shared/services/alert.service';
 })
 export class EditPageComponent implements OnInit, OnDestroy {
 
-  public form: FormGroup | undefined;
-  public submitted = false;
+  form: FormGroup | undefined;
+  submitted = false;
   private _subscriptions$: Subscription = new Subscription();
   private _post: Post | undefined;
 

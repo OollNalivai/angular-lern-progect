@@ -14,9 +14,7 @@ export class HomePageComponent implements OnInit {
   posts$: Observable<Post[]> | undefined;
   currentPage: number = 1;
 
-  constructor(
-    private _postsService: PostsService,
-  ) {
+  constructor(private _postsService: PostsService) {
   }
 
   ngOnInit(): void {
@@ -26,5 +24,4 @@ export class HomePageComponent implements OnInit {
   onChangePage(current: number): number {
     return this.currentPage = current;
   }
-
 }

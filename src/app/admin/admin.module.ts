@@ -33,8 +33,8 @@ const routes: Routes = [
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
-    SearchPipe,
-    AlertComponent
+    AlertComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

@@ -7,9 +7,8 @@ import { AuthService } from './auth.service';
 
 export class AuthGuard implements CanActivate {
 
-  constructor(private auth: AuthService,
-              private router: Router,
-  ) {
+  constructor(private _auth: AuthService,
+              private _router: Router) {
   }
 
   canActivate(
@@ -17,13 +16,13 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.auth.isAuth) {
+    if (this._auth.isAuth) {
       return true;
 
     } else {
 
-      this.auth.logout();
-      this.router.navigate(['/admin', 'login'], {
+      this._auth.logout();
+      this._router.navigate(['/admin', 'login'], {
         queryParams: {
           loginAgain: true,
         },
