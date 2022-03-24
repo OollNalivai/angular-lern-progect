@@ -12,6 +12,7 @@ import { Post } from '../shared/interfaces';
 export class PostPageComponent implements OnInit {
 
   post$: Observable<Post> | undefined;
+  rating: number = 50;
 
   constructor (
     private _route: ActivatedRoute,
@@ -25,4 +26,7 @@ export class PostPageComponent implements OnInit {
     );
   }
 
+  inputChange($event: any) {
+
+  }
 }

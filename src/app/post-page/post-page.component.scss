@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 10px;
 
-  .header {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,9 +13,31 @@
     margin-bottom: .5rem;
   }
 
-  .info {
+  &__info {
     strong {
       margin-right: 1rem;
+    }
+  }
+
+  &__rating-block {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      margin: 30px 0 0;
+      font-size: 24px;
+    }
+
+    .input {
+      width: 400px;
+      margin: 30px 0;
+    }
+
+    .stars {
+      display: block;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(to right, yellow 50%, white 50%);
     }
   }
 }

@@ -1,13 +1,13 @@
 <div *ngIf="post$ | async as post; else loading">
   <div class="post">
 
-    <div class="header">
+    <div class="post__header">
       <h1>{{ post?.title }}</h1>
 
       <button routerLink="/" class="btn btn-link">To home page</button>
     </div>
 
-    <div class="info">
+    <div class="post__info">
       <strong>{{ post?.author }}</strong>
       <small>{{ post?.date | date: 'dd.MM.yyyy' }}</small>
     </div>
@@ -16,8 +16,12 @@
       <quill-view-html [content]="post?.text"></quill-view-html>
     </div>
 
-    <div>
-      <span style="color: #dc3545">{{ post?.rating }}</span>
+    <div class="post__rating-block">
+      <label class="label" for="rating" style="color: #dc3545">Post rating:  </label>
+      <input class="input" type="range" name="rating" id="rating"
+             min="0" max="5" step="1"
+             (change)="inputChange($event)">
+      <div class="stars"></div>
     </div>
 
   </div>
