@@ -26,7 +26,17 @@ export class PostPageComponent implements OnInit {
     );
   }
 
-  inputChange($event: any) {
+  inputChange(evt: any): void {
+    let stars = document.querySelector(".stars") as HTMLElement;
+    let percentRatingColoring: number;
 
+    this.rating = evt.value / 5 * 100;
+    percentRatingColoring = this.rating;
+      stars.style.background =
+      `linear-gradient(to right, yellow 0 ${percentRatingColoring}%, white ${percentRatingColoring}% 100%)`;
+
+
+    console.log(evt.value)
+    console.log(this.rating)
   }
 }
