@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Post } from '../../shared/interfaces';
+import { Post, Rating } from '../../shared/interfaces';
 import { PostsService } from '../../shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
 
@@ -38,7 +38,9 @@ export class CreatePageComponent implements OnInit {
       text: this.form?.value.text,
       author: this.form?.value.author,
       date: new Date(),
-      rating: 0
+      rating: {
+        numberOfRatings: 0
+      }
     };
 
     this._postsService.create(post).subscribe(() => {

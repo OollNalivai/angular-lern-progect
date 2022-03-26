@@ -12,7 +12,9 @@ import { Post } from '../shared/interfaces';
 export class PostPageComponent implements OnInit {
 
   post$: Observable<Post> | undefined;
-  rating: number = 50;
+  rating: number = 0;
+  numberOfRatings: number = 0; // каунтер оценок для подсчета среднего рейтинга поста
+  scoreArray: number[] = [];
 
   constructor (
     private _route: ActivatedRoute,
@@ -28,15 +30,17 @@ export class PostPageComponent implements OnInit {
 
   inputChange(evt: any): void {
     let stars = document.querySelector(".stars") as HTMLElement;
-    let percentRatingColoring: number;
+    let percentRatingColoring: number = 0; // % заполенния звезды
+    let currentAssessment: number = +evt.value; // текущая оценка
+    this.scoreArray.push(currentAssessment);
+    this.rating = this.scoreArray
+      .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
+    console.log(this.numberOfRatings)
+    console.log(this.rating)
 
-    this.rating = evt.value / 5 * 100;
-    percentRatingColoring = this.rating;
+    percentRatingColoring = this.rating / 5 * 100;
       stars.style.background =
       `linear-gradient(to right, yellow 0 ${percentRatingColoring}%, white ${percentRatingColoring}% 100%)`;
-
-
-    console.log(evt.value)
-    console.log(this.rating)
+    console.log('percentRatingColoring', percentRatingColoring);
   }
 }
