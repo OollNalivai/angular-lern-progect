@@ -35,12 +35,9 @@ export class PostPageComponent implements OnInit {
     this.scoreArray.push(currentAssessment);
     this.rating = this.scoreArray
       .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
-    console.log(this.numberOfRatings)
-    console.log(this.rating)
 
     percentRatingColoring = this.rating / 5 * 100;
       stars.style.background =
       `linear-gradient(to right, yellow 0 ${percentRatingColoring}%, white ${percentRatingColoring}% 100%)`;
-    console.log('percentRatingColoring', percentRatingColoring);
   }
 }
