@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 type updateType = Pick<Post, "id" | "text" | "title">
+type updateRatingType = Pick<Post, "id" | "rating">
 
 @Injectable({providedIn: 'root'})
 
@@ -54,6 +55,11 @@ export class PostsService {
 
   update(post: updateType): Observable<updateType> {
     return this.http.patch<updateType>
+    (`${environment.fbDbUrl}/posts/${post.id}.json`, post)
+  }
+
+  updateRating(post: updateRatingType): Observable<updateRatingType> {
+    return this.http.patch<updateRatingType>
     (`${environment.fbDbUrl}/posts/${post.id}.json`, post)
   }
 }
