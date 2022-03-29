@@ -11,25 +11,49 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  post$: Observable<Post> | undefined;
+  private _post: Post | undefined;
+
+  currentPost: Observable<Post> | undefined;
   rating: number = 0;
   numberOfRatings: number = 0; // каунтер оценок для подсчета среднего рейтинга поста
   scoreArray: number[] = [];
+  postsArr: Post[] = [];
 
-  constructor (
+  constructor(
     private _route: ActivatedRoute,
-    private _postsService: PostsService
-  ) { }
+    private _postsService: PostsService,
+  ) {
+  }
 
   ngOnInit(): void {
-    this.post$ = this._route.params.pipe(switchMap((params) => {
+    this.currentPost = this._route.params.pipe(switchMap((params) => {
         return this._postsService.getById(params['id']);
       })
     );
+
+    this._route.params.pipe(switchMap((params) => {
+        return this._postsService.getById(params['id']);
+      })
+    )
+      .subscribe((post: Post) => {
+        this._post = post;
+      });
+  }
+
+
+  test() {
+      this._postsService.updateRating({
+        id: this._post?.id,
+        rating: {
+          averageRating: 5,
+          numberOfRatings: 42,
+          scoreArray: [52, 54, 32],
+        }
+      })
   }
 
   inputChange(evt: any): void {
-    let stars = document.querySelector(".stars") as HTMLElement;
+    let stars = document.querySelector('.stars') as HTMLElement;
     let percentRatingColoring: number = 0; // % заполенния звезды
     let currentAssessment: number = +evt.value; // текущая оценка
     this.scoreArray.push(currentAssessment);
@@ -37,7 +61,7 @@ export class PostPageComponent implements OnInit {
       .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
 
     percentRatingColoring = this.rating / 5 * 100;
-      stars.style.background =
+    stars.style.background =
       `linear-gradient(to right, yellow 0 ${percentRatingColoring}%, white ${percentRatingColoring}% 100%)`;
   }
 }

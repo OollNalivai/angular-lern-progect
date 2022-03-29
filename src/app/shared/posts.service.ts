@@ -59,6 +59,17 @@ export class PostsService {
   }
 
   updateRating(post: updateRatingType): Observable<updateRatingType> {
+
+    console.log({
+      id: post?.id,
+
+      rating: {
+        averageRating: post.rating?.averageRating,
+        numberOfRatings: post.rating?.numberOfRatings,
+        scoreArray: post.rating?.scoreArray,
+      }
+    } as updateRatingType);
+
     return this.http.patch<updateRatingType>
     (`${environment.fbDbUrl}/posts/${post.id}.json`, post)
   }
