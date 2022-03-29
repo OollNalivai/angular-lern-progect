@@ -33,8 +33,28 @@
              min="1" max="5" step="1" (click)="test()" (input)="inputChange($event.target)">
       <div class="stars"></div>
 
-    </div>
+      <div class="rating">
 
+        <div class="rating__body">
+
+          <div class="rating__active"></div>
+
+          <div class="rating__items">
+            <input type="radio" class="rating__item" value="1" name="rating">
+            <input type="radio" class="rating__item" value="2" name="rating">
+            <input type="radio" class="rating__item" value="3" name="rating">
+            <input type="radio" class="rating__item" value="4" name="rating">
+            <input type="radio" class="rating__item" value="5" name="rating">
+          </div>
+
+        </div>
+
+        <div class="rating__value">1.5</div>
+
+      </div>
+
+
+    </div>
   </div>
 </div>
 
