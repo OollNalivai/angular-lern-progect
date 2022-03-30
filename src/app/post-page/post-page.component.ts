@@ -54,6 +54,7 @@ export class PostPageComponent implements OnInit {
 
   inputChange(evt: any): void {
     let stars = document.querySelector('.stars') as HTMLElement;
+    let ratingActive = document.querySelector('.rating__active') as HTMLElement
     let percentRatingColoring: number = 0; // % заполенния звезды
     let currentAssessment: number = +evt.value; // текущая оценка
     this.scoreArray.push(currentAssessment);
@@ -61,7 +62,6 @@ export class PostPageComponent implements OnInit {
       .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
 
     percentRatingColoring = this.rating / 5 * 100;
-    stars.style.background =
-      `linear-gradient(to right, yellow 0 ${percentRatingColoring}%, white ${percentRatingColoring}% 100%)`;
+    ratingActive.style.width = `${percentRatingColoring}%`;
   }
 }
