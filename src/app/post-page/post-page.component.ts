@@ -11,12 +11,12 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  private _post: Post | undefined;
 
+  private _post: Post | undefined;
   currentPost: Observable<Post> | undefined;
   rating: number = 0;
-  numberOfRatings: number = 0; // каунтер оценок для подсчета среднего рейтинга поста
-  scoreArray: number[] = [];
+  numberOfRatings: number = 0; // каунтер (сколько всего оценок) для подсчета среднего рейтинга поста
+  scoreArray: number[] = []; // массив оценок
   postsArr: Post[] = [];
 
   constructor(
@@ -41,15 +41,23 @@ export class PostPageComponent implements OnInit {
   }
 
 
-  test() {
-      this._postsService.updateRating({
-        id: this._post?.id,
-        rating: {
-          averageRating: 5,
-          numberOfRatings: 42,
-          scoreArray: [52, 54, 32],
-        }
-      })
+  async test() {
+      try {
+        await this._postsService.updateRating({
+          ...this._post,
+          rating: {
+            averageRating: 5, // средний рейтинг
+            numberOfRatings: 42, // количество оценок
+            scoreArray: [52, 54, 32], // массив оценок
+          }
+        }).toPromise();
+      } catch (e) {
+        console.log(e);
+      }
+  }
+
+  getRatingValue() {
+    
   }
 
   inputChange(evt: any): void {
