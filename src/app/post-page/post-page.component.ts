@@ -11,9 +11,13 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
+  #post: Post | undefined;
+  #currentAssessment: number | undefined; // последняя оценка
+  #scoreArray: number[] | undefined = []; // массив оценок
+
   currentPost: Observable<Post> | undefined;
-  #post: Post = {author: '', date: new Date, text: '', title: '', rating:
-      {numberOfRatings: 2, scoreArray: []}};
+  ratingStar: number | undefined = 0; // вывод среднего рейтинга в шаблон
+  numberOfRatings: number | undefined = 0; // сколько всего оценок
 
   constructor(
     private _route: ActivatedRoute,
@@ -23,68 +27,61 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentPost = this._route.params.pipe(switchMap((params) => {
-        return this._postsService.getById(params['id']);
-      })
-    );
+      return this._postsService.getById(params['id']);
+    }));
 
     this._route.params.pipe(switchMap((params) => {
-        return this._postsService.getById(params['id']);
-      })
-    ).subscribe((post: Post) => {
-      this.#post = post;
-      // console.log(this.#post);
-    });
+      return this._postsService.getById(params['id']);
+    }))
+      .subscribe((post: Post) => {
+        this.#post = post;
+
+        if (post.rating) {
+          this.ratingStar = post.rating.averageRating;
+          this.numberOfRatings = post.rating.numberOfRatings;
+          this.#scoreArray = post.rating.scoreArray;
+        }
+      });
   }
 
   getRatingValue(evt: MouseEvent): void {
     const target = evt.target as HTMLInputElement;
+    this.#currentAssessment = +target.value;
 
-    //   ...this.#post, rating {
-    //     'averageRating': 5, // средний рейтинг
-    //     'numberOfRatings': 42, // количество оценок
-    //     'scoreArray': [52, 54, 32], // массив оценок
-    //   }
+    if (this.#scoreArray) {
+      this.#scoreArray.push(this.#currentAssessment);
+    }
 
-    console.log();
-
-
-    let stars = document.querySelector('.stars') as HTMLElement;
-    let ratingActive = document.querySelector('.rating__active') as HTMLElement;
-    let percentRatingColoring: number = 0; // % заполенния звезды
-    let currentAssessment: number = +target.value; // текущая оценка
-    this.scoreArray.push(currentAssessment);
-    this.rating = this.scoreArray
-      .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
-
-    percentRatingColoring = this.rating / 5 * 100;
-    ratingActive.style.width = `${percentRatingColoring}%`;
-
-  }
-
-
-  rating: number = 0;
-  numberOfRatings: number = 0; // каунтер (сколько всего оценок) для подсчета среднего рейтинга поста
-  scoreArray: number[] = []; // массив оценок
-  postsArr: Post[] = [];
-
-
-  async test() {
-    try {
-      await this._postsService.updateRating({
-        ...this.#post,
-        rating: {
-          averageRating: 5, // средний рейтинг
-          numberOfRatings: 42, // количество оценок
-          scoreArray: [52, 54, 32], // массив оценок
-        }
-      }).toPromise();
-    } catch (e) {
-      console.log(e);
+    if (this.ratingStar && this.numberOfRatings && this.#scoreArray) {
+      this.calculatingRating(this.numberOfRatings, this.#scoreArray);
+      this.getRating(this.ratingStar);
     }
   }
 
-
-  inputChange(evt: any): void {
-
+  calculatingRating(numberOfRatings: number, scoreArray: number[]) {
+    this.ratingStar = scoreArray
+      .reduce((acc, curr) => acc + curr) / ++numberOfRatings;
+    this.numberOfRatings = numberOfRatings;
   }
+
+  getRating(value: number): void {
+    let ratingActive = document.querySelector('.rating__active') as HTMLElement;
+    ratingActive.style.width = `${value / 5 * 100}%`;
+  }
+
+  // async test() {
+  //   try {
+  //     await this._postsService.updateRating({
+  //       ...this.#post,
+  //       rating: {
+  //         averageRating: 5, // средний рейтинг
+  //         numberOfRatings: 42, // количество оценок
+  //         scoreArray: [52, 54, 32], // массив оценок
+  //       }
+  //     }).toPromise();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
+
 }

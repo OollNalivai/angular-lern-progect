@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Post, Rating } from '../../shared/interfaces';
+import { Post } from '../../shared/interfaces';
 import { PostsService } from '../../shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
 
@@ -39,7 +39,8 @@ export class CreatePageComponent implements OnInit {
       author: this.form?.value.author,
       date: new Date(),
       rating: {
-        numberOfRatings: 0
+        numberOfRatings: 0,
+        scoreArray: []
       }
     };
 

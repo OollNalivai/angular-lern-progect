@@ -35,9 +35,10 @@
         </div>
 
         <div class="rating__value"
-             *ngIf="post?.rating.averageRating;
+             *ngIf="post?.rating.averageRating || post?.rating.numberOfRatings;
              else notAverageRating">
-          Post rating: {{ this.rating | number:'1.0-2' }}
+          Post rating: {{ this.ratingStar | number:'1.0-2' }}<br>
+          Number of votes: {{ this.numberOfRatings }}
         </div>
 
         <ng-template #notAverageRating>
