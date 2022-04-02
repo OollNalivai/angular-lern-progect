@@ -18,27 +18,13 @@
 
     <div class="post__rating-block">
 
-      <label *ngIf="post?.rating.averageRating; else notAverageRating"
-             class="label" for="rating" style="color: #dc3545">
-        Post rating: {{ post?.rating.averageRating }}
-      </label>
-
-      <ng-template #notAverageRating>
-        <label class="label" for="rating" style="color: #dc3545">
-          This post has no rating.
-        </label>
-      </ng-template>
-
-      <input class="input" type="range" name="rating" id="rating"
-             min="1" max="5" step="1" (click)="test()" (input)="inputChange($event.target)">
-
       <div class="rating">
 
         <div class="rating__body">
 
           <div class="rating__active"></div>
 
-          <div class="rating__items" (click)="getRatingValue()">
+          <div class="rating__items" (click)="getRatingValue($event)">
             <input type="radio" class="rating__item" value="1" name="rating">
             <input type="radio" class="rating__item" value="2" name="rating">
             <input type="radio" class="rating__item" value="3" name="rating">
@@ -48,10 +34,17 @@
 
         </div>
 
-        <div class="rating__value">{{ this.rating | number:'1.0-2' }}</div>
+        <div class="rating__value"
+             *ngIf="post?.rating.averageRating;
+             else notAverageRating">
+          Post rating: {{ this.rating | number:'1.0-2' }}
+        </div>
+
+        <ng-template #notAverageRating>
+          <div class="rating__value">This post has no rating.</div>
+        </ng-template>
 
       </div>
-
 
     </div>
   </div>

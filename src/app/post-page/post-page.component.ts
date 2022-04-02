@@ -11,13 +11,9 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-
-  private _post: Post | undefined;
   currentPost: Observable<Post> | undefined;
-  rating: number = 0;
-  numberOfRatings: number = 0; // каунтер (сколько всего оценок) для подсчета среднего рейтинга поста
-  scoreArray: number[] = []; // массив оценок
-  postsArr: Post[] = [];
+  #post: Post = {author: '', date: new Date, text: '', title: '', rating:
+      {numberOfRatings: 2, scoreArray: []}};
 
   constructor(
     private _route: ActivatedRoute,
@@ -34,42 +30,61 @@ export class PostPageComponent implements OnInit {
     this._route.params.pipe(switchMap((params) => {
         return this._postsService.getById(params['id']);
       })
-    )
-      .subscribe((post: Post) => {
-        this._post = post;
-      });
+    ).subscribe((post: Post) => {
+      this.#post = post;
+      // console.log(this.#post);
+    });
   }
 
+  getRatingValue(evt: MouseEvent): void {
+    const target = evt.target as HTMLInputElement;
 
-  async test() {
-      try {
-        await this._postsService.updateRating({
-          ...this._post,
-          rating: {
-            averageRating: 5, // средний рейтинг
-            numberOfRatings: 42, // количество оценок
-            scoreArray: [52, 54, 32], // массив оценок
-          }
-        }).toPromise();
-      } catch (e) {
-        console.log(e);
-      }
-  }
+    //   ...this.#post, rating {
+    //     'averageRating': 5, // средний рейтинг
+    //     'numberOfRatings': 42, // количество оценок
+    //     'scoreArray': [52, 54, 32], // массив оценок
+    //   }
 
-  getRatingValue() {
-    
-  }
+    console.log();
 
-  inputChange(evt: any): void {
+
     let stars = document.querySelector('.stars') as HTMLElement;
-    let ratingActive = document.querySelector('.rating__active') as HTMLElement
+    let ratingActive = document.querySelector('.rating__active') as HTMLElement;
     let percentRatingColoring: number = 0; // % заполенния звезды
-    let currentAssessment: number = +evt.value; // текущая оценка
+    let currentAssessment: number = +target.value; // текущая оценка
     this.scoreArray.push(currentAssessment);
     this.rating = this.scoreArray
       .reduce((acc, curr) => acc + curr) / ++this.numberOfRatings;
 
     percentRatingColoring = this.rating / 5 * 100;
     ratingActive.style.width = `${percentRatingColoring}%`;
+
+  }
+
+
+  rating: number = 0;
+  numberOfRatings: number = 0; // каунтер (сколько всего оценок) для подсчета среднего рейтинга поста
+  scoreArray: number[] = []; // массив оценок
+  postsArr: Post[] = [];
+
+
+  async test() {
+    try {
+      await this._postsService.updateRating({
+        ...this.#post,
+        rating: {
+          averageRating: 5, // средний рейтинг
+          numberOfRatings: 42, // количество оценок
+          scoreArray: [52, 54, 32], // массив оценок
+        }
+      }).toPromise();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+  inputChange(evt: any): void {
+
   }
 }
