@@ -11,13 +11,12 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  #post: Post | undefined;
-  #currentAssessment: number | undefined; // последняя оценка
-  #scoreArray: number[] | undefined = []; // массив оценок
+  // #currentAssessment: number | undefined; // последняя оценка
+  // #scoreArray: number[] | undefined = []; // массив оценок
 
   currentPost: Observable<Post> | undefined;
-  ratingStar: number | undefined = 0; // вывод среднего рейтинга в шаблон
-  numberOfRatings: number | undefined = 0; // сколько всего оценок
+  // ratingStar: number | undefined = 0; // вывод среднего рейтинга в шаблон
+  // numberOfRatings: number | undefined = 0; // сколько всего оценок
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,44 +28,31 @@ export class PostPageComponent implements OnInit {
     this.currentPost = this._route.params.pipe(switchMap((params) => {
       return this._postsService.getById(params['id']);
     }));
-
-    this._route.params.pipe(switchMap((params) => {
-      return this._postsService.getById(params['id']);
-    }))
-      .subscribe((post: Post) => {
-        this.#post = post;
-
-        if (post.rating) {
-          this.ratingStar = post.rating.averageRating;
-          this.numberOfRatings = post.rating.numberOfRatings;
-          this.#scoreArray = post.rating.scoreArray;
-        }
-      });
   }
 
   getRatingValue(evt: MouseEvent): void {
-    const target = evt.target as HTMLInputElement;
-    this.#currentAssessment = +target.value;
-
-    if (this.#scoreArray) {
-      this.#scoreArray.push(this.#currentAssessment);
-    }
-
-    if (this.ratingStar && this.numberOfRatings && this.#scoreArray) {
-      this.calculatingRating(this.numberOfRatings, this.#scoreArray);
-      this.getRating(this.ratingStar);
-    }
+    // const target = evt.target as HTMLInputElement;
+    // this.#currentAssessment = +target.value;
+    //
+    // if (this.#scoreArray) {
+    //   this.#scoreArray.push(this.#currentAssessment);
+    // }
+    //
+    // if (this.ratingStar && this.numberOfRatings && this.#scoreArray) {
+    //   this.calculatingRating(this.numberOfRatings, this.#scoreArray);
+    //   this.getRating(this.ratingStar);
+    // }
   }
 
   calculatingRating(numberOfRatings: number, scoreArray: number[]) {
-    this.ratingStar = scoreArray
-      .reduce((acc, curr) => acc + curr) / ++numberOfRatings;
-    this.numberOfRatings = numberOfRatings;
+    // this.ratingStar = scoreArray
+    //   .reduce((acc, curr) => acc + curr) / ++numberOfRatings;
+    // this.numberOfRatings = numberOfRatings;
   }
 
   getRating(value: number): void {
-    let ratingActive = document.querySelector('.rating__active') as HTMLElement;
-    ratingActive.style.width = `${value / 5 * 100}%`;
+    // let ratingActive = document.querySelector('.rating__active') as HTMLElement;
+    // ratingActive.style.width = `${value / 5 * 100}%`;
   }
 
   // async test() {

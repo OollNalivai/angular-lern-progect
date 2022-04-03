@@ -2,18 +2,18 @@
   <div class="post">
 
     <div class="post__header">
-      <h1>{{ post?.title }}</h1>
+      <h1>{{ post.title }}</h1>
 
       <button routerLink="/" class="btn btn-link">To home page</button>
     </div>
 
     <div class="post__info">
-      <strong>{{ post?.author }}</strong>
-      <small>{{ post?.date | date: 'dd.MM.yyyy' }}</small>
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date: 'dd.MM.yyyy' }}</small>
     </div>
 
     <div>
-      <quill-view-html [content]="post?.text"></quill-view-html>
+      <quill-view-html [content]="post.text"></quill-view-html>
     </div>
 
     <div class="post__rating-block">
@@ -22,7 +22,9 @@
 
         <div class="rating__body">
 
-          <div class="rating__active"></div>
+          <div class="rating__active"
+               [ngStyle]="{'width': post.rating.averageRating / 5 * 100 + '%' }">
+          </div>
 
           <div class="rating__items" (click)="getRatingValue($event)">
             <input type="radio" class="rating__item" value="1" name="rating">
@@ -34,16 +36,10 @@
 
         </div>
 
-        <div class="rating__value"
-             *ngIf="post?.rating.averageRating || post?.rating.numberOfRatings;
-             else notAverageRating">
-          Post rating: {{ this.ratingStar | number:'1.0-2' }}<br>
-          Number of votes: {{ this.numberOfRatings }}
+        <div class="rating__value">
+          Post rating: {{ this.post.rating.averageRating | number:'1.0-2' }}<br>
+          Number of votes: {{ this.post.rating.numberOfRatings }}
         </div>
-
-        <ng-template #notAverageRating>
-          <div class="rating__value">This post has no rating.</div>
-        </ng-template>
 
       </div>
 
