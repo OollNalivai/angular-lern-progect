@@ -26,7 +26,7 @@
                [ngStyle]="{'width': post.rating.averageRating / 5 * 100 + '%' }">
           </div>
 
-          <div class="rating__items" (click)="getRatingValue($event)">
+          <div class="rating__items" (click)="setRatingValue($event)">
             <input type="radio" class="rating__item" value="1" name="rating">
             <input type="radio" class="rating__item" value="2" name="rating">
             <input type="radio" class="rating__item" value="3" name="rating">

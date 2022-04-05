@@ -3,6 +3,7 @@ import { PostsService } from '../shared/posts.service';
 import { Observable, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../shared/interfaces';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'mua-post-page',
@@ -11,7 +12,7 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  // #currentAssessment: number | undefined; // последняя оценка
+  #currentAssessment: number | undefined; // последняя оценка
   // #scoreArray: number[] | undefined = []; // массив оценок
 
   currentPost: Observable<Post> | undefined;
@@ -30,9 +31,21 @@ export class PostPageComponent implements OnInit {
     }));
   }
 
-  getRatingValue(evt: MouseEvent): void {
-    // const target = evt.target as HTMLInputElement;
-    // this.#currentAssessment = +target.value;
+  setRatingValue(evt: MouseEvent): void {
+    const target = evt.target as HTMLInputElement;
+    this.#currentAssessment = +target.value;
+
+    this.currentPost?.subscribe(el => console.log(el))
+    console.log(this.#currentAssessment);
+    this._postsService.updateRating({
+      // id: this.post?.id,
+      //
+      // rating: {
+      //   averageRating: post.rating?.averageRating,
+      //   numberOfRatings: post.rating?.numberOfRatings,
+      //   scoreArray: post.rating?.scoreArray,
+      // }
+    })
     //
     // if (this.#scoreArray) {
     //   this.#scoreArray.push(this.#currentAssessment);
@@ -69,5 +82,6 @@ export class PostPageComponent implements OnInit {
   //     console.log(e);
   //   }
   // }
+
 
 }
