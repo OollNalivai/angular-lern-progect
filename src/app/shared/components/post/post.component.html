@@ -10,8 +10,8 @@
     <small>{{ post?.author | stringClipping: 20 }}</small>
   </div>
 
-  <div *ngIf="post?.rating.averageRating > 0">
-    <span>Post rating: {{ post?.rating.averageRating }}</span>
+  <div *ngIf="post?.scoreArray">
+    <span>Post rating: {{ post?.scoreArray }}</span>
   </div>
 
   <button

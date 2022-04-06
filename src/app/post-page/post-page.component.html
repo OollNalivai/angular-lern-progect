@@ -22,9 +22,9 @@
 
         <div class="rating__body">
 
-          <div class="rating__active"
-               [ngStyle]="{'width': post.rating.averageRating / 5 * 100 + '%' }">
-          </div>
+          <!--          <div class="rating__active"-->
+          <!--               [ngStyle]="{'width': post.rating.averageRating / 5 * 100 + '%' }">-->
+          <!--          </div>-->
 
           <div class="rating__items" (click)="setRatingValue($event)">
             <input type="radio" class="rating__item" value="1" name="rating">
@@ -36,9 +36,9 @@
 
         </div>
 
-        <div class="rating__value">
-          Post rating: {{ this.post.rating.averageRating | number:'1.0-2' }}<br>
-          Number of votes: {{ this.post.rating.numberOfRatings }}
+        <div class="rating__value" (click)="test()">
+          <!--          Post rating: {{ this.post.rating.averageRating | number:'1.0-2' }}<br>-->
+          Number of votes: {{ this.post.scoreArray ? this.post.scoreArray.length : 0 }}
         </div>
 
       </div>

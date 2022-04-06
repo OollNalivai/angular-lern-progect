@@ -15,13 +15,7 @@ export interface Post {
   text: string;
   author: string;
   date: Date;
-  rating?: Rating;
-}
-
-export interface Rating {
-  averageRating?: number;
-  numberOfRatings: number;
-  scoreArray: number[];
+  scoreArray?: number[];
 }
 
 export interface FbCreateResponse {

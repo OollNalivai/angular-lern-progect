@@ -3,7 +3,6 @@ import { PostsService } from '../shared/posts.service';
 import { Observable, switchMap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../shared/interfaces';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'mua-post-page',
@@ -13,11 +12,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class PostPageComponent implements OnInit {
 
   #currentAssessment: number | undefined; // последняя оценка
-  // #scoreArray: number[] | undefined = []; // массив оценок
-
+  #postId: string | undefined;
+  #scoreArray: number[] | undefined = [];
   currentPost: Observable<Post> | undefined;
-  // ratingStar: number | undefined = 0; // вывод среднего рейтинга в шаблон
-  // numberOfRatings: number | undefined = 0; // сколько всего оценок
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,32 +26,31 @@ export class PostPageComponent implements OnInit {
     this.currentPost = this._route.params.pipe(switchMap((params) => {
       return this._postsService.getById(params['id']);
     }));
+
+    this.currentPost?.subscribe((post: Post) => {
+      this.#postId = post.id;
+
+      if (post.scoreArray) {
+        this.#scoreArray = post.scoreArray;
+      }
+    });
   }
 
   setRatingValue(evt: MouseEvent): void {
     const target = evt.target as HTMLInputElement;
     this.#currentAssessment = +target.value;
 
-    this.currentPost?.subscribe(el => console.log(el))
-    console.log(this.#currentAssessment);
-    this._postsService.updateRating({
-      // id: this.post?.id,
-      //
-      // rating: {
-      //   averageRating: post.rating?.averageRating,
-      //   numberOfRatings: post.rating?.numberOfRatings,
-      //   scoreArray: post.rating?.scoreArray,
-      // }
-    })
-    //
-    // if (this.#scoreArray) {
-    //   this.#scoreArray.push(this.#currentAssessment);
-    // }
-    //
-    // if (this.ratingStar && this.numberOfRatings && this.#scoreArray) {
-    //   this.calculatingRating(this.numberOfRatings, this.#scoreArray);
-    //   this.getRating(this.ratingStar);
-    // }
+    if (this.#scoreArray) {
+      this.#scoreArray = [...this.#scoreArray, this.#currentAssessment];
+    }
+
+    this._postsService.updateRating(
+      {
+        id: this.#postId,
+        scoreArray: this.#scoreArray
+      }
+    )
+
   }
 
   calculatingRating(numberOfRatings: number, scoreArray: number[]) {
@@ -68,20 +64,15 @@ export class PostPageComponent implements OnInit {
     // ratingActive.style.width = `${value / 5 * 100}%`;
   }
 
-  // async test() {
-  //   try {
-  //     await this._postsService.updateRating({
-  //       ...this.#post,
-  //       rating: {
-  //         averageRating: 5, // средний рейтинг
-  //         numberOfRatings: 42, // количество оценок
-  //         scoreArray: [52, 54, 32], // массив оценок
-  //       }
-  //     }).toPromise();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
+  async test() {
+    try {
+      await this._postsService.updateRating({
+        id: this.#postId,
+        scoreArray: this.#scoreArray
+      }).toPromise();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 }

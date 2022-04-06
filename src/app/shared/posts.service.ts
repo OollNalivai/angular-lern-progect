@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 type updateType = Pick<Post, "id" | "text" | "title">
-type updateRatingType = Pick<Post, "id" | "rating">
+type updateRatingType = Pick<Post, "id" | "scoreArray">
 
 @Injectable({providedIn: 'root'})
 
@@ -62,12 +62,7 @@ export class PostsService {
 
     console.log({
       id: post?.id,
-
-      rating: {
-        averageRating: post.rating?.averageRating,
-        numberOfRatings: post.rating?.numberOfRatings,
-        scoreArray: post.rating?.scoreArray,
-      }
+      scoreArray: post.scoreArray
     } as updateRatingType);
 
     return this.http.patch<updateRatingType>
