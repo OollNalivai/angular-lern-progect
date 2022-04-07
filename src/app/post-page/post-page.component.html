@@ -1,4 +1,5 @@
 <div *ngIf="currentPost | async as post; else loading">
+  <pre>{{post | json}}</pre>
   <div class="post">
 
     <div class="post__header">
@@ -26,7 +27,7 @@
           <!--               [ngStyle]="{'width': post.rating.averageRating / 5 * 100 + '%' }">-->
           <!--          </div>-->
 
-          <div class="rating__items" (click)="setRatingValue($event)">
+          <div class="rating__items" (click)="setRatingValue($event, post)">
             <input type="radio" class="rating__item" value="1" name="rating">
             <input type="radio" class="rating__item" value="2" name="rating">
             <input type="radio" class="rating__item" value="3" name="rating">

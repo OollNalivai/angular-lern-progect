@@ -36,21 +36,25 @@ export class PostPageComponent implements OnInit {
     });
   }
 
-  setRatingValue(evt: MouseEvent): void {
+  setRatingValue(evt: MouseEvent, post: Post): void {
     const target = evt.target as HTMLInputElement;
-    this.#currentAssessment = +target.value;
 
-    if (this.#scoreArray) {
-      this.#scoreArray = [...this.#scoreArray, this.#currentAssessment];
-    }
+    // this.#currentAssessment = +target.value;
+    //
+    // if (this.#scoreArray) {
+    //   this.#scoreArray = [...this.#scoreArray, this.#currentAssessment];
+    // }
 
     this._postsService.updateRating(
       {
-        id: this.#postId,
-        scoreArray: this.#scoreArray
+        // id: this.#postId,
+        // scoreArray: this.#scoreArray
+        ...post,
+        scoreArray: [...post.scoreArray || [], +target.value]
       }
-    )
-
+    ).subscribe((scoreArray: number[]) => {
+      post.scoreArray = scoreArray;
+    })
   }
 
   calculatingRating(numberOfRatings: number, scoreArray: number[]) {
@@ -65,14 +69,14 @@ export class PostPageComponent implements OnInit {
   }
 
   async test() {
-    try {
-      await this._postsService.updateRating({
-        id: this.#postId,
-        scoreArray: this.#scoreArray
-      }).toPromise();
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   await this._postsService.updateRating({
+    //     id: this.#postId,
+    //     scoreArray: this.#scoreArray
+    //   }).toPromise();
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 
 }
