@@ -1,21 +1,21 @@
 <div class="card">
 
   <div class="card-header">
-    <h2>{{ post?.title | stringClipping: 20 }}</h2>
+    <h2>{{ post.title | stringClipping: 20 }}</h2>
 
-    <small>{{ post?.date | date: 'dd.MM.yyyy' }}</small>
+    <small>{{ post.date | date: 'dd.MM.yyyy' }}</small>
   </div>
 
   <div>
-    <small>{{ post?.author | stringClipping: 20 }}</small>
+    <small>{{ post.author | stringClipping: 20 }}</small>
   </div>
 
-  <div *ngIf="post?.scoreArray">
-    <span>Post rating: {{ post?.scoreArray }}</span>
+  <div *ngIf="post.scoreArray">
+    <span>Post rating: {{ post.scoreArray }}</span>
   </div>
 
   <button
-    [routerLink]="['/post', post?.id]"
+    [routerLink]="['/post', post.id]"
     class="btn btn-dark"
   >Open</button>
 

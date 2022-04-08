@@ -61,7 +61,6 @@ export class PostsService {
   updateRating(updatablePost: Post): Observable<number[]> {
 
     console.log(updatablePost);
-
     return this.http.patch<Post>
     (`${environment.fbDbUrl}/posts/${updatablePost.id}.json`, updatablePost)
       .pipe(map((post: Post) => post.scoreArray || []))

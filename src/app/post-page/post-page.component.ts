@@ -11,9 +11,10 @@ import { Post } from '../shared/interfaces';
 })
 export class PostPageComponent implements OnInit {
 
-  #currentAssessment: number | undefined; // последняя оценка
   #postId: string | undefined;
   #scoreArray: number[] | undefined = [];
+  currentAssessment: number | undefined; // последняя оценка
+  starRating: number | undefined;
   currentPost: Observable<Post> | undefined;
 
   constructor(
@@ -39,29 +40,27 @@ export class PostPageComponent implements OnInit {
   setRatingValue(evt: MouseEvent, post: Post): void {
     const target = evt.target as HTMLInputElement;
 
-    // this.#currentAssessment = +target.value;
-    //
-    // if (this.#scoreArray) {
-    //   this.#scoreArray = [...this.#scoreArray, this.#currentAssessment];
-    // }
-
     this._postsService.updateRating(
       {
-        // id: this.#postId,
-        // scoreArray: this.#scoreArray
         ...post,
         scoreArray: [...post.scoreArray || [], +target.value]
       }
     ).subscribe((scoreArray: number[]) => {
       post.scoreArray = scoreArray;
+
+      this.starRating = post.scoreArray
+        .reduce((acc, curr) => acc + curr) / post.scoreArray.length;
     })
+
+    this.currentAssessment = +target.value;
+
+    // if (post.scoreArray) {
+    //   this.starRating = post.scoreArray
+    //     .reduce((acc, curr) => acc + curr) / post.scoreArray.length;
+    // }
+
   }
 
-  calculatingRating(numberOfRatings: number, scoreArray: number[]) {
-    // this.ratingStar = scoreArray
-    //   .reduce((acc, curr) => acc + curr) / ++numberOfRatings;
-    // this.numberOfRatings = numberOfRatings;
-  }
 
   getRating(value: number): void {
     // let ratingActive = document.querySelector('.rating__active') as HTMLElement;
