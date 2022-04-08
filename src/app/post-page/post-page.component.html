@@ -1,5 +1,5 @@
 <div *ngIf="currentPost | async as post; else loading">
-<!--  <pre>{{post | json}}</pre>-->
+  <!--  <pre>{{post | json}}</pre>-->
   <div class="post">
 
     <div class="post__header">
@@ -23,9 +23,10 @@
 
         <div class="rating__body">
 
-<!--          <div class="rating__active"-->
-<!--               [ngStyle]="{'width': (this.starRating / 5 * 100 + '%') || 0 }">-->
-<!--          </div>-->
+          <div class="rating__active"
+               [ngStyle]="{'width':
+               this.starRating ? this.starRating / 5 * 100 + '%' : 0 + '%'}">
+          </div>
 
           <div class="rating__items" (click)="setRatingValue($event, post)">
             <input type="radio" class="rating__item" value="1" name="rating">
