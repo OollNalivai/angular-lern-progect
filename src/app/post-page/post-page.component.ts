@@ -14,7 +14,6 @@ export class PostPageComponent implements OnInit {
   #postId: string | undefined;
   #scoreArray: number[] | undefined = [];
   currentAssessment: number | undefined; // последняя оценка
-  starRating: number | undefined;
   currentPost: Observable<Post> | undefined;
 
   constructor(
@@ -47,10 +46,6 @@ export class PostPageComponent implements OnInit {
       }
     ).subscribe((scoreArray: number[]) => {
       post.scoreArray = scoreArray;
-
-
-      this.starRating = post.scoreArray
-        .reduce((acc, curr) => acc + curr) / post?.scoreArray.length;
     })
 
     this.currentAssessment = +target.value;

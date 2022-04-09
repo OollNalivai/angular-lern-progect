@@ -10,7 +10,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SlicePostsPipe } from './pipes/slice-posts.pipe';
 import { StringClippingPipe } from './pipes/string-clipping.pipe';
-import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
+import { CalculatePercentRatingPipe } from './pipes/calculate-percent-rating.pipe';
+import { CalculateAverageRatingPipe } from './pipes/calculate-average-rating.pipe';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
     PaginatorComponent,
     SlicePostsPipe,
     StringClippingPipe,
-    CalculateRatingPipe
+    CalculatePercentRatingPipe,
+    CalculateAverageRatingPipe
   ],
   declarations: [
     FooterComponent,
@@ -35,7 +37,8 @@ import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
     MainLayoutComponent,
     SlicePostsPipe,
     StringClippingPipe,
-    CalculateRatingPipe,
+    CalculatePercentRatingPipe,
+    CalculateAverageRatingPipe,
   ]
 })
 

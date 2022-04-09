@@ -23,7 +23,7 @@
         <div class="rating__body">
 
           <div class="rating__active"
-               [ngStyle]="{'width': this.starRating | calculateRating}">
+               [ngStyle]="{'width': post.scoreArray | calculateAverageRating | calculatePercentRating }">
           </div>
 
           <div class="rating__items" (click)="setRatingValue($event, post)">
@@ -37,9 +37,10 @@
         </div>
 
         <div class="rating__value" (click)="test()">
-          Post rating: {{ (this.starRating | number:'1.0-2') || 0 }}<br>
+          Post rating: {{ (post.scoreArray | calculateAverageRating | number:'1.0-2') || 0 }}<br>
+          Your assessment: {{ post.scoreArray[post.scoreArray.length - 1] || 0 }}<br>
           Your assessment: {{ this.currentAssessment || 0 }}<br>
-          Number of votes: {{ this.post.scoreArray ? this.post.scoreArray.length : 0 }}
+          Number of votes: {{ post.scoreArray ? post.scoreArray.length : 0 }}
         </div>
 
       </div>
