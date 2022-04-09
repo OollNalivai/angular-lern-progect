@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SlicePostsPipe } from './pipes/slice-posts.pipe';
 import { StringClippingPipe } from './pipes/string-clipping.pipe';
+import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { StringClippingPipe } from './pipes/string-clipping.pipe';
     QuillModule,
     PaginatorComponent,
     SlicePostsPipe,
-    StringClippingPipe
+    StringClippingPipe,
+    CalculateRatingPipe
   ],
   declarations: [
     FooterComponent,
@@ -33,6 +35,7 @@ import { StringClippingPipe } from './pipes/string-clipping.pipe';
     MainLayoutComponent,
     SlicePostsPipe,
     StringClippingPipe,
+    CalculateRatingPipe,
   ]
 })
 

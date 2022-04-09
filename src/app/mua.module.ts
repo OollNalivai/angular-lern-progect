@@ -12,7 +12,7 @@ import { PostComponent } from './shared/components/post/post.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 
-registerLocaleData(enLocaleData, 'en')
+registerLocaleData(enLocaleData, 'en');
 
 @NgModule({
   declarations: [

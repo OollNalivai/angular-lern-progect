@@ -48,23 +48,12 @@ export class PostPageComponent implements OnInit {
     ).subscribe((scoreArray: number[]) => {
       post.scoreArray = scoreArray;
 
+
       this.starRating = post.scoreArray
-        .reduce((acc, curr) => acc + curr) / post.scoreArray.length;
+        .reduce((acc, curr) => acc + curr) / post?.scoreArray.length;
     })
 
     this.currentAssessment = +target.value;
-
-    // if (post.scoreArray) {
-    //   this.starRating = post.scoreArray
-    //     .reduce((acc, curr) => acc + curr) / post.scoreArray.length;
-    // }
-
-  }
-
-
-  getRating(value: number): void {
-    // let ratingActive = document.querySelector('.rating__active') as HTMLElement;
-    // ratingActive.style.width = `${value / 5 * 100}%`;
   }
 
   async test() {
@@ -77,5 +66,4 @@ export class PostPageComponent implements OnInit {
     //   console.log(e);
     // }
   }
-
 }
