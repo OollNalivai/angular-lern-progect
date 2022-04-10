@@ -18,13 +18,23 @@
 
     <div class="post__rating-block">
 
+      <h2>
+        Your assessment: {{ this.currentAssessment }}
+      </h2>
+
       <div class="rating">
 
         <div class="rating__body">
 
-          <div class="rating__active"
-               [ngStyle]="{'width': post.scoreArray | calculateAverageRating | calculatePercentRating }">
+          <div *ngIf="this.currentAssessment === 0; else afterTheVote"
+               class="rating__active">
           </div>
+
+          <ng-template #afterTheVote>
+            <div class="rating__active"
+                 [ngStyle]="{'width': post.scoreArray | calculateRating: true }">
+            </div>
+          </ng-template>
 
           <div class="rating__items" (click)="setRatingValue($event, post)">
             <input type="radio" class="rating__item" value="1" name="rating">
@@ -36,11 +46,9 @@
 
         </div>
 
-        <div class="rating__value" (click)="test()">
-          Post rating: {{ (post.scoreArray | calculateAverageRating | number:'1.0-2') || 0 }}<br>
-          Your assessment: {{ post.scoreArray[post.scoreArray.length - 1] || 0 }}<br>
-          Your assessment: {{ this.currentAssessment || 0 }}<br>
-          Number of votes: {{ post.scoreArray ? post.scoreArray.length : 0 }}
+        <div class="rating__value">
+          Post rating: {{ (post.scoreArray | calculateRating | number:'1.0-2') }}<br>
+          Number of votes: {{ post.scoreArray ? post.scoreArray?.length : 0 }}
         </div>
 
       </div>

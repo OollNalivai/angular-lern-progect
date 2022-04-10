@@ -13,7 +13,7 @@ export class PostPageComponent implements OnInit {
 
   #postId: string | undefined;
   #scoreArray: number[] | undefined = [];
-  currentAssessment: number | undefined; // последняя оценка
+  currentAssessment: number = 0; // последняя оценка
   currentPost: Observable<Post> | undefined;
 
   constructor(

@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 type updateType = Pick<Post, "id" | "text" | "title">
-type updateRatingType = Pick<Post, "id" | "scoreArray">
 
 @Injectable({providedIn: 'root'})
 

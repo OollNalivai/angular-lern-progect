@@ -1,22 +1,34 @@
 <div class="card">
 
   <div class="card-header">
+
     <h2>{{ post.title | stringClipping: 20 }}</h2>
+    <small>{{ post.author | stringClipping: 20 }}</small>
+    <button [routerLink]="['/post', post.id]"
+            class="btn btn-dark card-header__button">Open
+    </button>
+  </div>
+
+  <div class="card__date-and-rating">
 
     <small>{{ post.date | date: 'dd.MM.yyyy' }}</small>
-  </div>
 
-  <div>
-    <small>{{ post.author | stringClipping: 20 }}</small>
-  </div>
+    <div *ngIf="post.scoreArray">
 
-  <div *ngIf="post.scoreArray">
-    <span>Post rating: {{ post.scoreArray | calculateAverageRating | number:'1.0-2' }}</span>
-  </div>
+      <span>Post rating: {{ post.scoreArray | calculateRating | number:'1.0-2' }}</span>
+      <div class="post__rating-block">
+        <div class="rating">
+          <div class="rating__body">
+            <div class="rating__active"
+                 [ngStyle]="{'width': post.scoreArray | calculateRating: true }">
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <button
-    [routerLink]="['/post', post.id]"
-    class="btn btn-dark"
-  >Open</button>
+    </div>
+
+
+  </div>
 
 </div>

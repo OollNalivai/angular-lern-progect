@@ -45,7 +45,7 @@
 
     <button class="tools-paginator__button"
             (click)="clickRight()"
-            *ngIf="currentPage !== arrPageNumbers.length; else elseRightBtn">
+            *ngIf="currentPage !== arrPageNumbers?.length; else elseRightBtn">
       <div class="btn-paginator right"></div>
     </button>
 
