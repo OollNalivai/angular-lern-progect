@@ -1,0 +1,33 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &-header {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    small {
+      padding: 10px 0;
+    }
+  }
+
+  &__button {
+    display: block;
+  }
+
+  &__date-and-rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 125px;
+
+    .rating {
+      font-size: 28px;
+    }
+  }
+}
