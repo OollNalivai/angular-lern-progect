@@ -46,19 +46,8 @@ export class PostPageComponent implements OnInit {
       }
     ).subscribe((scoreArray: number[]) => {
       post.scoreArray = scoreArray;
-    })
+    });
 
     this.currentAssessment = +target.value;
-  }
-
-  async test() {
-    // try {
-    //   await this._postsService.updateRating({
-    //     id: this.#postId,
-    //     scoreArray: this.#scoreArray
-    //   }).toPromise();
-    // } catch (e) {
-    //   console.log(e);
-    // }
   }
 }
