@@ -32,7 +32,7 @@
 
           <ng-template #afterTheVote>
             <div class="rating__active"
-                 [ngStyle]="{'width': post.scoreArray | calculateRating: true }">
+                 [ngStyle]="{'width': post.scoreArray | calculateRating: 'percentage' }">
             </div>
           </ng-template>
 
@@ -47,7 +47,7 @@
         </div>
 
         <div class="rating__value">
-          Post rating: {{ (post.scoreArray | calculateRating | number:'1.0-2') }}<br>
+          Post rating: {{ (post.scoreArray | calculateRating: 'average' | number:'1.0-2') }}<br>
           Number of votes: {{ post.scoreArray ? post.scoreArray?.length : 0 }}
         </div>
 
