@@ -2,11 +2,12 @@
 
   <h2 class="slider__title">Slider</h2>
 
-  <div class="slider__container">
+  <div class="slider__container" *ngIf="this.postsArr.length !== 0; else loadingSlider">
 
     <button class="slider__button" disabled="disabled"
-            *ngIf="sliceStart === 0; else elseLeftBtn"
-    ><div class="btn-slider left"></div></button>
+            *ngIf="sliceStart === 0; else elseLeftBtn">
+      <div class="btn-slider left"></div>
+    </button>
 
     <ng-template #elseLeftBtn>
 
@@ -53,7 +54,7 @@
 
     <button class="slider__button"
             (click)="clickRight()"
-            *ngIf="sliceEnd !== postsArr.length; else elseRightBtn">
+            *ngIf="sliceEnd !== postsArr.length && postsArr.length > sliceEnd; else elseRightBtn">
       <div class="btn-slider right"></div>
     </button>
 
@@ -64,5 +65,11 @@
     </ng-template>
 
   </div>
+
+  <ng-template #loadingSlider>
+    <div>
+      <p class="text-center">Loading slider...</p>
+    </div>
+  </ng-template>
 
 </div>
