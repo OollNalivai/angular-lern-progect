@@ -22,7 +22,7 @@ export class PostPageComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.currentPost = this._route.params.pipe(switchMap((params) => {
       return this._postsService.getById(params['id']);
     }));

@@ -18,7 +18,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   constructor(private alertService: AlertService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.#subscriptions$.add(
       this.alertService.alert$.subscribe(alert => {
         this.text = alert.text;
@@ -32,7 +32,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.#subscriptions$.unsubscribe();
   }
 

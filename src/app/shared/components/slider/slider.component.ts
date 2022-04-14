@@ -16,12 +16,12 @@ export class SliderComponent implements OnInit {
   posts$: Observable<Post[]> | undefined;
 
   constructor(
-    private postsService: PostsService
+    private _postsService: PostsService
   ) { }
 
-  ngOnInit(): void {
-    this.posts$ = this.postsService.allPosts;
-    this.postsService.allPosts
+  ngOnInit() {
+    this.posts$ = this._postsService.allPosts;
+    this._postsService.allPosts
       .subscribe(posts => {
         this.postsArr = [...posts];
       })

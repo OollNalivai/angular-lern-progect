@@ -68,7 +68,7 @@ export class PaginatorComponent implements OnInit, AfterViewInit {
     return arrPageNumbersDots;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this._totalPage = Math.ceil(this.posts.length / this._numberOfPostsShown);
 
     for (let i = 1; i <= this._totalPage; i++) {

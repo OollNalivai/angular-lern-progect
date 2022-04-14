@@ -22,7 +22,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this._subscriptions$.add(this._postsService.allPosts.subscribe(posts => {
       this.posts = posts;
     }));
@@ -35,7 +35,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }));
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this._subscriptions$.unsubscribe();
   }
 }

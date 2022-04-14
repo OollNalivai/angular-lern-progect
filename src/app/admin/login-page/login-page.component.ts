@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnInit {
     return this._auth.error$;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
     this._route.queryParams.subscribe((params: Params) => {
 
@@ -54,7 +54,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  submit() {
+  submit(): void {
     if (this.form?.invalid) {
       return;
     }
@@ -66,13 +66,13 @@ export class LoginPageComponent implements OnInit {
       password: this.form?.value.password,
     };
 
-    this._auth.login(user).subscribe(() => {
-
+    this._auth.login(user).subscribe(
+      (): void => {
         this.form?.reset();
         this._router.navigate(['/admin', 'dashboard']).then(r => r);
         this.submitted = false;
       },
-      () => {
+      (): void => {
         this.submitted = false;
       });
   }

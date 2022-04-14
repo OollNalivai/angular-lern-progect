@@ -30,9 +30,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
     this._route.params.pipe(switchMap((params) => {
         return this._postsService.getById(params['id']);
       })
-    )
-
-      .subscribe((post: Post) => {
+    ).subscribe((post: Post) => {
         this._post = post;
         this.form = new FormGroup({
           title: new FormControl(post.title, Validators.required),
@@ -42,7 +40,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  submit() {
+  submit(): void {
     if (this.form?.invalid) {
       return;
     }
