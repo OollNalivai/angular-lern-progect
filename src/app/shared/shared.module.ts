@@ -19,14 +19,15 @@ import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
     QuillModule.forRoot(),
     CommonModule
   ],
-  exports: [
-    HttpClientModule,
-    QuillModule,
-    PaginatorComponent,
-    SlicePostsPipe,
-    StringClippingPipe,
-    CalculateRatingPipe
-  ],
+    exports: [
+        HttpClientModule,
+        QuillModule,
+        PaginatorComponent,
+        SlicePostsPipe,
+        StringClippingPipe,
+        CalculateRatingPipe,
+        FooterComponent
+    ],
   declarations: [
     FooterComponent,
     HeaderComponent,

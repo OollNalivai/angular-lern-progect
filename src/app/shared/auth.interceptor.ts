@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-
+    // TODO: отловить ошибки аутентификации
     return next.handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -37,6 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }).then(r => r);
           }
 
+          console.log('я же говорил, ошибочка')
           return throwError(() => error);
         })
       );

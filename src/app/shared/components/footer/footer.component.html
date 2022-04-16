@@ -1,5 +1,12 @@
 <footer class="footer">
 
+  <ng-template #ref let-where let-number='number'>
+    <h2  class="footer__test">{{ number }} Footer component is {{ where }}</h2>
+  </ng-template>
+
+  <ng-container *ngTemplateOutlet="ref; context: {number: 'One', $implicit: 'here'}"></ng-container>
+
+
   <div class="footer-container">
 
     <a class="github" href="https://github.com/OollNalivai"
