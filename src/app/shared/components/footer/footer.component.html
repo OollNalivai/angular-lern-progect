@@ -6,6 +6,11 @@
 
   <ng-container *ngTemplateOutlet="ref; context: {number: 'One', $implicit: 'here'}"></ng-container>
 
+  <ng-container *ngIf="true">
+    <ul>
+      <li *ngFor="let item of [1,2,3]" style="color: #ffd300">{{ item }}</li>
+    </ul>
+  </ng-container>
 
   <div class="footer-container">
 
