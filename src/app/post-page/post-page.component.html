@@ -36,13 +36,13 @@
             </div>
           </ng-template>
 
-          <div class="rating__items" (click)="setRatingValue($event, post)">
-            <input type="radio" class="rating__item" value="1" name="rating">
-            <input type="radio" class="rating__item" value="2" name="rating">
-            <input type="radio" class="rating__item" value="3" name="rating">
-            <input type="radio" class="rating__item" value="4" name="rating">
-            <input type="radio" class="rating__item" value="5" name="rating">
-          </div>
+          <fieldset class="rating__items" (click)="setRatingValue($event, post)">
+            <input type="radio" class="rating__item" value="1" name="rating" aria-label="terribly">
+            <input type="radio" class="rating__item" value="2" name="rating" aria-label="tolerable">
+            <input type="radio" class="rating__item" value="3" name="rating" aria-label="normal">
+            <input type="radio" class="rating__item" value="4" name="rating" aria-label="good">
+            <input type="radio" class="rating__item" value="5" name="rating" aria-label="great">
+          </fieldset>
 
         </div>
 
