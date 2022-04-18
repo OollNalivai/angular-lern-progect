@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { SlicePostsPipe } from './pipes/slice-posts.pipe';
 import { StringClippingPipe } from './pipes/string-clipping.pipe';
 import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
         SlicePostsPipe,
         StringClippingPipe,
         CalculateRatingPipe,
-        FooterComponent
+        FooterComponent,
+        StarRatingComponent
     ],
   declarations: [
     FooterComponent,
@@ -37,6 +39,7 @@ import { CalculateRatingPipe } from './pipes/calculate-rating.pipe';
     SlicePostsPipe,
     StringClippingPipe,
     CalculateRatingPipe,
+    StarRatingComponent,
   ]
 })
 

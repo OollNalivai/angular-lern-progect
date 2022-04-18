@@ -16,7 +16,7 @@
     <div *ngIf="post.scoreArray">
 
       <span>Post rating: {{ post.scoreArray | calculateRating: 'average' | number:'1.0-2' }}</span>
-      <div class="post__rating-block">
+      <div class="rating-wrapper">
         <div class="rating">
           <div class="rating__body">
             <div class="rating__active"

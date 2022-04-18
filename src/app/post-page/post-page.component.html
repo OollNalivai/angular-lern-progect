@@ -16,44 +16,8 @@
       <quill-view-html [content]="post.text"></quill-view-html>
     </div>
 
-    <div class="post__rating-block">
+    <mua-star-rating></mua-star-rating>
 
-      <h2>
-        Your assessment: {{ this.currentAssessment }}
-      </h2>
-
-      <div class="rating">
-
-        <div class="rating__body">
-
-          <div *ngIf="this.currentAssessment === 0; else afterTheVote"
-               class="rating__active">
-          </div>
-
-          <ng-template #afterTheVote>
-            <div class="rating__active"
-                 [ngStyle]="{'width': post.scoreArray | calculateRating: 'percentage' }">
-            </div>
-          </ng-template>
-
-          <fieldset class="rating__items" (click)="setRatingValue($event, post)">
-            <input type="radio" class="rating__item" value="1" name="rating" aria-label="terribly">
-            <input type="radio" class="rating__item" value="2" name="rating" aria-label="tolerable">
-            <input type="radio" class="rating__item" value="3" name="rating" aria-label="normal">
-            <input type="radio" class="rating__item" value="4" name="rating" aria-label="good">
-            <input type="radio" class="rating__item" value="5" name="rating" aria-label="great">
-          </fieldset>
-
-        </div>
-
-        <div class="rating__value">
-          Post rating: {{ (post.scoreArray | calculateRating: 'average' | number:'1.0-2') }}<br>
-          Number of votes: {{ post.scoreArray ? post.scoreArray?.length : 0 }}
-        </div>
-
-      </div>
-
-    </div>
   </div>
 </div>
 
