@@ -1,8 +1,14 @@
 <div class="container">
   <!--<mua-header></mua-header>-->
+  
+  <div class="content">
+<!-- без оберток не хочет позиционироваться -->
+    <router-outlet></router-outlet>
+  </div>
 
-  <router-outlet></router-outlet>
+  <div class="footer">
+    <mua-footer></mua-footer>
+  </div>
 
-  <mua-footer></mua-footer>
 </div>
 
