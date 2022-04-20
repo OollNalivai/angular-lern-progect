@@ -1,22 +1,8 @@
 <footer class="footer">
 
-  <ng-template #ref let-where let-number='number'>
-    <h2  class="footer__test">{{ number }} Footer component is {{ where }}</h2>
-  </ng-template>
-
-  <ng-container *ngTemplateOutlet="ref; context: {number: 'One', $implicit: 'here'}"></ng-container>
-
-  <ng-container *ngIf="true">
-    <ul>
-      <li *ngFor="let item of [1,2,3]" style="color: #ffd300">{{ item }}</li>
-    </ul>
-  </ng-container>
-
   <div class="footer-container">
-
     <a class="github" href="https://github.com/OollNalivai"
        target="_blank" rel="noopener noreferrer">github</a>
-
   </div>
 
 </footer>
