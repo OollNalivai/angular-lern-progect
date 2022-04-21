@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log(`[Interceptor Error]: `, error);
+          console.warn(`[Interceptor Error]: `, error.message);
 
           if (error.status === 401) {
             this._auth.logout();
@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }).then(r => r);
           }
 
-          console.log('я же говорил, ошибочка')
+          console.warn('я же говорил, ошибочка? Залогинься.')
           return throwError(() => error);
         })
       );
